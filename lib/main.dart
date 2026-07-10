@@ -55,7 +55,8 @@ class _RihlaState extends State<Rihla> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    contentPadding: const EdgeInsets.only(left: 10, top: 3),
+                    contentPadding:
+                        const EdgeInsets.only(left: 10, top: 3),
                     labelText: "Search for a route or a station",
                     labelStyle: const TextStyle(),
                   ),
@@ -72,7 +73,6 @@ class _RihlaState extends State<Rihla> {
                   borderRadius: BorderRadius.circular(40),
                   color: const Color(0xFFE2E2E2),
                 ),
-
                 child: Row(
                   children: [
                     Expanded(
@@ -80,15 +80,14 @@ class _RihlaState extends State<Rihla> {
                         onTap: () {
                           setState(() {
                             isTrainSelected = true;
-
                           });
                         },
                         child: Container(
-                          decoration:  BoxDecoration(
-                            color:isTrainSelected
-                            ? const Color(0xFFC0001A)
-                            :Color(0xFFE2E2E2),
-                            borderRadius: BorderRadius.only(
+                          decoration: BoxDecoration(
+                            color: isTrainSelected
+                                ? const Color(0xFFC0001A)
+                                : const Color(0xFFE2E2E2),
+                            borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(40),
                               bottomLeft: Radius.circular(40),
                             ),
@@ -97,9 +96,9 @@ class _RihlaState extends State<Rihla> {
                             child: Text(
                               "Train",
                               style: TextStyle(
-                                color:isTrainSelected
-                                ?Colors.white
-                                :Color(0xFF627595),
+                                color: isTrainSelected
+                                    ? Colors.white
+                                    : const Color(0xFF627595),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -118,10 +117,10 @@ class _RihlaState extends State<Rihla> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color:isTrainSelected
-                            ? const Color(0xFFE2E2E2)
-                            :Color(0xFFC0001A),
-                            borderRadius: BorderRadius.only(
+                            color: isTrainSelected
+                                ? const Color(0xFFE2E2E2)
+                                : const Color(0xFFC0001A),
+                            borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(40),
                               bottomRight: Radius.circular(40),
                             ),
@@ -130,9 +129,9 @@ class _RihlaState extends State<Rihla> {
                             child: Text(
                               "Bus",
                               style: TextStyle(
-                                color:isTrainSelected
-                                ?Color(0xFF627595)
-                                :Colors.white,
+                                color: isTrainSelected
+                                    ? const Color(0xFF627595)
+                                    : Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -147,19 +146,380 @@ class _RihlaState extends State<Rihla> {
 
               const SizedBox(height: 40),
 
+              // routes cards 1
               Container(
-                height: 150,
+                height: 130,
                 width: 350,
-                
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(110, 255, 193, 7),
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 20,
+                      offset: Offset(0, 4),
+                    )
+                  ],
                 ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // vertical line
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      height: 60,
+                      width: 6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red,
+                      ),
+                    ),
 
+                    // line number small box
+                    Container(
+                      height: 40,
+                      width: 40,
+                      margin: EdgeInsets.only(left: 25),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9),
+                        color: Colors.red,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "1",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
 
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsGeometry.only(left: 10, top: 20),
+                          child: Text(
+                            "Red Line",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
 
+                        Row(
+                          children: [
+                            Text(
+                              "     Khartoum central ",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_circle_left_outlined,
+                              size: 15,
+                            ),
+                            Icon(
+                              Icons.arrow_circle_right_outlined,
+                              size: 15,
+                            ),
+                            Text(
+                              " bahri south",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Container(
+                          height: 20,
+                          width: 70,
+                          margin: EdgeInsets.only(left: 15, top: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "8 stations",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(left: 35),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 10,)
+
+              SizedBox(height: 10),
+              // routes card 2
+                Container(
+                height: 130,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 20,
+                      offset: Offset(0, 4),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // vertical line
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      height: 60,
+                      width: 6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color:const Color.fromARGB(255, 11, 152, 16),
+                      ),
+                    ),
+
+                    // line number small box
+                    Container(
+                      height: 40,
+                      width: 40,
+                      margin: EdgeInsets.only(left: 25),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9),
+                        color: const Color.fromARGB(255, 11, 152, 16),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "1",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsGeometry.only(left: 10, top: 20),
+                          child: Text(
+                            "Green Line",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+
+                        Row(
+                          children: [
+                            Text(
+                              "     Omdur Central ",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_circle_left_outlined,
+                              size: 15,
+                            ),
+                            Icon(
+                              Icons.arrow_circle_right_outlined,
+                              size: 15,
+                            ),
+                            Text(
+                              "Khartoum central",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Container(
+                          height: 20,
+                          width: 70,
+                          margin: EdgeInsets.only(left: 15, top: 20),
+                          decoration: BoxDecoration(
+                            color:const Color.fromARGB(255, 11, 152, 16),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "5 stations",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(left: 29),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),
+
+              //routes card 3
+
+                Container(
+                height: 130,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 20,
+                      offset: Offset(0, 4),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // vertical line
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      height: 60,
+                      width: 6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.blue,
+                      ),
+                    ),
+
+                    // line number small box
+                    Container(
+                      height: 40,
+                      width: 40,
+                      margin: EdgeInsets.only(left: 25),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9),
+                        color: Colors.blue,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "1",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsGeometry.only(left: 10, top: 20),
+                          child: Text(
+                            "Blue Line",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+
+                        Row(
+                          children: [
+                            Text(
+                              "     Khartoum central ",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_circle_left_outlined,
+                              size: 15,
+                            ),
+                            Icon(
+                              Icons.arrow_circle_right_outlined,
+                              size: 15,
+                            ),
+                            Text(
+                              " bahri central",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Container(
+                          height: 20,
+                          width: 70,
+                          margin: EdgeInsets.only(left: 13, top: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "7 stations",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(left: 35),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
