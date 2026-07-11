@@ -272,7 +272,7 @@ class _RihlaState extends State<Rihla> {
 
               SizedBox(height: 10),
               // routes card 2
-                Container(
+              Container(
                 height: 130,
                 width: 350,
                 decoration: BoxDecoration(
@@ -398,7 +398,7 @@ class _RihlaState extends State<Rihla> {
 
               //routes card 3
 
-                Container(
+              Container(
                 height: 130,
                 width: 350,
                 decoration: BoxDecoration(
@@ -523,6 +523,77 @@ class _RihlaState extends State<Rihla> {
             ],
           ),
         ),
+        bottomNavigationBar:Container(
+          height: 75, 
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 255, 255, 255),
+            border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color:Color.fromARGB(110, 32, 5, 5),
+                spreadRadius: 1,
+                offset: Offset(0,5),
+                blurRadius: 20.0
+              )
+            ]
+              
+          
+          ),
+        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+           Padding(
+              padding:EdgeInsetsGeometry.only(left: 35,top: 10),
+              child: Column(
+                
+                children: [
+                  Icon(Icons.house_rounded, size: 30,color:Color.fromRGBO(191, 0, 28, 100), ),
+                  Text("Home",style: TextStyle(fontWeight: FontWeight.bold,color:Color.fromRGBO(191, 0, 28, 100) ),)
+                  
+                ],
+              ),
+            ),
+             Padding(
+              padding:EdgeInsetsGeometry.only(left: 50,top: 10),
+              child: Column(
+                
+                children: [
+                  Icon(Icons.route_outlined, size: 30,color:Color.fromRGBO(191, 0, 28, 100), ),
+                  Text("Routes",style: TextStyle(fontWeight: FontWeight.bold,color:Color.fromRGBO(191, 0, 28, 100) ),)
+                  
+                ],
+              ),
+            ),
+
+             Padding(
+              padding:EdgeInsetsGeometry.only(left: 50,top: 10),
+              child: Column(
+                
+                children: [
+                  Icon(Icons.airplane_ticket_outlined, size: 30,color:Color.fromRGBO(191, 0, 28, 100), ),
+                  Text("Tickets",style: TextStyle(fontWeight: FontWeight.bold,color:Color.fromRGBO(191, 0, 28, 100) ),)
+                  
+                ],
+              ),
+            ),
+
+            Padding(
+              padding:EdgeInsetsGeometry.only(left: 50,top: 10),
+              child: Column(
+                
+                children: [
+                  Icon(Icons.person, size: 30,color:Color.fromRGBO(191, 0, 28, 100), ),
+                  Text("Profile",style: TextStyle(fontWeight: FontWeight.bold,color:Color.fromRGBO(191, 0, 28, 100) ),)
+                  
+                ],
+              ),
+            )
+          ],
+        ),
+        )
       ),
     );
   }
