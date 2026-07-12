@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {
   final int selectedIndex;
+  final Function(int) onTap;
 
-  const BottomBar({super.key , required this.selectedIndex});
+  const BottomBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,60 +38,76 @@ class BottomBar extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsetsGeometry.only(left: 35, top: 10),
-            child: Column(
-              children: [
-                Icon(
-                  Icons.house_rounded,
-                  size: 30,
-                  color: Color.fromRGBO(191, 0, 28, 100),
-                ),
-                Text(
-                  "Home",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                onTap(0);
+              },
+
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.house_rounded,
+                    size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
-                ),
-              ],
+                  Text(
+                    "Home",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(191, 0, 28, 100),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(
             padding: EdgeInsetsGeometry.only(left: 50, top: 10),
-            child: Column(
-              children: [
-                Icon(
-                  Icons.route_outlined,
-                  size: 30,
-                  color: Color.fromRGBO(191, 0, 28, 100),
-                ),
-                Text(
-                  "Routes",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                onTap(0);
+              },
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.route_outlined,
+                    size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
-                ),
-              ],
+                  Text(
+                    "Routes",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(191, 0, 28, 100),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
           Padding(
             padding: EdgeInsetsGeometry.only(left: 50, top: 10),
-            child: Column(
-              children: [
-                Icon(
-                  Icons.airplane_ticket_outlined,
-                  size: 30,
-                  color: Color.fromRGBO(191, 0, 28, 100),
-                ),
-                Text(
-                  "Tickets",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                onTap(1);
+              },
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.airplane_ticket_outlined,
+                    size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
-                ),
-              ],
+                  Text(
+                    "Tickets",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(191, 0, 28, 100),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 

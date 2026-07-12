@@ -8,7 +8,9 @@ class Tickets extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
+        
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -262,7 +264,7 @@ class Tickets extends StatelessWidget {
           
               //third card
               Container(
-                height: 210,
+                height: 220,
                 width: 350,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 255, 255, 255),
@@ -300,6 +302,7 @@ class Tickets extends StatelessWidget {
                           child: Column(
                             children: [
                               Container(
+                                margin: EdgeInsets.only(top: 5,bottom: 3),
                                 height: 30,
                                 width: 100,
                                 decoration: BoxDecoration(
@@ -310,7 +313,10 @@ class Tickets extends StatelessWidget {
           
                                 child: Row(
                                   children: [
-                                    Icon(Icons.backpack_rounded,color: const Color.fromARGB(255, 135, 120, 0),size: 20,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4),
+                                      child: Icon(Icons.backpack_rounded,color: const Color.fromARGB(255, 135, 120, 0),size: 20,),
+                                    ),
                                     
                                     Text("  students", style: TextStyle(color: const Color.fromARGB(255, 165, 124, 0)),)
                                   ],
@@ -383,7 +389,9 @@ class Tickets extends StatelessWidget {
           ),
         ),
       ),
-    bottomNavigationBar: const BottomBar(selectedIndex: 2,),
+    // bottomNavigationBar:  BottomBar(selectedIndex: 2, onTap: (index) {
+      
+    // },),
     );
   }
 }

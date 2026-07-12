@@ -494,7 +494,9 @@ class _RoutesScreenState extends State<RoutesScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomBar(selectedIndex: 1)
+      // bottomNavigationBar:  BottomBar(selectedIndex: 1, onTap:(index) {
+        
+      // } ,)
        
     );
   }
