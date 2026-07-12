@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/widgets/BottomBar.dart';
 
 class Tickets extends StatelessWidget {
   const Tickets({super.key});
@@ -310,6 +311,7 @@ class Tickets extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Icon(Icons.backpack_rounded,color: const Color.fromARGB(255, 135, 120, 0),size: 20,),
+                                    
                                     Text("  students", style: TextStyle(color: const Color.fromARGB(255, 165, 124, 0)),)
                                   ],
                                 ),
@@ -381,6 +383,7 @@ class Tickets extends StatelessWidget {
           ),
         ),
       ),
+    bottomNavigationBar: const BottomBar(selectedIndex: 2,),
     );
   }
 }
