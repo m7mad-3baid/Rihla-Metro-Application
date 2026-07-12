@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/Tickets.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:rihla_4_0/screens/rigesterpage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
@@ -20,7 +21,9 @@ class _RihlaState extends State<Rihla> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Splash(),
+      
+      home: const Tickets()
+    
        
     );
   }
