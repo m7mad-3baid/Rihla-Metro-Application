@@ -42,7 +42,6 @@ class BottomBar extends StatelessWidget {
               onTap: () {
                 onTap(0);
               },
-
               child: Column(
                 children: [
                   Icon(
@@ -65,7 +64,7 @@ class BottomBar extends StatelessWidget {
             padding: EdgeInsetsGeometry.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
-                onTap(0);
+                onTap(1);
               },
               child: Column(
                 children: [
@@ -90,7 +89,7 @@ class BottomBar extends StatelessWidget {
             padding: EdgeInsetsGeometry.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
-                onTap(1);
+                onTap(2);
               },
               child: Column(
                 children: [
@@ -113,21 +112,27 @@ class BottomBar extends StatelessWidget {
 
           Padding(
             padding: EdgeInsetsGeometry.only(left: 50, top: 10),
-            child: Column(
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 30,
-                  color: Color.fromRGBO(191, 0, 28, 100),
-                ),
-                Text(
-                  "Profile",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                onTap(3);
+              },
+
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.person,
+                    size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
-                ),
-              ],
+                  Text(
+                    "Profile",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(191, 0, 28, 100),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

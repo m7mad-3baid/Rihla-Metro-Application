@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/MainScreen.dart';
+import 'package:rihla_4_0/screens/Profile.dart';
 import 'package:rihla_4_0/screens/Tickets.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:rihla_4_0/screens/rigesterpage.dart';

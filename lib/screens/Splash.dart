@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/MainScreen.dart';
 import 'package:video_player/video_player.dart';
 import 'routes_screen.dart';
 
@@ -41,7 +42,7 @@ class _SplashState extends State<Splash> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const RoutesScreen(),
+              builder: (context) => const MainScreen(),
             ),
           );
 
