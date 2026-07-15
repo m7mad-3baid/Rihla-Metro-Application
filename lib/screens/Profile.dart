@@ -8,7 +8,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFCF9F8),
       body: SafeArea(
         
         child: SingleChildScrollView(
