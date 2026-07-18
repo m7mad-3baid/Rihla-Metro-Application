@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../services/api_services.dart';
+
 class Rigesterpage extends StatefulWidget {
   const Rigesterpage({super.key});
 
@@ -8,6 +10,11 @@ class Rigesterpage extends StatefulWidget {
 }
 
 class _RigesterpageState extends State<Rigesterpage> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +43,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
                   ),
-
                   TextField(
+                    controller: usernameController,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -64,8 +71,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
                   ),
-
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -92,8 +99,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
                   ),
-
                   TextField(
+                    controller: passwordController,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -120,8 +127,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
                   ),
-
                   TextField(
+                    controller: repasswordController,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -147,7 +154,13 @@ class _RigesterpageState extends State<Rigesterpage> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final result = await ApiService.register(
+                          usernameController.text,
+                          emailController.text,
+                          passwordController.text,
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         shape: RoundedRectangleBorder(

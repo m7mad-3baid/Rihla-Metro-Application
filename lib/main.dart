@@ -25,7 +25,10 @@ class _RihlaState extends State<Rihla> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  MainScreen()
+      home:  Loginpage()
+
+
+      
     
        
     );

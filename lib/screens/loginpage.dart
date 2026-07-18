@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import '../services/api_services.dart';
+import '../screens/MainScreen.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+  Loginpage({super.key});
 
   @override
   State<Loginpage> createState() => _LoginpageState();
 }
 
 class _LoginpageState extends State<Loginpage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +40,8 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   TextField(
+                    controller: emailController,
+
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -60,6 +67,7 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   TextField(
+                    controller: passwordController,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -99,7 +107,23 @@ class _LoginpageState extends State<Loginpage> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final result = await ApiService.login(
+                          emailController.text,
+                          passwordController.text,
+                        );
+
+                        if (result["success"] == true) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(),
+                            ),
+                          );
+                        } else {
+                          print("login failed ");
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         shape: RoundedRectangleBorder(

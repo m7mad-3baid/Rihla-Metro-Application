@@ -46,7 +46,7 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.house_rounded,
+                    Icons.house_outlined,
                     size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
@@ -70,7 +70,7 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.route_outlined,
+                    Icons.map_outlined,
                     size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),
@@ -95,7 +95,7 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.airplane_ticket_outlined,
+                    Icons.confirmation_num_outlined,
                     size: 30,
                     color: Color.fromRGBO(191, 0, 28, 100),
                   ),

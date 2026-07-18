@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
-import 'package:rihla_4_0/widgets/BottomBar.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      backgroundColor:Color(0xFFFCF9F8),
+      backgroundColor:Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-              
-                child:  // Header
-                      Row(
+                // Header
+                child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
               
@@ -50,10 +47,6 @@ class HomePage extends StatelessWidget {
                           
                         ],
                       ),
-                
-                     
-              
-                
               ),
           
               SizedBox(height: 40,),
@@ -67,7 +60,6 @@ class HomePage extends StatelessWidget {
                 , decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12,blurRadius: 10,offset:Offset(0, 4) )] ),
           
-          // the pill
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,8 +99,6 @@ class HomePage extends StatelessWidget {
                             Text("  Current : Bahri Central",style: TextStyle(color: Colors.blueGrey),)
                           ],
                         ),
-                        //ahhhhhh
-                        
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
@@ -125,8 +115,6 @@ class HomePage extends StatelessWidget {
                             Text("  TO : Khartoum Central",style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0,),fontSize:20 , fontWeight: FontWeight.bold),)
                           ],
                         ),
-                        //ahhhhhh
-                        
                       ),
                       SizedBox(height: 20,),
           
@@ -138,9 +126,6 @@ class HomePage extends StatelessWidget {
                           child: Center(child: Text("View Route",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 20),)),
                         ),
                       )
-                      
-                      
-                      
                     ],
                   ),
               ),
@@ -197,11 +182,6 @@ class HomePage extends StatelessWidget {
 
               SizedBox(height: 20,),
 
-
-
-
-          
-          
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -286,11 +266,252 @@ class HomePage extends StatelessWidget {
                           child: Text("Nearby", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),),
                         )
                       ],
+
+                    
                     ),
 
                   ),
                 ],
-              )
+              ),
+              SizedBox(height: 20,),
+
+              Align(alignment: Alignment.centerLeft, child:
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text("Saved Stations", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
+                )
+                )
+
+
+                ,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Row(
+                      
+                      children: [
+                        //pills
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 40, width: 150,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20),boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),], border: Border.all(width: 0.25,color: const Color.fromARGB(255, 194, 201, 205))),
+                    
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.circle,size: 15, color: Colors.blue,),
+                                Text("EL MAK NIMIR", style: TextStyle(fontWeight: FontWeight.w500),)
+                              ],
+                            ),
+                          ),
+                        ),
+                    
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 40, width: 150,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20),boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),], border: Border.all(width: 0.25,color: const Color.fromARGB(255, 194, 201, 205))),
+                    
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.circle,size: 15, color: const Color.fromARGB(255, 243, 33, 33),),
+                                Text("KOBER", style: TextStyle(fontWeight: FontWeight.w500),)
+                              ],
+                            ),
+                          ),
+                        ),
+                    
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 40, width: 150,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20),boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),], border: Border.all(width: 0.25,color: const Color.fromARGB(255, 194, 201, 205))),
+                    
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.circle,size: 15, color: const Color.fromARGB(255, 51, 243, 33),),
+                                Text("ARKAWEET", style: TextStyle(fontWeight: FontWeight.w500),)
+                              ],
+                            ),
+                          ),
+                        ),
+                    
+                    
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 40, width: 150,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20),boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),], border: Border.all(width: 0.25,color: const Color.fromARGB(255, 194, 201, 205))),
+                    
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.circle,size: 15, color: const Color.fromARGB(255, 33, 243, 40),),
+                                Text("WAD NUBAWI", style: TextStyle(fontWeight: FontWeight.w500),)
+                              ],
+                            ),
+                          ),
+                        )
+                    
+                    
+                      ],
+                    
+                    ),
+                  ),
+                ),
+
+                Container(
+                  height: 300, width: 375,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4))],
+                    border: Border.all(color: Colors.blueGrey, width: 0.25)
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15,top: 15),
+                            child: Text("Metro Status", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15, top: 15),
+                            child: Text("Live Updates", style: TextStyle(fontWeight: FontWeight.w300),),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 40, width: 40,
+                                  decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(5)),
+                                  child: Center(child: Text("BL", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                                ),
+
+                                 Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text("Blue Line", style: TextStyle(fontSize: 20),),
+                          )
+                              ],
+                            ),
+
+                          ), 
+
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.circle, size: 15,color: const Color.fromARGB(255, 9, 144, 14),),
+                                Text(" normal")
+                              ],
+                            ),
+                          )
+
+
+                          
+                        ],
+                      ), SizedBox(height: 10,)
+
+                      , Divider(indent: 20, endIndent: 20,),
+
+                      SizedBox(height: 10,),
+
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 40, width: 40,
+                                  decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(5)),
+                                  child: Center(child: Text("GR", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                                ),
+
+                                 Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text("Green Line", style: TextStyle(fontSize: 20),),
+                          )
+                              ],
+                            ),
+
+                          ), 
+
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.circle, size: 15,color: const Color.fromARGB(255, 226, 205, 15),),
+                                Text(" 5 MIN Delay")
+                              ],
+                            ),
+                          )
+
+
+                          
+                        ],
+                      ),
+
+                      SizedBox(height: 10,)
+
+                      , Divider(indent: 20, endIndent: 20,),
+
+                      SizedBox(height: 10,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 40, width: 40,
+                                  decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(5)),
+                                  child: Center(child: Text("RD", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                                ),
+
+                                 Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text("Red Line", style: TextStyle(fontSize: 20),),
+                          )
+                              ],
+                            ),
+
+                          ), 
+
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.circle, size: 15,color: const Color.fromARGB(255, 144, 9, 18),),
+                                Text(" Maintnance ")
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),
