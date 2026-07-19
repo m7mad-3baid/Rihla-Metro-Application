@@ -143,7 +143,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
             if (isTrainSelected) ...[
               // routes cards 1
               Container(
-                height: 130,
+                height: 150,
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
@@ -227,8 +227,8 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         ),
 
                         Container(
-                          height: 20,
-                          width: 70,
+                          height: 30,
+                          width: 100,
                           margin: EdgeInsets.only(left: 15, top: 20),
                           decoration: BoxDecoration(
                             color: Colors.red,
@@ -261,7 +261,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
               SizedBox(height: 10),
               // routes card 2
               Container(
-                height: 130,
+                height: 150,
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
@@ -345,8 +345,8 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         ),
 
                         Container(
-                          height: 20,
-                          width: 70,
+                          height: 30,
+                          width: 100,
                           margin: EdgeInsets.only(left: 15, top: 20),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 11, 152, 16),
@@ -379,7 +379,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
 
               //routes card 3
               Container(
-                height: 130,
+                height: 150,
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
@@ -463,8 +463,8 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         ),
 
                         Container(
-                          height: 20,
-                          width: 70,
+                          height: 30,
+                          width: 100,
                           margin: EdgeInsets.only(left: 13, top: 20),
                           decoration: BoxDecoration(
                             color: Colors.blue,
