@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../services/api_services.dart';
 import '../screens/MainScreen.dart';
+import '../screens/rigesterpage.dart';
 
 class Loginpage extends StatefulWidget {
   Loginpage({super.key});
@@ -16,15 +18,44 @@ class _LoginpageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login Page")),
       body: Column(
         children: [
+          Container(
+            height: 230,
+            width: 400,
+            color: Color(0xFFBF001C),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30, left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "RIHLA",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "METRO",
+                    style: TextStyle(color: Colors.grey[300], fontSize: 25),
+                  ),
+                  SizedBox(height: 40),
+                  Text(
+                    "SIGN IN TO CONTINUE",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Center(
             child: Container(
               padding: EdgeInsets.all(25),
-              height: 600,
+              height: 575,
               width: 400,
-              color: Colors.grey[300],
+              color: const Color.fromARGB(255, 224, 224, 228),
               child: Column(
                 children: [
                   Container(
@@ -33,7 +64,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       "USERNAME",
                       style: TextStyle(
-                        color: Colors.red,
+                        color: Color(0xFFBF001C),
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
@@ -43,9 +74,9 @@ class _LoginpageState extends State<Loginpage> {
                     controller: emailController,
 
                     decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
+                      fillColor: const Color.fromARGB(255, 238, 240, 243),
                       filled: true,
-                      prefixIcon: const Icon(Icons.person),
+                      prefixIcon: const Icon(Icons.person_outlined),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -60,7 +91,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       "PASSWORD",
                       style: TextStyle(
-                        color: Colors.red,
+                        color: Color(0xFFBF001C),
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
@@ -71,7 +102,7 @@ class _LoginpageState extends State<Loginpage> {
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
-                      prefixIcon: const Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock_outline),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -87,7 +118,7 @@ class _LoginpageState extends State<Loginpage> {
                       child: Text(
                         "Forgot Your Password?",
                         style: TextStyle(
-                          color: Colors.red,
+                          color: Color(0xFFBF001C),
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -125,7 +156,7 @@ class _LoginpageState extends State<Loginpage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                        backgroundColor: Color(0xFFBF001C),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -138,7 +169,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       "---------- Dont Have An Account ? ----------",
                       style: TextStyle(
-                        color: Colors.red,
+                        color: Color(0xFFBF001C),
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
                       ),
@@ -154,10 +185,17 @@ class _LoginpageState extends State<Loginpage> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          color: Color(0xFFBF001C),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Rigesterpage(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/loginpage.dart';
 
 import '../services/api_services.dart';
 
@@ -15,198 +16,354 @@ class _RigesterpageState extends State<Rigesterpage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
 
+  bool isStudent = false;
+  bool agreedToTerms = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register Page")),
-      body: Column(
-        children: [
-          Center(
-            child: Container(
-              padding: EdgeInsets.all(25),
-              height: 600,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Header
+            Container(
+              height: 230,
               width: 400,
-              color: Colors.grey[300],
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
+              color: Color(0xFFBF001C),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "RIHLA",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "METRO",
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 25,
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    Text(
+                      "CREATE AN ACCOUNT",
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(25),
+                height: 750,
+                width: 400,
+                color: Colors.grey[300],
+
+                child: Column(
+                  children: [
+
+                    // Username
+                    Align(
+                      alignment: Alignment.centerLeft,
                       child: Text(
                         "USERNAME",
                         style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
+                          color: Color(0xFFBF001C),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: usernameController,
-                    decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.person),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: Icon(Icons.person_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Username",
                       ),
-                      contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                      labelText: "Username",
-                      labelStyle: const TextStyle(),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Text(
-                        "EMAIL",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+
+
+                    // Email
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "EMAIL",
+                          style: TextStyle(
+                            color: Color(0xFFBF001C),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.email),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+
+                    TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: Icon(Icons.email_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Email",
                       ),
-                      contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                      labelText: "Email",
-                      labelStyle: const TextStyle(),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Text(
-                        "PASSWORD",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+
+
+                    // Password
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "PASSWORD",
+                          style: TextStyle(
+                            color: Color(0xFFBF001C),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: Icon(Icons.lock_outline),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Password",
                       ),
-                      contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                      labelText: "Password",
-                      labelStyle: const TextStyle(),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Text(
-                        "CONFIRM PASSWORD",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+
+
+                    // Confirm password
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "CONFIRM PASSWORD",
+                          style: TextStyle(
+                            color: Color(0xFFBF001C),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: repasswordController,
-                    decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+
+                    TextField(
+                      controller: repasswordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: Icon(Icons.lock_outline),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Re Enter Your Password",
                       ),
-                      contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                      labelText: "Re Enter Your Password",
-                      labelStyle: const TextStyle(),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20, bottom: 10),
-                    height: 50,
-                    width: 395,
-                    child: ElevatedButton(
+
+
+                    // Student checkbox
+                    Container(
+                      margin: EdgeInsets.only(top: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+
+                      child: Row(
+                        children: [
+
+                          Checkbox(
+                            value: isStudent,
+                            activeColor: Color(0xFFBF001C),
+
+                            onChanged: (value){
+                              setState(() {
+                                isStudent = value ?? false;
+                              });
+                            },
+                          ),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              Text(
+                                "I'm a student",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              Text(
+                                "Unlock 50% off all tickets",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+
+                            ],
+                          )
+
+                        ],
+                      ),
+                    ),
+
+
+
+                    // Terms checkbox
+                    Row(
+                      children: [
+
+                        Checkbox(
+                          value: agreedToTerms,
+
+                          activeColor: Color(0xFFBF001C),
+
+                          onChanged:(value){
+
+                            setState(() {
+                              agreedToTerms = value ?? false;
+                            });
+
+                          },
+                        ),
+
+
+                        Text(
+                          "I agree to Terms & Privacy Policy",
+                          style: TextStyle(
+                            color: Color(0xFFBF001C),
+                          ),
+                        )
+
+                      ],
+                    ),
+
+
+
+                    // Register button
+                    ElevatedButton(
+
+                      onPressed: agreedToTerms
+                          ? () async {
+
+                              final result =
+                                  await ApiService.register(
+                                usernameController.text,
+                                emailController.text,
+                                passwordController.text,
+                              );
+
+
+                              print(result);
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context)=> Loginpage(),
+                                ),
+                              );
+
+                            }
+                          : null,
+
+
                       child: Text(
                         "Create Your Account",
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          fontSize: 20,
                         ),
                       ),
-                      onPressed: () async {
-                        final result = await ApiService.register(
-                          usernameController.text,
-                          emailController.text,
-                          passwordController.text,
-                        );
-                      },
+
+
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+
+                        backgroundColor: Color(0xFFBF001C),
+
+                        minimumSize: Size(395,50),
+
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
+
                       ),
+
                     ),
-                  ),
-                  Container(
-                    height: 55,
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(
+
+
+
+                    SizedBox(height:10),
+
+
+                    Text(
                       "---------- Already Have An Account ? ----------",
                       style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w800,
+                        color: Color(0xFFBF001C),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 50,
-                    width: 395,
-                    child: ElevatedButton(
+
+
+
+                    ElevatedButton(
+
+                      onPressed: (){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder:(context)=>Loginpage(),
+                          ),
+                        );
+                      },
+
+
                       child: Text(
                         "LOGIN",
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          color: Color(0xFFBF001C),
                         ),
                       ),
-                      onPressed: () {},
+
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                        minimumSize: Size(395,50),
                       ),
-                    ),
-                  ),
-                ],
+
+                    )
+
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
