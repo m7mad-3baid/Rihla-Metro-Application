@@ -2,6 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/screens/routes_screen.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import '../widgets/rihla_map.dart';
+
+
+
+List<Map<String, dynamic>> stations = [
+  {
+    "name": "Khartoum Central",
+    "location": LatLng(15.6000, 32.5340),
+    "Line": "blue line",
+    "nextTrain": "3 min",
+  },
+  {
+    "name": "Bahri Station",
+    "location": LatLng(15.6400, 32.5600),
+    "Line": "green line",
+    "nextTrain": "7 min",
+  },
+  {
+    "name": "AirPort Station",
+    "location": LatLng(15.5890, 32.5530),
+    "Line": "red line",
+    "nextTrain": "9 min",
+  },
+];
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -66,7 +92,7 @@ class HomePage extends StatelessWidget {
                     ),
 
                     child: const Text(
-                      "Hababk.. Hussam",
+                      "Hababk.. >>>",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -99,6 +125,24 @@ class HomePage extends StatelessWidget {
 
 
               SizedBox(height: 30),
+
+
+              Align( alignment: Alignment.centerLeft,
+               child: Padding(
+                 padding: const EdgeInsets.only(left: 20),
+                 child: Text("Map", style: TextStyle(fontSize: 25),),
+               )
+               ),
+
+               SizedBox(height: 15,),
+
+
+
+//the map         
+                  RihlaMap(),
+             
+
+              SizedBox(height: 20,),
 
 
 
