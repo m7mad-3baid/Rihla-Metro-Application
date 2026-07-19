@@ -32,7 +32,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                 borderRadius: BorderRadius.only(bottomRight:Radius.circular(20), bottomLeft: Radius.circular(20),)
               ),
               height: 300,
-              width: 400,
+              width: double.infinity,
               
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20),

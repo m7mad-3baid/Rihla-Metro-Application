@@ -21,9 +21,13 @@ class _LoginpageState extends State<Loginpage> {
       body: Column(
         children: [
           Container(
-            height: 230,
-            width: 400,
-            color: Color(0xFFBF001C),
+            decoration: BoxDecoration(
+              color: Color(0xFFBF001C),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+            ),
+            height: 300,
+            width: double.infinity,
+            
             child: Padding(
               padding: const EdgeInsets.only(top: 30, left: 20),
               child: Column(
@@ -37,14 +41,11 @@ class _LoginpageState extends State<Loginpage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    "METRO",
-                    style: TextStyle(color: Colors.grey[300], fontSize: 25),
-                  ),
+                
                   SizedBox(height: 40),
                   Text(
                     "SIGN IN TO CONTINUE",
-                    style: TextStyle(color: Colors.grey[400], fontSize: 18),
+                    style: TextStyle(color: const Color.fromARGB(255, 252, 251, 251), fontSize: 18),
                   ),
                 ],
               ),
@@ -53,9 +54,9 @@ class _LoginpageState extends State<Loginpage> {
           Center(
             child: Container(
               padding: EdgeInsets.all(25),
-              height: 575,
+              height: 500,
               width: 400,
-              color: const Color.fromARGB(255, 224, 224, 228),
+              color:  Colors.white,
               child: Column(
                 children: [
                   Container(
