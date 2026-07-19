@@ -27,9 +27,13 @@ class _RigesterpageState extends State<Rigesterpage> {
           children: [
             // Header
             Container(
-              height: 230,
+              decoration: BoxDecoration(
+                color: Color(0xFFBF001C),
+                borderRadius: BorderRadius.only(bottomRight:Radius.circular(20), bottomLeft: Radius.circular(20),)
+              ),
+              height: 300,
               width: 400,
-              color: Color(0xFFBF001C),
+              
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Column(
@@ -43,13 +47,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "METRO",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontSize: 25,
-                      ),
-                    ),
+                    
                     SizedBox(height: 40),
                     Text(
                       "CREATE AN ACCOUNT",
@@ -68,7 +66,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
-                color: Colors.grey[300],
+                color:  Colors.white,
 
                 child: Column(
                   children: [
@@ -228,6 +226,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 ),
                               ),
 
+                              SizedBox(height: 10,)
+
                             ],
                           )
 
@@ -269,54 +269,71 @@ class _RigesterpageState extends State<Rigesterpage> {
 
 
                     // Register button
-                    ElevatedButton(
+                    // Register button
+ElevatedButton(
 
-                      onPressed: agreedToTerms
-                          ? () async {
+  onPressed: agreedToTerms
+      ? () async {
 
-                              final result =
-                                  await ApiService.register(
-                                usernameController.text,
-                                emailController.text,
-                                passwordController.text,
-                              );
-
-
-                              print(result);
-
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context)=> Loginpage(),
-                                ),
-                              );
-
-                            }
-                          : null,
+          final result =
+              await ApiService.register(
+            usernameController.text,
+            emailController.text,
+            passwordController.text,
+            isStudent,
+          );
 
 
-                      child: Text(
-                        "Create Your Account",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
+          print(result);
 
 
-                      style: ElevatedButton.styleFrom(
+          if (result["success"] == true) {
 
-                        backgroundColor: Color(0xFFBF001C),
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Loginpage(),
+              ),
+            );
 
-                        minimumSize: Size(395,50),
+          }
 
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+          else {
 
-                      ),
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(result["message"]),
+              ),
+            );
 
-                    ),
+          }
+
+        }
+      : null,
+
+
+  child: Text(
+    "Create Your Account",
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
+  ),
+
+
+  style: ElevatedButton.styleFrom(
+
+    backgroundColor: Color(0xFFBF001C),
+
+    minimumSize: Size(395,50),
+
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+
+  ),
+
+),
 
 
 
@@ -324,11 +341,13 @@ class _RigesterpageState extends State<Rigesterpage> {
 
 
                     Text(
-                      "---------- Already Have An Account ? ----------",
+                      " Already Have An Account ? ",
                       style: TextStyle(
                         color: Color(0xFFBF001C),
                       ),
                     ),
+
+                    SizedBox(height: 25,),
 
 
 
