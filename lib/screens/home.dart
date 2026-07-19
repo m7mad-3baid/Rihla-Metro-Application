@@ -92,7 +92,8 @@ class HomePage extends StatelessWidget {
                     ),
 
                     child: const Text(
-                      "Hababk.. >>>",
+                      
+                      "Hababk.. ",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -148,7 +149,7 @@ class HomePage extends StatelessWidget {
 
               // Next Train Card
               Container(
-                height: 250,
+                height: 300,
                 width: 350,
 
                 decoration: BoxDecoration(
@@ -220,6 +221,8 @@ class HomePage extends StatelessWidget {
                                 "IN 3 MIN",
 
                                 style: TextStyle(
+
+                                  fontSize: 10,
                                   color: Color.fromARGB(
                                     255,
                                     255,
@@ -388,7 +391,7 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 20),
                             // Student Discount Card
               Container(
-                width: 325,
+                width: 350,
                 height: 100,
 
                 decoration: BoxDecoration(
@@ -631,7 +634,7 @@ class HomePage extends StatelessWidget {
 
 
 
-              SizedBox(height: 20),
+              SizedBox(height: 30),
 
                             // Metro Status Card
               Container(
@@ -864,6 +867,7 @@ class HomePage extends StatelessWidget {
           const EdgeInsets.only(
             left: 15,
             top: 15,
+            bottom: 10
           ),
 
       child: Container(

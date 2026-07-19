@@ -12,13 +12,15 @@ class RihlaMap extends StatelessWidget {
       height: 250,
       width: 375,
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: const Color.fromARGB(31, 114, 43, 43),
             blurRadius: 10,
             offset: Offset(0, 4),
+            spreadRadius: 10
           ),
         ],
       ),
