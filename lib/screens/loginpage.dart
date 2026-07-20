@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/api_services.dart';
+import '../services/session_services.dart';
 import '../screens/MainScreen.dart';
 import '../screens/rigesterpage.dart';
 
@@ -14,6 +15,8 @@ class Loginpage extends StatefulWidget {
 class _LoginpageState extends State<Loginpage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool hidePassword = true;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,13 @@ class _LoginpageState extends State<Loginpage> {
           Container(
             decoration: BoxDecoration(
               color: Color(0xFFBF001C),
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
             ),
             height: 300,
             width: double.infinity,
-            
             child: Padding(
               padding: const EdgeInsets.only(top: 30, left: 20),
               child: Column(
@@ -41,11 +46,13 @@ class _LoginpageState extends State<Loginpage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                
                   SizedBox(height: 40),
                   Text(
                     "SIGN IN TO CONTINUE",
-                    style: TextStyle(color: const Color.fromARGB(255, 252, 251, 251), fontSize: 18),
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 252, 251, 251),
+                      fontSize: 18,
+                    ),
                   ),
                 ],
               ),
@@ -56,7 +63,7 @@ class _LoginpageState extends State<Loginpage> {
               padding: EdgeInsets.all(25),
               height: 500,
               width: 400,
-              color:  Colors.white,
+              color: Colors.white,
               child: Column(
                 children: [
                   Container(
@@ -73,7 +80,6 @@ class _LoginpageState extends State<Loginpage> {
                   ),
                   TextField(
                     controller: emailController,
-
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 238, 240, 243),
                       filled: true,
@@ -100,6 +106,7 @@ class _LoginpageState extends State<Loginpage> {
                   ),
                   TextField(
                     controller: passwordController,
+                    obscureText: hidePassword,
                     decoration: InputDecoration(
                       fillColor: const Color.fromARGB(255, 255, 255, 255),
                       filled: true,
@@ -131,21 +138,48 @@ class _LoginpageState extends State<Loginpage> {
                     height: 50,
                     width: 395,
                     child: ElevatedButton(
-                      child: Text(
-                        "LOGIN",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: isLoading
+                          ? CircularProgressIndicator(color: Colors.white)
+                          : Text(
+                              "LOGIN",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                       onPressed: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        if (emailController.text.isEmpty ||
+                            passwordController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("make sure to fill ALL the Fields"),
+                            ),
+                          );
+
+                          setState(() {
+                            isLoading = false;
+                          });
+
+                          return;
+                        }
+
                         final result = await ApiService.login(
                           emailController.text,
                           passwordController.text,
                         );
+                        setState(() {
+                          isLoading = false;
+                        });
 
                         if (result["success"] == true) {
+                          await SessionService.saveUser(result["data"]);
+                          await SessionService.checkUser();
+
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -153,7 +187,13 @@ class _LoginpageState extends State<Loginpage> {
                             ),
                           );
                         } else {
-                          print("login failed ");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "login failed , check email and password again !",
+                              ),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/MainScreen.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
+import '../services/session_services.dart';
 import 'package:video_player/video_player.dart';
 import 'routes_screen.dart';
 
@@ -25,12 +26,37 @@ class _SplashState extends State<Splash> {
 
       _controller.play();
 
-      _controller.addListener(() {
-        if (_controller.value.position >= _controller.value.duration) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) =>  Loginpage()),
-          );
+      _controller.addListener(()async {
+        if (_controller.value.position >= _controller.value.duration)  {
+
+           bool loggedIn = await SessionService.isLoggedIn();
+
+
+  if (loggedIn) {
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MainScreen(),
+      ),
+    );
+
+  } else {
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Loginpage(),
+      ),
+    );
+
+  }
+
+
+
+
+
+  
         }
       });
     });

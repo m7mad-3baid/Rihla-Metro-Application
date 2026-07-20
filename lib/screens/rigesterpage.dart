@@ -11,24 +11,36 @@ class Rigesterpage extends StatefulWidget {
 }
 
 class _RigesterpageState extends State<Rigesterpage> {
+  // ============================================================
+  // CONTROLLERS FOR TEXT FIELDS
+  // ============================================================
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
 
-  bool isStudent = false;
-  bool agreedToTerms = false;
+  // ============================================================
+  // STATE VARIABLES
+  // ============================================================
+  bool isStudent = false; // Tracks if user is a student
+  bool agreedToTerms = false; // Tracks if user agreed to terms
+  bool isLoading = false; // for the loading circle
 
+  // ============================================================
+  // BUILD METHOD - UI RENDERING
+  // ============================================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
+            // ============================================================
+            // HEADER SECTION - Red background with app name and title
+            // ============================================================
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFFBF001C),
+                color: Color(0xFFBF001C), // Brand red color
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(20),
                   bottomLeft: Radius.circular(20),
@@ -36,12 +48,12 @@ class _RigesterpageState extends State<Rigesterpage> {
               ),
               height: 300,
               width: double.infinity,
-
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // App name
                     Text(
                       "RIHLA",
                       style: TextStyle(
@@ -50,8 +62,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     SizedBox(height: 40),
+                    // Page title
                     Text(
                       "CREATE AN ACCOUNT",
                       style: TextStyle(color: Colors.grey[300], fontSize: 25),
@@ -61,16 +73,20 @@ class _RigesterpageState extends State<Rigesterpage> {
               ),
             ),
 
+            // ============================================================
+            // FORM SECTION - White container with all input fields
+            // ============================================================
             Center(
               child: Container(
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
                 color: Colors.white,
-
                 child: Column(
                   children: [
-                    // Username
+                    // ==========================================================
+                    // USERNAME FIELD
+                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -81,7 +97,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                         ),
                       ),
                     ),
-
                     TextField(
                       controller: usernameController,
                       decoration: InputDecoration(
@@ -95,7 +110,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // Email
+                    // ==========================================================
+                    // EMAIL FIELD
+                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -109,7 +126,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                         ),
                       ),
                     ),
-
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -123,7 +139,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // Password
+                    // ==========================================================
+                    // PASSWORD FIELD
+                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -137,10 +155,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                         ),
                       ),
                     ),
-
                     TextField(
                       controller: passwordController,
-                      obscureText: true,
+                      obscureText: true, // Hides password characters
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -152,7 +169,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // Confirm password
+                    // ==========================================================
+                    // CONFIRM PASSWORD FIELD
+                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -166,10 +185,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                         ),
                       ),
                     ),
-
                     TextField(
                       controller: repasswordController,
-                      obscureText: true,
+                      obscureText: true, // Hides password characters
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -181,27 +199,26 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // Student checkbox
+                    // ==========================================================
+                    // STUDENT CHECKBOX - Toggles student discount
+                    // ==========================================================
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
                       ),
-
                       child: Row(
                         children: [
                           Checkbox(
                             value: isStudent,
                             activeColor: Color(0xFFBF001C),
-
                             onChanged: (value) {
                               setState(() {
                                 isStudent = value ?? false;
                               });
                             },
                           ),
-
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -209,12 +226,10 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 "I'm a student",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-
                               Text(
                                 "Unlock 50% off all tickets",
                                 style: TextStyle(color: Colors.grey),
                               ),
-
                               SizedBox(height: 10),
                             ],
                           ),
@@ -222,21 +237,20 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // Terms checkbox
+                    // ==========================================================
+                    // TERMS AND CONDITIONS CHECKBOX
+                    // ==========================================================
                     Row(
                       children: [
                         Checkbox(
                           value: agreedToTerms,
-
                           activeColor: Color(0xFFBF001C),
-
                           onChanged: (value) {
                             setState(() {
                               agreedToTerms = value ?? false;
                             });
                           },
                         ),
-
                         Text(
                           "I agree to Terms & Privacy Policy",
                           style: TextStyle(color: Color(0xFFBF001C)),
@@ -244,11 +258,40 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ],
                     ),
 
-                    // Register button
-                    // Register button
+                    // ==========================================================
+                    // REGISTER BUTTON - Creates account (only if terms agreed)
+                    // ==========================================================
                     ElevatedButton(
                       onPressed: agreedToTerms
                           ? () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              // Validate that all fields are filled
+                              if (usernameController.text.isEmpty ||
+                                  emailController.text.isEmpty ||
+                                  passwordController.text.isEmpty ||
+                                  repasswordController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Please fill all fields"),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              if (passwordController.text !=
+                                  repasswordController.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Passwords dont match"),
+                                  ),
+                                );
+
+                                return;
+                              }
+
+                              // Call API to register user
                               final result = await ApiService.register(
                                 usernameController.text,
                                 emailController.text,
@@ -256,54 +299,53 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 isStudent,
                               );
 
+                              setState(() {
+                                isLoading = false;
+                              });
+
+                              // Log result for debugging
                               print(result);
 
+                              // Check if registration was successful
+                              if (result["success"] == true) {
+                                // Show success message
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Account created successfully",
+                                    ),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
 
-if (result["success"] == true) {
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text("Account created successfully"),
-      duration: Duration(seconds: 2),
-    ),
-  );
-
-
-  Future.delayed(
-    Duration(seconds: 2),
-    () {
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Loginpage(),
-        ),
-      );
-
-    },
-  );
-
-}
-
-
-else {
+                                // Navigate to login page after delay
+                                Future.delayed(Duration(seconds: 2), () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Loginpage(),
+                                    ),
+                                  );
+                                });
+                              } else {
+                                // Show error message from API
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(result["message"])),
                                 );
                               }
                             }
-                          : null,
-
-                      child: Text(
+                          : null, // Button disabled if terms not agreed
+                      child: isLoading
+                      ?CircularProgressIndicator()
+                      
+                       :Text(
                         "Create Your Account",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-
+                      
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFBF001C),
-
                         minimumSize: Size(395, 50),
-
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -312,6 +354,9 @@ else {
 
                     SizedBox(height: 10),
 
+                    // ==========================================================
+                    // "ALREADY HAVE AN ACCOUNT" TEXT
+                    // ==========================================================
                     Text(
                       " Already Have An Account ? ",
                       style: TextStyle(color: Color(0xFFBF001C)),
@@ -319,19 +364,21 @@ else {
 
                     SizedBox(height: 25),
 
+                    // ==========================================================
+                    // LOGIN BUTTON - Navigates to login page
+                    // ==========================================================
                     ElevatedButton(
                       onPressed: () {
+                        // Navigate back to login page
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => Loginpage()),
                         );
                       },
-
                       child: Text(
                         "LOGIN",
                         style: TextStyle(color: Color(0xFFBF001C)),
                       ),
-
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         minimumSize: Size(395, 50),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
+import '../services/session_services.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -409,7 +410,8 @@ class Profile extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    await SessionService.logout();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => Loginpage()),
