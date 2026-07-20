@@ -48,13 +48,13 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     Icons.house_outlined,
                     size: 30,
-                    color: Color.fromRGBO(191, 0, 28, 100),
+                    color: Colors.red,
                   ),
                   Text(
                     "Home",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(191, 0, 28, 100),
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -72,13 +72,13 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     Icons.map_outlined,
                     size: 30,
-                    color: Color.fromRGBO(191, 0, 28, 100),
+                    color: Colors.red,
                   ),
                   Text(
                     "Routes",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(191, 0, 28, 100),
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -97,13 +97,13 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     Icons.confirmation_num_outlined,
                     size: 30,
-                    color: Color.fromRGBO(191, 0, 28, 100),
+                    color: Colors.red,
                   ),
                   Text(
                     "Tickets",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(191, 0, 28, 100),
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -123,13 +123,13 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     Icons.person,
                     size: 30,
-                    color: Color.fromRGBO(191, 0, 28, 100),
+                    color: Colors.red,
                   ),
                   Text(
                     "Profile",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(191, 0, 28, 100),
+                      color: Colors.red,
                     ),
                   ),
                 ],

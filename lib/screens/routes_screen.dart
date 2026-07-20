@@ -79,7 +79,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: isTrainSelected
-                              ? const Color(0xFFC0001A)
+                              ?  Colors.red
                               : const Color(0xFFE2E2E2),
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(40),

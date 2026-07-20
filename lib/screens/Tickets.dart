@@ -36,41 +36,7 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, top: 10),
-                    child: Icon(
-                      Icons.money_rounded,
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      size: 35,
-                    ),
-                  ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, top: 10),
-                      child: Container(
-                        height: 30,
-                        width: 130,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 180, 12, 0),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Buy A Ticket",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              
               SizedBox(height: 30),
 
               // Buy A Ticket / My Tickets Toggle
@@ -157,7 +123,7 @@ class _TicketsState extends State<Tickets> {
               if (isBuySelected) ...[
                 // tickets prices card
                 Container(
-                  height: 210,
+                  height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
@@ -259,7 +225,7 @@ class _TicketsState extends State<Tickets> {
 
                 //second card
                 Container(
-                  height: 210,
+                  height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
@@ -361,7 +327,7 @@ class _TicketsState extends State<Tickets> {
 
                 //third card
                 Container(
-                  height: 220,
+                  height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
@@ -387,7 +353,7 @@ class _TicketsState extends State<Tickets> {
                           Padding(
                             padding: const EdgeInsets.only(left: 15, top: 35),
                             child: Text(
-                              "STUDENT TICKET",
+                              "STUDENT pass",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -401,7 +367,7 @@ class _TicketsState extends State<Tickets> {
                                 Container(
                                   margin: EdgeInsets.only(top: 5, bottom: 3),
                                   height: 30,
-                                  width: 100,
+                                  width: 130,
                                   decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                       47,
