@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl = "http://10.5.50.225/Rihla_backend/api";
+  static const String baseUrl = "http://10.5.50.82/Rihla_backend/api";
 
 
   static Future<dynamic> register(

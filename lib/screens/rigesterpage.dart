@@ -29,11 +29,14 @@ class _RigesterpageState extends State<Rigesterpage> {
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFFBF001C),
-                borderRadius: BorderRadius.only(bottomRight:Radius.circular(20), bottomLeft: Radius.circular(20),)
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                ),
               ),
               height: 300,
               width: double.infinity,
-              
+
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Column(
@@ -47,14 +50,11 @@ class _RigesterpageState extends State<Rigesterpage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    
+
                     SizedBox(height: 40),
                     Text(
                       "CREATE AN ACCOUNT",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontSize: 25,
-                      ),
+                      style: TextStyle(color: Colors.grey[300], fontSize: 25),
                     ),
                   ],
                 ),
@@ -66,11 +66,10 @@ class _RigesterpageState extends State<Rigesterpage> {
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
-                color:  Colors.white,
+                color: Colors.white,
 
                 child: Column(
                   children: [
-
                     // Username
                     Align(
                       alignment: Alignment.centerLeft,
@@ -95,7 +94,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                         labelText: "Username",
                       ),
                     ),
-
 
                     // Email
                     Align(
@@ -124,7 +122,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                         labelText: "Email",
                       ),
                     ),
-
 
                     // Password
                     Align(
@@ -155,7 +152,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-
                     // Confirm password
                     Align(
                       alignment: Alignment.centerLeft,
@@ -185,7 +181,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-
                     // Student checkbox
                     Container(
                       margin: EdgeInsets.only(top: 15),
@@ -196,12 +191,11 @@ class _RigesterpageState extends State<Rigesterpage> {
 
                       child: Row(
                         children: [
-
                           Checkbox(
                             value: isStudent,
                             activeColor: Color(0xFFBF001C),
 
-                            onChanged: (value){
+                            onChanged: (value) {
                               setState(() {
                                 isStudent = value ?? false;
                               });
@@ -211,172 +205,138 @@ class _RigesterpageState extends State<Rigesterpage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
                               Text(
                                 "I'm a student",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
 
                               Text(
                                 "Unlock 50% off all tickets",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
+                                style: TextStyle(color: Colors.grey),
                               ),
 
-                              SizedBox(height: 10,)
-
+                              SizedBox(height: 10),
                             ],
-                          )
-
+                          ),
                         ],
                       ),
                     ),
 
-
-
                     // Terms checkbox
                     Row(
                       children: [
-
                         Checkbox(
                           value: agreedToTerms,
 
                           activeColor: Color(0xFFBF001C),
 
-                          onChanged:(value){
-
+                          onChanged: (value) {
                             setState(() {
                               agreedToTerms = value ?? false;
                             });
-
                           },
                         ),
 
-
                         Text(
                           "I agree to Terms & Privacy Policy",
-                          style: TextStyle(
-                            color: Color(0xFFBF001C),
-                          ),
-                        )
-
+                          style: TextStyle(color: Color(0xFFBF001C)),
+                        ),
                       ],
                     ),
 
-
-
                     // Register button
                     // Register button
-ElevatedButton(
+                    ElevatedButton(
+                      onPressed: agreedToTerms
+                          ? () async {
+                              final result = await ApiService.register(
+                                usernameController.text,
+                                emailController.text,
+                                passwordController.text,
+                                isStudent,
+                              );
 
-  onPressed: agreedToTerms
-      ? () async {
-
-          final result =
-              await ApiService.register(
-            usernameController.text,
-            emailController.text,
-            passwordController.text,
-            isStudent,
-          );
-
-
-          print(result);
+                              print(result);
 
 
-          if (result["success"] == true) {
+if (result["success"] == true) {
 
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Loginpage(),
-              ),
-            );
-
-          }
-
-          else {
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(result["message"]),
-              ),
-            );
-
-          }
-
-        }
-      : null,
-
-
-  child: Text(
-    "Create Your Account",
-    style: TextStyle(
-      color: Colors.white,
-      fontSize: 20,
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text("Account created successfully"),
+      duration: Duration(seconds: 2),
     ),
-  ),
+  );
 
 
-  style: ElevatedButton.styleFrom(
+  Future.delayed(
+    Duration(seconds: 2),
+    () {
 
-    backgroundColor: Color(0xFFBF001C),
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Loginpage(),
+        ),
+      );
 
-    minimumSize: Size(395,50),
+    },
+  );
 
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-
-  ),
-
-),
-
-
-
-                    SizedBox(height:10),
+}
 
 
-                    Text(
-                      " Already Have An Account ? ",
-                      style: TextStyle(
-                        color: Color(0xFFBF001C),
+else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(result["message"])),
+                                );
+                              }
+                            }
+                          : null,
+
+                      child: Text(
+                        "Create Your Account",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFBF001C),
+
+                        minimumSize: Size(395, 50),
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
 
-                    SizedBox(height: 25,),
+                    SizedBox(height: 10),
 
+                    Text(
+                      " Already Have An Account ? ",
+                      style: TextStyle(color: Color(0xFFBF001C)),
+                    ),
 
+                    SizedBox(height: 25),
 
                     ElevatedButton(
-
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
-                            builder:(context)=>Loginpage(),
-                          ),
+                          MaterialPageRoute(builder: (context) => Loginpage()),
                         );
                       },
 
-
                       child: Text(
                         "LOGIN",
-                        style: TextStyle(
-                          color: Color(0xFFBF001C),
-                        ),
+                        style: TextStyle(color: Color(0xFFBF001C)),
                       ),
 
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        minimumSize: Size(395,50),
+                        minimumSize: Size(395, 50),
                       ),
-
-                    )
-
+                    ),
                   ],
                 ),
               ),
