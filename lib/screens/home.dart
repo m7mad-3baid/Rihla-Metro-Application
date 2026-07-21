@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../widgets/rihla_map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
+import 'package:rihla_4_0/screens/fullMapPage.dart';
 
 // StatefulWidget for the main home page
 class HomePage extends StatefulWidget {
@@ -119,17 +121,66 @@ class _HomePageState extends State<HomePage> {
               Searchbarwidget(),
               SizedBox(height: 30),
               // Map section title
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text("Map", style: TextStyle(fontSize: 25)),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text("Map", style: TextStyle(fontSize: 25)),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, top: 20),
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Text(
+                            "  Full Map Mode",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.blueGrey,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Icon(Icons.arrow_right_outlined),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullMapPage(),
+                          ),
+                        );
+                      },
+
+                      child: Icon(Icons.fullscreen_rounded, size: 50),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 15),
               // Interactive map widget
-              RihlaMap(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FullMapPage()),
+                  );
+                },
+
+                child: RihlaMap(),
+              ),
               SizedBox(height: 20),
+
+              SizedBox(height: 20),
+
               // Next train information card
               Container(
                 height: 300,
