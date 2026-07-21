@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
-import 'package:rihla_4_0/screens/routes_screen.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../widgets/rihla_map.dart';
-
-
 
 List<Map<String, dynamic>> stations = [
   {
@@ -30,8 +27,16 @@ List<Map<String, dynamic>> stations = [
 ];
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final VoidCallback onViewRoutesTap;
+  final VoidCallback onRoutesTap;
+  final VoidCallback onTicketsTap;
 
+  const HomePage({
+    super.key,
+    required this.onViewRoutesTap,
+    required this.onRoutesTap,
+    required this.onTicketsTap,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +46,10 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 20),
                     child: Container(
@@ -57,12 +60,7 @@ class HomePage extends StatelessWidget {
                         color: Color(0xFFE4E1F7),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Color.fromARGB(
-                            255,
-                            157,
-                            142,
-                            255,
-                          ),
+                          color: Color.fromARGB(255, 157, 142, 255),
                         ),
                       ),
 
@@ -72,27 +70,17 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: Color.fromARGB(
-                              255,
-                              74,
-                              46,
-                              255,
-                            ),
+                            color: Color.fromARGB(255, 74, 46, 255),
                           ),
                         ),
                       ),
                     ),
                   ),
 
-
                   Container(
-                    margin: const EdgeInsets.only(
-                      top: 20,
-                      right: 40,
-                    ),
+                    margin: const EdgeInsets.only(top: 20, right: 40),
 
                     child: const Text(
-                      
                       "Hababk.. ",
                       style: TextStyle(
                         fontSize: 30,
@@ -101,12 +89,8 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
 
-
                   Padding(
-                    padding: const EdgeInsets.only(
-                      right: 10,
-                      top: 20,
-                    ),
+                    padding: const EdgeInsets.only(right: 10, top: 20),
 
                     child: Icon(
                       CupertinoIcons.bell,
@@ -117,35 +101,27 @@ class HomePage extends StatelessWidget {
                 ],
               ),
 
-
               SizedBox(height: 40),
-
 
               // Search Bar
               Searchbarwidget(),
 
-
               SizedBox(height: 30),
 
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text("Map", style: TextStyle(fontSize: 25)),
+                ),
+              ),
 
-              Align( alignment: Alignment.centerLeft,
-               child: Padding(
-                 padding: const EdgeInsets.only(left: 20),
-                 child: Text("Map", style: TextStyle(fontSize: 25),),
-               )
-               ),
+              SizedBox(height: 15),
 
-               SizedBox(height: 15,),
+              //the map
+              RihlaMap(),
 
-
-
-//the map         
-                  RihlaMap(),
-             
-
-              SizedBox(height: 20,),
-
-
+              SizedBox(height: 20),
 
               // Next Train Card
               Container(
@@ -165,45 +141,30 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
 
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
-
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                       children: [
-
                         Padding(
-                          padding:
-                              const EdgeInsets.only(
-                                left: 10,
-                                top: 25,
-                              ),
+                          padding: const EdgeInsets.only(left: 10, top: 25),
 
                           child: Text(
                             "NEXT TRAIN",
 
                             style: TextStyle(
                               color: Color(0xFFBF001C),
-                              fontWeight:
-                                  FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                               fontSize: 15,
                             ),
                           ),
                         ),
 
-
-
                         Padding(
-                          padding:
-                              const EdgeInsets.only(
-                                right: 15,
-                                top: 15,
-                              ),
+                          padding: const EdgeInsets.only(right: 15, top: 15),
 
                           child: Container(
                             width: 80,
@@ -211,27 +172,18 @@ class HomePage extends StatelessWidget {
 
                             decoration: BoxDecoration(
                               color: Color(0xFFBF001C),
-                              borderRadius:
-                                  BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-
 
                             child: Center(
                               child: Text(
                                 "IN 3 MIN",
 
                                 style: TextStyle(
-
                                   fontSize: 10,
-                                  color: Color.fromARGB(
-                                    255,
-                                    255,
-                                    200,
-                                    200,
-                                  ),
+                                  color: Color.fromARGB(255, 255, 200, 200),
 
-                                  fontWeight:
-                                      FontWeight.bold,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -240,121 +192,82 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
 
-
-
                     SizedBox(height: 10),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15),
 
                       child: Text(
                         "Bahri Central",
 
                         style: TextStyle(
                           fontSize: 25,
-                          fontWeight:
-                              FontWeight.bold,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 10),
 
                       child: Row(
                         children: [
-
                           Icon(
                             Icons.circle,
                             color: Color(0xFFBF001C),
                             size: 15,
                           ),
 
-
                           Text(
                             "  Current : Bahri Central",
 
-                            style: TextStyle(
-                              color: Colors.blueGrey,
-                            ),
+                            style: TextStyle(color: Colors.blueGrey),
                           ),
                         ],
                       ),
                     ),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15),
 
                       child: Container(
                         width: 3,
                         height: 20,
 
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                        ),
+                        decoration: BoxDecoration(color: Colors.grey),
                       ),
                     ),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 10),
 
                       child: Row(
                         children: [
-
                           Icon(
                             Icons.circle,
                             color: Color(0xFFBF001C),
                             size: 15,
                           ),
-
 
                           Text(
                             "  TO : Khartoum Central",
 
                             style: TextStyle(
                               fontSize: 20,
-                              fontWeight:
-                                  FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
                     ),
 
-
-
                     SizedBox(height: 20),
-
-
 
                     Center(
                       child: GestureDetector(
-
                         onTap: () {
-
-                          Navigator.pushReplacement(
-                            context,
-
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  RoutesScreen(),
-                            ),
-                          );
-
+                          onViewRoutesTap();
                         },
-
 
                         child: Container(
                           width: 250,
@@ -363,10 +276,8 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Color(0xFFBF001C),
 
-                            borderRadius:
-                                BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-
 
                           child: Center(
                             child: Text(
@@ -374,8 +285,7 @@ class HomePage extends StatelessWidget {
 
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight:
-                                    FontWeight.w700,
+                                fontWeight: FontWeight.w700,
                                 fontSize: 20,
                               ),
                             ),
@@ -387,43 +297,24 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-
               SizedBox(height: 20),
-                            // Student Discount Card
+              // Student Discount Card
               Container(
                 width: 350,
                 height: 100,
 
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(
-                    255,
-                    255,
-                    241,
-                    195,
-                  ),
+                  color: Color.fromARGB(255, 255, 241, 195),
 
-                  border: Border.all(
-                    color: Color.fromARGB(
-                      255,
-                      197,
-                      160,
-                      27,
-                    ),
-                  ),
+                  border: Border.all(color: Color.fromARGB(255, 197, 160, 27)),
 
-                  borderRadius:
-                      BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-
 
                 child: Row(
                   children: [
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(
-                            left: 10,
-                          ),
+                      padding: const EdgeInsets.only(left: 10),
 
                       child: Icon(
                         Icons.school_outlined,
@@ -434,209 +325,141 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(
-                            left: 20,
-                          ),
+                      padding: const EdgeInsets.only(left: 20),
 
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
 
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
-
                           Text(
                             "Student Discount",
 
                             style: TextStyle(
-                              color:
-                                  Color(0xFF7C5700),
+                              color: Color(0xFF7C5700),
 
-                              fontWeight:
-                                  FontWeight.bold,
+                              fontWeight: FontWeight.bold,
 
                               fontSize: 20,
                             ),
                           ),
 
-
                           Text(
                             "save up to 50% on all rides",
 
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
+                            style: TextStyle(fontSize: 15),
                           ),
                         ],
                       ),
                     ),
 
-
-
                     Spacer(),
 
-
-
                     Padding(
-                      padding:
-                          const EdgeInsets.only(
-                            right: 15,
-                          ),
+                      padding: const EdgeInsets.only(right: 15),
 
                       child: Icon(
                         Icons.arrow_forward_ios_outlined,
 
-                        color:
-                            Color(0xFF7C5700),
+                        color: Color(0xFF7C5700),
                       ),
                     ),
                   ],
                 ),
               ),
 
-
-
               SizedBox(height: 20),
-
-
 
               // Quick Actions
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                 children: [
-
-                  _buildQuickAction(
-                    icon: Icons.map_outlined,
-                    title: "Routes",
-                    color: Color(0xFFBF001C),
+                  GestureDetector(
+                    onTap: onRoutesTap,
+                    child: _buildQuickAction(
+                      icon: Icons.map_outlined,
+                      title: "Routes",
+                      color: Color(0xFFBF001C),
+                    ),
                   ),
-
-
-                  _buildQuickAction(
-                    icon:
-                        Icons.confirmation_num_outlined,
-                    title: "Tickets",
-                    color: Color(0xFF284EE2),
+                  GestureDetector(
+                    onTap: onTicketsTap,
+                    child: _buildQuickAction(
+                      icon: Icons.confirmation_num_outlined,
+                      title: "Tickets",
+                      color: Color(0xFF284EE2),
+                    ),
                   ),
                 ],
               ),
-
-
 
               SizedBox(height: 15),
 
-
-
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                 children: [
-
-                  _buildQuickAction(
-                    icon: CupertinoIcons.heart,
-                    title: "Favorites",
-                    color:
-                        Color.fromARGB(
-                          255,
-                          0,
-                          191,
-                          51,
-                        ),
+                  GestureDetector(
+                    onTap: onRoutesTap,
+                    child: _buildQuickAction(
+                      icon: CupertinoIcons.heart,
+                      title: "Favorites",
+                      color: Color.fromARGB(255, 0, 191, 51),
+                    ),
                   ),
 
-
-                  _buildQuickAction(
-                    icon: Icons.location_pin,
-                    title: "Nearby",
-                    color:
-                        Color.fromARGB(
-                          255,
-                          226,
-                          198,
-                          40,
-                        ),
+                  GestureDetector(
+                    onTap: onTicketsTap,
+                    child: _buildQuickAction(
+                      icon: Icons.location_pin,
+                      title: "Nearby",
+                      color: Color.fromARGB(255, 226, 198, 40),
+                    ),
                   ),
                 ],
               ),
 
-
-
               SizedBox(height: 20),
-
-
 
               Align(
                 alignment: Alignment.centerLeft,
 
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(
-                        left: 15,
-                      ),
+                  padding: const EdgeInsets.only(left: 15),
 
                   child: Text(
                     "Saved Stations",
 
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight:
-                          FontWeight.w500,
-                    ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
 
-
-
               SizedBox(height: 10),
-
-
 
               // Horizontal station pills
               SingleChildScrollView(
-                scrollDirection:
-                    Axis.horizontal,
+                scrollDirection: Axis.horizontal,
 
                 child: Row(
                   children: [
+                    _buildStationPill("EL MAK NIMIR", Colors.blue),
 
-                    _buildStationPill(
-                      "EL MAK NIMIR",
-                      Colors.blue,
-                    ),
+                    _buildStationPill("KOBER", Colors.red),
 
-                    _buildStationPill(
-                      "KOBER",
-                      Colors.red,
-                    ),
+                    _buildStationPill("ARKAWEET", Colors.green),
 
-                    _buildStationPill(
-                      "ARKAWEET",
-                      Colors.green,
-                    ),
-
-                    _buildStationPill(
-                      "WAD NUBAWI",
-                      Colors.green,
-                    ),
+                    _buildStationPill("WAD NUBAWI", Colors.green),
                   ],
                 ),
               ),
 
-
-
               SizedBox(height: 30),
 
-                            // Metro Status Card
+              // Metro Status Card
               Container(
                 height: 300,
                 width: 375,
@@ -644,8 +467,7 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
 
-                  borderRadius:
-                      BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20),
 
                   boxShadow: [
                     BoxShadow(
@@ -655,67 +477,42 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
 
-                  border: Border.all(
-                    color: Colors.blueGrey,
-                    width: 0.25,
-                  ),
+                  border: Border.all(color: Colors.blueGrey, width: 0.25),
                 ),
-
 
                 child: Column(
                   children: [
-
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                       children: [
-
                         Padding(
-                          padding:
-                              const EdgeInsets.only(
-                                left: 15,
-                                top: 15,
-                              ),
+                          padding: const EdgeInsets.only(left: 15, top: 15),
 
                           child: Text(
                             "Metro Status",
 
                             style: TextStyle(
-                              fontWeight:
-                                  FontWeight.bold,
+                              fontWeight: FontWeight.bold,
 
                               fontSize: 20,
                             ),
                           ),
                         ),
 
-
-
                         Padding(
-                          padding:
-                              const EdgeInsets.only(
-                                right: 15,
-                                top: 15,
-                              ),
+                          padding: const EdgeInsets.only(right: 15, top: 15),
 
                           child: Text(
                             "Live Updates",
 
-                            style: TextStyle(
-                              fontWeight:
-                                  FontWeight.w300,
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w300),
                           ),
                         ),
                       ],
                     ),
 
-
-
                     SizedBox(height: 15),
-
-
 
                     _buildMetroLine(
                       "BL",
@@ -725,14 +522,7 @@ class HomePage extends StatelessWidget {
                       Colors.green,
                     ),
 
-
-
-                    Divider(
-                      indent: 20,
-                      endIndent: 20,
-                    ),
-
-
+                    Divider(indent: 20, endIndent: 20),
 
                     _buildMetroLine(
                       "GR",
@@ -742,14 +532,7 @@ class HomePage extends StatelessWidget {
                       Colors.yellow,
                     ),
 
-
-
-                    Divider(
-                      indent: 20,
-                      endIndent: 20,
-                    ),
-
-
+                    Divider(indent: 20, endIndent: 20),
 
                     _buildMetroLine(
                       "RD",
@@ -762,9 +545,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-
               SizedBox(height: 20),
-
             ],
           ),
         ),
@@ -772,30 +553,22 @@ class HomePage extends StatelessWidget {
     );
   }
 
-
-
   // Quick action card builder
   Widget _buildQuickAction({
     required IconData icon,
     required String title,
     required Color color,
   }) {
-
     return Container(
       width: 130,
       height: 120,
 
       decoration: BoxDecoration(
-
         color: Colors.white,
 
-        borderRadius:
-            BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20),
 
-        border: Border.all(
-          color: Colors.blueGrey,
-          width: 0.5,
-        ),
+        border: Border.all(color: Colors.blueGrey, width: 0.5),
 
         boxShadow: [
           BoxShadow(
@@ -806,47 +579,23 @@ class HomePage extends StatelessWidget {
         ],
       ),
 
-
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-
           Padding(
-            padding:
-                const EdgeInsets.only(
-                  left: 10,
-                  top: 15,
-                ),
+            padding: const EdgeInsets.only(left: 10, top: 15),
 
-            child: Icon(
-              icon,
-
-              color: color,
-
-              size: 30,
-            ),
+            child: Icon(icon, color: color, size: 30),
           ),
 
-
-
           Padding(
-            padding:
-                const EdgeInsets.only(
-                  left: 15,
-                  top: 15,
-                ),
+            padding: const EdgeInsets.only(left: 15, top: 15),
 
             child: Text(
               title,
 
-              style: TextStyle(
-                fontWeight:
-                    FontWeight.w700,
-
-                fontSize: 20,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ),
         ],
@@ -854,33 +603,19 @@ class HomePage extends StatelessWidget {
     );
   }
 
-
-
   // Saved station pill builder
-  Widget _buildStationPill(
-    String name,
-    Color color,
-  ) {
-
+  Widget _buildStationPill(String name, Color color) {
     return Padding(
-      padding:
-          const EdgeInsets.only(
-            left: 15,
-            top: 15,
-            bottom: 10
-          ),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 10),
 
       child: Container(
-
         height: 40,
         width: 150,
 
         decoration: BoxDecoration(
-
           color: Colors.white,
 
-          borderRadius:
-              BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20),
 
           boxShadow: [
             BoxShadow(
@@ -895,49 +630,24 @@ class HomePage extends StatelessWidget {
           border: Border.all(
             width: 0.25,
 
-            color: Color.fromARGB(
-              255,
-              194,
-              201,
-              205,
-            ),
+            color: Color.fromARGB(255, 194, 201, 205),
           ),
         ),
 
-
-
         child: Row(
-
-          mainAxisAlignment:
-              MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
           children: [
+            Icon(Icons.circle, size: 15, color: color),
 
-            Icon(
-              Icons.circle,
-
-              size: 15,
-
-              color: color,
-            ),
-
-
-
-            Text(
-              name,
-
-              style: TextStyle(
-                fontWeight:
-                    FontWeight.w500,
-              ),
-            ),
+            Text(name, style: TextStyle(fontWeight: FontWeight.w500)),
           ],
         ),
       ),
     );
   }
 
-    // Metro line builder
+  // Metro line builder
   Widget _buildMetroLine(
     String abbreviation,
     String lineName,
@@ -945,30 +655,22 @@ class HomePage extends StatelessWidget {
     String status,
     Color statusColor,
   ) {
-
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 5,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
 
       child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
         children: [
-
           Row(
             children: [
-
               Container(
                 height: 40,
                 width: 40,
 
                 decoration: BoxDecoration(
                   color: lineColor,
-                  borderRadius:
-                      BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5),
                 ),
 
                 child: Center(
@@ -977,43 +679,23 @@ class HomePage extends StatelessWidget {
 
                     style: TextStyle(
                       color: Colors.white,
-                      fontWeight:
-                          FontWeight.bold,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
 
-
               SizedBox(width: 10),
 
-
-              Text(
-                lineName,
-
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+              Text(lineName, style: TextStyle(fontSize: 20)),
             ],
           ),
 
-
-
           Row(
             children: [
-
-              Icon(
-                Icons.circle,
-
-                size: 15,
-
-                color: statusColor,
-              ),
-
+              Icon(Icons.circle, size: 15, color: statusColor),
 
               SizedBox(width: 5),
-
 
               Text(status),
             ],

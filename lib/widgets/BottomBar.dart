@@ -46,15 +46,17 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.house_outlined,
-                    size: 30,
-                    color: Colors.red,
+                    selectedIndex == 0 ? Icons.house : Icons.house_outlined,
+                    size: selectedIndex == 0 ? 35 : 30,
+                    color: selectedIndex == 0 ? Color(0xFFBF001C) : Colors.grey,
                   ),
                   Text(
                     "Home",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: selectedIndex == 0
+                          ? Color(0xFFBF001C)
+                          : Colors.grey,
                     ),
                   ),
                 ],
@@ -70,15 +72,17 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.map_outlined,
-                    size: 30,
-                    color: Colors.red,
+                    selectedIndex == 1 ? Icons.map : Icons.map_outlined,
+                    size: selectedIndex == 1 ? 35 : 30,
+                    color: selectedIndex == 1 ? Color(0xFFBF001C) : Colors.grey,
                   ),
                   Text(
                     "Routes",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: selectedIndex == 1
+                          ? Color(0xFFBF001C)
+                          : Colors.grey,
                     ),
                   ),
                 ],
@@ -95,15 +99,19 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.confirmation_num_outlined,
-                    size: 30,
-                    color: Colors.red,
+                    selectedIndex == 2
+                        ? Icons.confirmation_num
+                        : Icons.confirmation_num_outlined,
+                    size: selectedIndex == 2 ? 35 : 30,
+                    color: selectedIndex == 2 ? Color(0xFFBF001C) : Colors.grey,
                   ),
                   Text(
                     "Tickets",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: selectedIndex == 2
+                          ? Color(0xFFBF001C)
+                          : Colors.grey,
                     ),
                   ),
                 ],
@@ -121,15 +129,17 @@ class BottomBar extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.person,
-                    size: 30,
-                    color: Colors.red,
+                    selectedIndex == 3 ? Icons.person : Icons.person_outline,
+                    size: selectedIndex == 3 ? 35 : 30,
+                    color: selectedIndex == 3 ? Color(0xFFBF001C) : Colors.grey,
                   ),
                   Text(
                     "Profile",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: selectedIndex == 3
+                          ? Color(0xFFBF001C)
+                          : Colors.grey,
                     ),
                   ),
                 ],

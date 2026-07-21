@@ -16,12 +16,32 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
-  final List<Widget> pages = [HomePage(),RoutesScreen(), Tickets(),Profile()];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      HomePage(
+        onViewRoutesTap: () {
+          setState(() {
+            currentIndex = 1; // Routes tab
+          });
+        },
+        onRoutesTap: () {
+          setState(() {
+            currentIndex = 1; // Routes tab
+          });
+        },
+        onTicketsTap: () {
+          setState(() {
+            currentIndex = 2; // Tickets tab
+          });
+        },
+      ),
+      RoutesScreen(),
+      Tickets(),
+      Profile(),
+    ];
     return Scaffold(
-      backgroundColor:Color(0xFFFCF9F8) ,
+      backgroundColor: Color(0xFFFCF9F8),
       body: pages[currentIndex],
 
       bottomNavigationBar: BottomBar(

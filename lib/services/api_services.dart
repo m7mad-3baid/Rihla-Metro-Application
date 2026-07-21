@@ -5,8 +5,7 @@ class ApiService {
   // ============================================================
   // BASE URL FOR API ENDPOINTS
   // ============================================================
-  static const String baseUrl = "http://10.5.50.82/Rihla_backend/api";
-
+  static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
   // ============================================================
   // REGISTER - Creates a new user account
   // ============================================================
@@ -34,28 +33,19 @@ class ApiService {
       return data;
     } catch (e) {
       // Return error response if unable to connect to server
-      return {
-        "success": false,
-        "message": "unable to connect to server "
-      };
+      return {"success": false, "message": "unable to connect to server "};
     }
   }
 
   // ============================================================
   // LOGIN - Authenticates user credentials
   // ============================================================
-  static Future<dynamic> login(
-    String email,
-    String password,
-  ) async {
+  static Future<dynamic> login(String email, String password) async {
     try {
       // Send POST request to login endpoint
       final response = await http.post(
         Uri.parse("$baseUrl/login.php"),
-        body: {
-          "email": email,
-          "password": password,
-        },
+        body: {"email": email, "password": password},
       );
 
       // Parse JSON response
@@ -64,10 +54,7 @@ class ApiService {
       return data;
     } catch (e) {
       // Return error response if unable to connect to server
-      return {
-        "success": false,
-        "message": "unable to connect to server "
-      };
+      return {"success": false, "message": "unable to connect to server "};
     }
   }
 }

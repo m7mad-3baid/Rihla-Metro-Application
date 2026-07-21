@@ -12,7 +12,7 @@ class SessionService {
 
     await prefs.setString("email", user["email"].toString());
 
-    await prefs.setBool("is_student", user["is_srudent"] == "1");
+    await prefs.setBool("is_student", user["is_student"] == "1");
 
     await prefs.setBool("logged_in", true);
   }
@@ -29,18 +29,14 @@ class SessionService {
     await prefs.clear();
   }
 
-
-
-  //test if it saves 
+  //test if it saves
   static Future<void> checkUser() async {
+    final prefs = await SharedPreferences.getInstance();
 
-  final prefs = await SharedPreferences.getInstance();
-
-  print("USER ID: ${prefs.getString("user_id")}");
-  print("NAME: ${prefs.getString("name")}");
-  print("EMAIL: ${prefs.getString("email")}");
-  print("STUDENT: ${prefs.getBool("is_student")}");
-  print("LOGGED IN: ${prefs.getBool("logged_in")}");
-
-}
+    print("USER ID: ${prefs.getString("user_id")}");
+    print("NAME: ${prefs.getString("name")}");
+    print("EMAIL: ${prefs.getString("email")}");
+    print("STUDENT: ${prefs.getBool("is_student")}");
+    print("LOGGED IN: ${prefs.getBool("logged_in")}");
+  }
 }
