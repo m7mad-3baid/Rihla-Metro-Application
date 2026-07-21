@@ -208,7 +208,7 @@ class _LoginpageState extends State<Loginpage> {
                     height: 55,
                     padding: EdgeInsets.only(top: 20),
                     child: Text(
-                      "---------- Dont Have An Account ? ----------",
+                      " Dont Have An Account ?",
                       style: TextStyle(
                         color: Color(0xFFBF001C),
                         fontSize: 15,

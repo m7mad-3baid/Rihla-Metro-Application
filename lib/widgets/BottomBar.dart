@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+// Custom bottom navigation bar widget
 class BottomBar extends StatelessWidget {
+  // Currently selected tab index
   final int selectedIndex;
+  // Callback function when a tab is tapped
   final Function(int) onTap;
 
   const BottomBar({
@@ -13,17 +16,19 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       height: 75,
       width: double.infinity,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
+        // Top border line
         border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+        // Rounded top corners
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
+        // Shadow effect for elevation
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(110, 32, 5, 5),
@@ -33,18 +38,21 @@ class BottomBar extends StatelessWidget {
           ),
         ],
       ),
-
+      // Navigation items row
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          // Home tab
           Padding(
-            padding: EdgeInsetsGeometry.only(left: 35, top: 10),
+            padding: const EdgeInsets.only(left: 20, top: 10),
             child: GestureDetector(
               onTap: () {
+                // Notify parent of tab selection
                 onTap(0);
               },
               child: Column(
                 children: [
+                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 0 ? Icons.house : Icons.house_outlined,
                     size: selectedIndex == 0 ? 35 : 30,
@@ -63,14 +71,17 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
+          // Routes tab
           Padding(
-            padding: EdgeInsetsGeometry.only(left: 50, top: 10),
+            padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
+                // Notify parent of tab selection
                 onTap(1);
               },
               child: Column(
                 children: [
+                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 1 ? Icons.map : Icons.map_outlined,
                     size: selectedIndex == 1 ? 35 : 30,
@@ -89,15 +100,17 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-
+          // Tickets tab
           Padding(
-            padding: EdgeInsetsGeometry.only(left: 50, top: 10),
+            padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
+                // Notify parent of tab selection
                 onTap(2);
               },
               child: Column(
                 children: [
+                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 2
                         ? Icons.confirmation_num
@@ -118,16 +131,17 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-
+          // Profile tab
           Padding(
-            padding: EdgeInsetsGeometry.only(left: 50, top: 10),
+            padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
+                // Notify parent of tab selection
                 onTap(3);
               },
-
               child: Column(
                 children: [
+                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 3 ? Icons.person : Icons.person_outline,
                     size: selectedIndex == 3 ? 35 : 30,
