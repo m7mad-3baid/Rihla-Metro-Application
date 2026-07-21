@@ -4,6 +4,7 @@ import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../widgets/rihla_map.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 List<Map<String, dynamic>> stations = [
   {
@@ -26,7 +27,7 @@ List<Map<String, dynamic>> stations = [
   },
 ];
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final VoidCallback onViewRoutesTap;
   final VoidCallback onRoutesTap;
   final VoidCallback onTicketsTap;
@@ -37,6 +38,27 @@ class HomePage extends StatelessWidget {
     required this.onRoutesTap,
     required this.onTicketsTap,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String name = "";
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  Future<void> loadUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString("name") ?? "Guest";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +88,15 @@ class HomePage extends StatelessWidget {
 
                       child: Center(
                         child: Text(
-                          "HK",
+                          name.isNotEmpty
+                              ? name
+                                    .trim()
+                                    .split(" ")
+                                    .map((w) => w[0])
+                                    .take(2)
+                                    .join()
+                                    .toUpperCase()
+                              : "?",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -80,8 +110,8 @@ class HomePage extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 20, right: 40),
 
-                    child: const Text(
-                      "Hababk.. ",
+                    child: Text(
+                      "Hababk $name",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -266,7 +296,7 @@ class HomePage extends StatelessWidget {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          onViewRoutesTap();
+                          widget.onViewRoutesTap();
                         },
 
                         child: Container(
@@ -378,7 +408,7 @@ class HomePage extends StatelessWidget {
 
                 children: [
                   GestureDetector(
-                    onTap: onRoutesTap,
+                    onTap: widget.onRoutesTap,
                     child: _buildQuickAction(
                       icon: Icons.map_outlined,
                       title: "Routes",
@@ -386,7 +416,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: onTicketsTap,
+                    onTap: widget.onTicketsTap,
                     child: _buildQuickAction(
                       icon: Icons.confirmation_num_outlined,
                       title: "Tickets",
@@ -403,7 +433,7 @@ class HomePage extends StatelessWidget {
 
                 children: [
                   GestureDetector(
-                    onTap: onRoutesTap,
+                    onTap: widget.onRoutesTap,
                     child: _buildQuickAction(
                       icon: CupertinoIcons.heart,
                       title: "Favorites",
@@ -412,7 +442,7 @@ class HomePage extends StatelessWidget {
                   ),
 
                   GestureDetector(
-                    onTap: onTicketsTap,
+                    onTap: widget.onTicketsTap,
                     child: _buildQuickAction(
                       icon: Icons.location_pin,
                       title: "Nearby",

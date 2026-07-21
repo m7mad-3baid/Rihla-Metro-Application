@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String name = "";
+  String email = "";
+  bool isStudent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  Future<void> loadUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString("name") ?? "Guest";
+      email = prefs.getString("email") ?? "";
+      isStudent = prefs.getBool("is_student") ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +85,15 @@ class Profile extends StatelessWidget {
                         // text for profile
                         child: Center(
                           child: Text(
-                            "HK",
+                            name.isNotEmpty
+                                ? name
+                                      .trim()
+                                      .split(" ")
+                                      .map((w) => w[0])
+                                      .take(2)
+                                      .join()
+                                      .toUpperCase()
+                                : "?",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -77,46 +110,44 @@ class Profile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Hussam Faisal Kroom",
+                            name,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            "hossamkroom23@futureUni.edu",
-                            style: TextStyle(color: Colors.blueGrey),
-                          ),
+                          Text(email, style: TextStyle(color: Colors.blueGrey)),
                           SizedBox(height: 20),
 
                           //the pill
-                          Container(
-                            height: 30,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(131, 255, 214, 64),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.amber),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Icon(
-                                    Icons.star,
-                                    color: const Color.fromARGB(
-                                      255,
-                                      172,
-                                      130,
-                                      5,
+                          if (isStudent)
+                            Container(
+                              height: 30,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(131, 255, 214, 64),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.amber),
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Icon(
+                                      Icons.star,
+                                      color: const Color.fromARGB(
+                                        255,
+                                        172,
+                                        130,
+                                        5,
+                                      ),
+                                      size: 20,
                                     ),
-                                    size: 20,
                                   ),
-                                ),
-                                Text(" Student Discount"),
-                              ],
+                                  Text(" Student Discount"),
+                                ],
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
