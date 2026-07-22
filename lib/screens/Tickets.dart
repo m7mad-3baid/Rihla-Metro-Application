@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 
+// StatefulWidget for the Tickets screen, allowing toggle between Buy and My Tickets views
 class Tickets extends StatefulWidget {
   const Tickets({super.key});
 
@@ -9,18 +10,19 @@ class Tickets extends StatefulWidget {
 }
 
 class _TicketsState extends State<Tickets> {
+  // Boolean state to track which toggle option is selected
+  // true = "Buy A Ticket" view, false = "My Tickets" view
   bool isBuySelected = true;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              //header
+              // Page header with title
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -39,7 +41,7 @@ class _TicketsState extends State<Tickets> {
               
               SizedBox(height: 30),
 
-              // Buy A Ticket / My Tickets Toggle
+              // Toggle button container for switching between Buy A Ticket and My Tickets
               Container(
                 width: 350,
                 height: 40,
@@ -49,6 +51,7 @@ class _TicketsState extends State<Tickets> {
                 ),
                 child: Row(
                   children: [
+                    // "Buy A Ticket" toggle button
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -58,6 +61,7 @@ class _TicketsState extends State<Tickets> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
+                            // Highlight selected button with red color
                             color: isBuySelected
                                 ? const Color(0xFFC0001A)
                                 : const Color(0xFFE2E2E2),
@@ -82,6 +86,7 @@ class _TicketsState extends State<Tickets> {
                       ),
                     ),
 
+                    // "My Tickets" toggle button
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -91,6 +96,7 @@ class _TicketsState extends State<Tickets> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
+                            // Highlight selected button with red color
                             color: isBuySelected
                                 ? const Color(0xFFE2E2E2)
                                 : const Color(0xFFC0001A),
@@ -120,15 +126,16 @@ class _TicketsState extends State<Tickets> {
 
               SizedBox(height: 25),
 
+              // Conditionally render content based on selected toggle
               if (isBuySelected) ...[
-                // tickets prices card
+                // First ticket pricing card - 2-HOUR Ticket
                 Container(
                   height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(color: Colors.grey, width: 0.5),
+                    // Outer shadow effect for card elevation
                     boxShadow: [
                       BoxShadow(
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -140,9 +147,10 @@ class _TicketsState extends State<Tickets> {
                     ],
                   ),
 
-                  // elements
+                  // Card content elements
                   child: Column(
                     children: [
+                      // Ticket name and price row
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -170,6 +178,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Ticket description text
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
@@ -181,6 +190,7 @@ class _TicketsState extends State<Tickets> {
                         ),
                       ),
                       SizedBox(height: 10),
+                      // View Details link row
                       Row(
                         children: [
                           Padding(
@@ -200,6 +210,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Purchase button
                       Container(
                         width: 300,
                         height: 40,
@@ -223,14 +234,14 @@ class _TicketsState extends State<Tickets> {
                 ),
                 SizedBox(height: 25),
 
-                //second card
+                // Second ticket pricing card - 3-DAYS Pass
                 Container(
                   height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(color: Colors.grey, width: 0.5),
+                    // Outer shadow effect for card elevation
                     boxShadow: [
                       BoxShadow(
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -242,9 +253,10 @@ class _TicketsState extends State<Tickets> {
                     ],
                   ),
 
-                  // elements
+                  // Card content elements
                   child: Column(
                     children: [
+                      // Ticket name and price row
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -272,6 +284,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Ticket description text
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
@@ -283,6 +296,7 @@ class _TicketsState extends State<Tickets> {
                         ),
                       ),
                       SizedBox(height: 10),
+                      // View Details link row
                       Row(
                         children: [
                           Padding(
@@ -302,6 +316,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Purchase button
                       Container(
                         width: 300,
                         height: 40,
@@ -325,14 +340,14 @@ class _TicketsState extends State<Tickets> {
                 ),
                 SizedBox(height: 25),
 
-                //third card
+                // Third ticket pricing card - STUDENT pass
                 Container(
                   height: 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(color: Colors.grey, width: 0.5),
+                    // Outer shadow effect for card elevation
                     boxShadow: [
                       BoxShadow(
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -344,9 +359,10 @@ class _TicketsState extends State<Tickets> {
                     ],
                   ),
 
-                  // elements
+                  // Card content elements
                   child: Column(
                     children: [
+                      // Ticket name and price row with student badge
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -364,6 +380,7 @@ class _TicketsState extends State<Tickets> {
                             padding: const EdgeInsets.only(right: 15, top: 10),
                             child: Column(
                               children: [
+                                // Student discount badge
                                 Container(
                                   margin: EdgeInsets.only(top: 5, bottom: 3),
                                   height: 30,
@@ -409,6 +426,7 @@ class _TicketsState extends State<Tickets> {
                                     ],
                                   ),
                                 ),
+                                // Student ticket price
                                 Text(
                                   "100 SDG",
                                   style: TextStyle(
@@ -428,6 +446,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Student ticket description text
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
@@ -439,6 +458,7 @@ class _TicketsState extends State<Tickets> {
                         ),
                       ),
                       SizedBox(height: 10),
+                      // View Details link row
                       Row(
                         children: [
                           Padding(
@@ -458,6 +478,7 @@ class _TicketsState extends State<Tickets> {
                         ],
                       ),
                       SizedBox(height: 10),
+                      // Purchase button
                       Container(
                         width: 300,
                         height: 40,
@@ -481,119 +502,130 @@ class _TicketsState extends State<Tickets> {
                 ),
                 SizedBox(height: 25),
               ] else ...[
-                // my ticket card - inspired by the buy ticket card
+                // My Tickets view - Active trip card
                 Container(
-                  height: 210,
+                  height: 200,
                   width: 350,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: Color(0xFF355C8A),
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        spreadRadius: 0.5,
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
-                      ),
-                    ],
                   ),
 
-                  child: Column(
+                  child: Stack(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 35),
-                            child: Text(
-                              "2-HOUR Ticket",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
+                      // Decorative background ticket icon
+                      Positioned(
+                        right: -20,
+                        top: -15,
+                        child: Opacity(
+                          opacity: 0.15,
+                          child: Icon(
+                            Icons.confirmation_num,
+                            size: 120,
+                            color: Colors.white,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15, top: 10),
-                            child: Container(
-                              height: 30,
-                              width: 90,
+                        ),
+                      ),
+
+                      // Main card content
+                      Padding(
+                        padding: EdgeInsets.all(20),
+
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            // Active trip status badge
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
+
                               decoration: BoxDecoration(
-                                color: const Color.fromARGB(40, 11, 152, 16),
+                                color: Colors.white24,
                                 borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 11, 152, 16),
+                              ),
+
+                              child: Text(
+                                "ACTIVE TRIP",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              child: Center(
-                                child: Text(
-                                  "ACTIVE",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color.fromARGB(
-                                      255,
-                                      11,
-                                      152,
-                                      16,
+                            ),
+
+                            SizedBox(height: 15),
+
+                            // Trip route information
+                            Text(
+                              "Downtown to River Port",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            Spacer(),
+
+                            // Departure time and QR code button row
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                              children: [
+                                // Departure time column
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                  children: [
+                                    Text(
+                                      "Departure",
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+
+                                    Text(
+                                      "14:30 PM",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                // View QR code button
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 8,
+                                  ),
+
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+
+                                  child: Text(
+                                    "View QR",
+                                    style: TextStyle(
+                                      color: Color(0xFF355C8A),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          "**valid for unlimited rides on all 3 metro lines. expires in 1h 42m.",
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                          ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "View Details",
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 180, 12, 0),
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: const Color.fromARGB(255, 58, 4, 0),
-                            size: 15,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        width: 300,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 180, 12, 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Use Ticket",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -603,9 +635,8 @@ class _TicketsState extends State<Tickets> {
           ),
         ),
       ),
-      // bottomNavigationBar:  BottomBar(selectedIndex: 2, onTap: (index) {
-
-      // },),
+      // Bottom navigation bar - currently commented out
+      // bottomNavigationBar: BottomBar(selectedIndex: 2, onTap: (index) {},),
     );
   }
 }

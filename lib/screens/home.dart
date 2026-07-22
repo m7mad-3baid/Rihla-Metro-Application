@@ -94,17 +94,36 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  // Greeting text
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, right: 40),
-                    child: Text(
-                      "Hababk $name",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                 // Greeting text
+Container(
+  margin: const EdgeInsets.only(top: 30, right: 55),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        children: [
+          Text(
+            "Hababak ",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          Image.asset("assets/imgs/handwave.png", scale: 5,)
+        ],
+      ),
+
+      Text(
+        name,
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  ),
+),
                   // Notification bell icon
                   Padding(
                     padding: const EdgeInsets.only(right: 10, top: 20),
@@ -120,6 +139,120 @@ class _HomePageState extends State<HomePage> {
               // Search bar widget
               Searchbarwidget(),
               SizedBox(height: 30),
+
+              ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: Container(
+    height: 180,
+    width: 350,
+    decoration: BoxDecoration(
+      color: Color(0xFF00515A),
+    ),
+
+    child: Stack(
+      children: [
+
+        // BACKGROUND TRAIN ICON
+        Positioned(
+          right: -20,
+          top: -10,
+          child: Opacity(
+            opacity: 0.15,
+            child: Icon(
+              Icons.train,
+              size: 120,
+              color: Colors.white,
+            ),
+          ),
+        ),
+
+
+        // CARD CONTENT
+        Padding(
+          padding: EdgeInsets.all(20),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+
+              Text(
+                "ON TIME",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+
+              SizedBox(height: 8),
+
+
+              Text(
+                "Next Train",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+
+
+              Text(
+                "Green Line • Platform 3",
+                style: TextStyle(
+                  color: Colors.white70,
+                ),
+              ),
+
+
+              Spacer(),
+
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Text(
+                    "5 mins away",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+
+                  GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FullMapPage(),
+      ),
+    );
+  },
+
+  child: Icon(
+    Icons.arrow_circle_right_outlined,
+    color: Colors.white,
+    size: 40,
+  ),
+)
+
+                ],
+              )
+
+            ],
+          ),
+        )
+
+      ],
+    ),
+  ),
+),
+
+SizedBox(height: 20,),
               // Map section title
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,27 +262,19 @@ class _HomePageState extends State<HomePage> {
                     child: Text("Map", style: TextStyle(fontSize: 25)),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 80, top: 20),
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Text(
-                            "  Full Map Mode",
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.blueGrey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          Icon(Icons.arrow_right_outlined),
-                        ],
-                      ),
-                    ),
-                  ),
+                ],
+              ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
+              SizedBox(height: 10),
+              // Interactive map widget
+              Stack
+              (children:[ 
+                
+                RihlaMap(),
+
+                
+                  Positioned( 
+                    right: 15,
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -159,28 +284,19 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-
-                      child: Icon(Icons.fullscreen_rounded, size: 50),
+                    
+                      child: Icon(Icons.fullscreen_rounded, size: 50, color: Color(0xFF00515A)),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 15),
-              // Interactive map widget
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FullMapPage()),
-                  );
-                },
 
-                child: RihlaMap(),
-              ),
+                  
+
+                  
+              ]),
         
 
 
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // Saved stations section title
               Align(
                 alignment: Alignment.centerLeft,
@@ -207,215 +323,136 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // Next train information card
-              Container(
-                height: 300,
-                width: 350,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Next train header and time badge
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 25),
-                          child: Text(
-                            "NEXT TRAIN",
-                            style: TextStyle(
-                              color: Color(0xFFBF001C),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 15, top: 15),
-                          child: Container(
-                            width: 80,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFBF001C),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "IN 3 MIN",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Color.fromARGB(255, 255, 200, 200),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    // Current station name
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Text(
-                        "Bahri Central",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    // Current station indicator
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: Color(0xFFBF001C),
-                            size: 15,
-                          ),
-                          Text(
-                            "  Current : Bahri Central",
-                            style: TextStyle(color: Colors.blueGrey),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Vertical line connecting stations
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Container(
-                        width: 3,
-                        height: 20,
-                        decoration: BoxDecoration(color: Colors.grey),
-                      ),
-                    ),
-                    // Destination station indicator
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: Color(0xFFBF001C),
-                            size: 15,
-                          ),
-                          Text(
-                            "  TO : Khartoum Central",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    // View route button
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          // Trigger the view routes callback
-                          widget.onViewRoutesTap();
-                        },
-                        child: Container(
-                          width: 250,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFBF001C),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "View Route",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            
               SizedBox(height: 20),
               // Student discount promotional card
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Studentinfo()),
-                  );
-                },
-                child: Container(
-                  width: 350,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 241, 195),
-                    border: Border.all(
-                      color: Color.fromARGB(255, 197, 160, 27),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      // School icon
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Icon(
-                          Icons.school_outlined,
-                          color: Color(0xFF7C5700),
-                          size: 30,
-                        ),
-                      ),
-                      // Discount text
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Student Discount",
-                              style: TextStyle(
-                                color: Color(0xFF7C5700),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              "save up to 50% on all rides",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Spacer(),
-                      // Forward arrow icon
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15),
-                        child: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Color(0xFF7C5700),
-                        ),
-                      ),
-                    ],
-                  ),
+            GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Studentinfo(),
+      ),
+    );
+  },
+
+  child: Container(
+    width: 350,
+    height: 170,
+
+    decoration: BoxDecoration(
+      color: Color(0xFFFFF1C3),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(
+        color: Color(0xFFFFC641),
+      ),
+    ),
+
+
+    child: Stack(
+      children: [
+
+        // BACKGROUND SCHOOL ICON
+        Positioned(
+          right: -20,
+          top: -15,
+
+          child: Opacity(
+            opacity: 0.15,
+
+            child: Icon(
+              Icons.school,
+              size: 120,
+              color: Color(0xFF7C5700),
+            ),
+          ),
+        ),
+
+
+
+        // CARD CONTENT
+        Padding(
+          padding: EdgeInsets.all(20),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+
+
+              Text(
+                "STUDENT BENEFIT",
+                style: TextStyle(
+                  color: Color(0xFF7C5700),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+
+
+
+              SizedBox(height: 8),
+
+
+
+              Text(
+                "Student Discount",
+                style: TextStyle(
+                  color: Color(0xFF7C5700),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+
+
+              Text(
+                "Save up to 50% on all rides",
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                ),
+              ),
+
+
+
+              Spacer(),
+
+
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+
+
+                  Text(
+                    "Verify student ID",
+                    style: TextStyle(
+                      color: Color(0xFF7C5700),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+
+
+                  Icon(
+                    Icons.arrow_forward,
+                    color: Color(0xFF7C5700),
+                  )
+
+                ],
+              )
+
+
+            ],
+          ),
+        )
+
+      ],
+    ),
+  ),
+),
               SizedBox(height: 20),
               // Quick actions row 1: Routes and Tickets
               Row(

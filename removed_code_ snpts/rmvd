@@ -1,0 +1,147 @@
+  // rhe view route card
+  
+  
+  Container(
+                height: 300,
+                width: 350,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Next train header and time badge
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 25),
+                          child: Text(
+                            "NEXT TRAIN",
+                            style: TextStyle(
+                              color: Color(0xFFBF001C),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15, top: 15),
+                          child: Container(
+                            width: 80,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFBF001C),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "IN 3 MIN",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Color.fromARGB(255, 255, 200, 200),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    // Current station name
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        "Bahri Central",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    // Current station indicator
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: Color(0xFFBF001C),
+                            size: 15,
+                          ),
+                          Text(
+                            "  Current : Bahri Central",
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Vertical line connecting stations
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Container(
+                        width: 3,
+                        height: 20,
+                        decoration: BoxDecoration(color: Colors.grey),
+                      ),
+                    ),
+                    // Destination station indicator
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: Color(0xFFBF001C),
+                            size: 15,
+                          ),
+                          Text(
+                            "  TO : Khartoum Central",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // View route button
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Trigger the view routes callback
+                          widget.onViewRoutesTap();
+                        },
+                        child: Container(
+                          width: 250,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFBF001C),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "View Route",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
