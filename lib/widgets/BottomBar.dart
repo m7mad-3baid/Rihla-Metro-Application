@@ -25,8 +25,8 @@ class BottomBar extends StatelessWidget {
         border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
         // Rounded top corners
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
         ),
         // Shadow effect for elevation
         boxShadow: [

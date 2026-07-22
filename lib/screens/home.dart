@@ -177,9 +177,34 @@ class _HomePageState extends State<HomePage> {
 
                 child: RihlaMap(),
               ),
-              SizedBox(height: 20),
+        
+
 
               SizedBox(height: 20),
+              // Saved stations section title
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    "Saved Stations",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // Horizontal scrollable list of saved station pills
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _buildStationPill("EL MAK NIMIR", Colors.blue),
+                    _buildStationPill("KOBER", Colors.red),
+                    _buildStationPill("ARKAWEET", Colors.green),
+                    _buildStationPill("WAD NUBAWI", Colors.green),
+                  ],
+                ),
+              ),
 
               // Next train information card
               Container(
@@ -437,31 +462,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              // Saved stations section title
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    "Saved Stations",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              // Horizontal scrollable list of saved station pills
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildStationPill("EL MAK NIMIR", Colors.blue),
-                    _buildStationPill("KOBER", Colors.red),
-                    _buildStationPill("ARKAWEET", Colors.green),
-                    _buildStationPill("WAD NUBAWI", Colors.green),
-                  ],
-                ),
-              ),
+              
               SizedBox(height: 30),
               // Metro status card showing line statuses
               Container(
