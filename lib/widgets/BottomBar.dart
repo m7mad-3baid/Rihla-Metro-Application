@@ -54,7 +54,7 @@ class BottomBar extends StatelessWidget {
                 children: [
                   // Filled icon when selected, outlined when not
                   Icon(
-                    selectedIndex == 0 ? Icons.house : Icons.house_outlined,
+                    selectedIndex == 0 ? Icons.house_rounded : Icons.house_outlined,
                     size: selectedIndex == 0 ? 35 : 30,
                     color: selectedIndex == 0 ?  Color(0xFF00515A) : Colors.grey,
                   ),

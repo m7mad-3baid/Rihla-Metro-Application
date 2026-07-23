@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import '../widgets/rihla_map.dart';
+// import 'package:flutter_map/flutter_map.dart';
+// import 'package:latlong2/latlong.dart';
+import 'package:rihla_4_0/widgets/metro_preview.dart';
+// import '../widgets/rihla_map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
-import 'package:rihla_4_0/screens/fullMapPage.dart';
+// import 'package:rihla_4_0/screens/fullMapPage.dart';
+
 
 // StatefulWidget for the main home page
 class HomePage extends StatefulWidget {
@@ -94,36 +96,43 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                 // Greeting text
-Container(
-  margin: const EdgeInsets.only(top: 30, right: 55),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(
-        children: [
-          Text(
-            "Hababak ",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+                  // Greeting text
+                  Container(
+                    margin: const EdgeInsets.only(top: 30, right: 55),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 0),
+                              child: Text(
+                                "Hababak ",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
 
-          Image.asset("assets/imgs/handwave.png", scale: 5,)
-        ],
-      ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 50),
+                              child: Image.asset("assets/imgs/handwave.png", scale: 5),
+                            ),
+                          ],
+                        ),
 
-      Text(
-        name,
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ],
-  ),
-),
+                        Text(
+                          name,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   // Notification bell icon
                   Padding(
                     padding: const EdgeInsets.only(right: 10, top: 20),
@@ -141,160 +150,131 @@ Container(
               SizedBox(height: 30),
 
               ClipRRect(
-  borderRadius: BorderRadius.circular(20),
-  child: Container(
-    height: 180,
-    width: 350,
-    decoration: BoxDecoration(
-      color: Color(0xFF00515A),
-    ),
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  height: 180,
+                  width: 350,
+                  decoration: BoxDecoration(color: Color(0xFF00515A)),
 
-    child: Stack(
-      children: [
+                  child: Stack(
+                    children: [
+                      // BACKGROUND TRAIN ICON
+                      Positioned(
+                        right: -20,
+                        top: -10,
+                        child: Opacity(
+                          opacity: 0.15,
+                          child: Icon(
+                            Icons.train,
+                            size: 120,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
 
-        // BACKGROUND TRAIN ICON
-        Positioned(
-          right: -20,
-          top: -10,
-          child: Opacity(
-            opacity: 0.15,
-            child: Icon(
-              Icons.train,
-              size: 120,
-              color: Colors.white,
-            ),
-          ),
-        ),
+                      // CARD CONTENT
+                      Padding(
+                        padding: EdgeInsets.all(20),
 
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
 
-        // CARD CONTENT
-        Padding(
-          padding: EdgeInsets.all(20),
+                          children: [
+                            Text(
+                              "ON TIME",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+                            SizedBox(height: 8),
 
-            children: [
+                            Text(
+                              "Next Train",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
 
-              Text(
-                "ON TIME",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+                            Text(
+                              "Green Line • Platform 3",
+                              style: TextStyle(color: Colors.white70),
+                            ),
 
+                            Spacer(),
 
-              SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "5 mins away",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
 
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FullMapPage(),
+                                      ),
+                                    );
+                                  },
 
-              Text(
-                "Next Train",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-
-
-              Text(
-                "Green Line • Platform 3",
-                style: TextStyle(
-                  color: Colors.white70,
-                ),
-              ),
-
-
-              Spacer(),
-
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-                  Text(
-                    "5 mins away",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                                  child: Icon(
+                                    Icons.arrow_circle_right_outlined,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+              ),
 
-
-                  GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FullMapPage(),
-      ),
-    );
-  },
-
-  child: Icon(
-    Icons.arrow_circle_right_outlined,
-    color: Colors.white,
-    size: 40,
-  ),
-)
-
-                ],
-              )
-
-            ],
-          ),
-        )
-
-      ],
-    ),
-  ),
-),
-
-SizedBox(height: 20,),
+              SizedBox(height: 20),
               // Map section title
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Map", style: TextStyle(fontSize: 25)),
+                    child: Text(
+                      "Metro Network",
+                      style: TextStyle(fontSize: 25, color: Color(0xFF00515A)),
+                    ),
                   ),
+                ],
+              ),
 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Tap A Line To Explore Stations",
+                      style: TextStyle(fontSize: 14, color: Colors.blueGrey),
+                    ),
+                  ),
                 ],
               ),
 
               SizedBox(height: 10),
               // Interactive map widget
-              Stack
-              (children:[ 
-                
-                RihlaMap(),
-
-                
-                  Positioned( 
-                    right: 15,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FullMapPage(),
-                          ),
-                        );
-                      },
-                    
-                      child: Icon(Icons.fullscreen_rounded, size: 50, color: Color(0xFF00515A)),
-                    ),
-                  ),
-
-                  
-
-                  
-              ]),
-        
-
+              MetroPreview(),
 
               SizedBox(height: 10),
               // Saved stations section title
@@ -323,136 +303,107 @@ SizedBox(height: 20,),
               ),
 
               // Next train information card
-            
               SizedBox(height: 20),
               // Student discount promotional card
-            GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Studentinfo(),
-      ),
-    );
-  },
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Studentinfo()),
+                  );
+                },
 
-  child: Container(
-    width: 350,
-    height: 170,
+                child: Container(
+                  width: 350,
+                  height: 170,
 
-    decoration: BoxDecoration(
-      color: Color(0xFFFFF1C3),
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(
-        color: Color(0xFFFFC641),
-      ),
-    ),
-
-
-    child: Stack(
-      children: [
-
-        // BACKGROUND SCHOOL ICON
-        Positioned(
-          right: -20,
-          top: -15,
-
-          child: Opacity(
-            opacity: 0.15,
-
-            child: Icon(
-              Icons.school,
-              size: 120,
-              color: Color(0xFF7C5700),
-            ),
-          ),
-        ),
-
-
-
-        // CARD CONTENT
-        Padding(
-          padding: EdgeInsets.all(20),
-
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children: [
-
-
-              Text(
-                "STUDENT BENEFIT",
-                style: TextStyle(
-                  color: Color(0xFF7C5700),
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-
-
-              SizedBox(height: 8),
-
-
-
-              Text(
-                "Student Discount",
-                style: TextStyle(
-                  color: Color(0xFF7C5700),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-
-
-              Text(
-                "Save up to 50% on all rides",
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 14,
-                ),
-              ),
-
-
-
-              Spacer(),
-
-
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                children: [
-
-
-                  Text(
-                    "Verify student ID",
-                    style: TextStyle(
-                      color: Color(0xFF7C5700),
-                      fontWeight: FontWeight.w600,
-                    ),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFF1C3),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Color(0xFFFFC641)),
                   ),
 
+                  child: Stack(
+                    children: [
+                      // BACKGROUND SCHOOL ICON
+                      Positioned(
+                        right: -20,
+                        top: -15,
 
+                        child: Opacity(
+                          opacity: 0.15,
 
-                  Icon(
-                    Icons.arrow_forward,
-                    color: Color(0xFF7C5700),
-                  )
+                          child: Icon(
+                            Icons.school,
+                            size: 120,
+                            color: Color(0xFF7C5700),
+                          ),
+                        ),
+                      ),
 
-                ],
-              )
+                      // CARD CONTENT
+                      Padding(
+                        padding: EdgeInsets.all(20),
 
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
 
-            ],
-          ),
-        )
+                          children: [
+                            Text(
+                              "STUDENT BENEFIT",
+                              style: TextStyle(
+                                color: Color(0xFF7C5700),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
 
-      ],
-    ),
-  ),
-),
+                            SizedBox(height: 8),
+
+                            Text(
+                              "Student Discount",
+                              style: TextStyle(
+                                color: Color(0xFF7C5700),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            Text(
+                              "Save up to 50% on all rides",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 14,
+                              ),
+                            ),
+
+                            Spacer(),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                              children: [
+                                Text(
+                                  "Verify student ID",
+                                  style: TextStyle(
+                                    color: Color(0xFF7C5700),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Color(0xFF7C5700),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(height: 20),
               // Quick actions row 1: Routes and Tickets
               Row(
@@ -499,7 +450,7 @@ SizedBox(height: 20,),
                   ),
                 ],
               ),
-              
+
               SizedBox(height: 30),
               // Metro status card showing line statuses
               Container(
