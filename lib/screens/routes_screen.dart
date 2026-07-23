@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
+import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 
 class RoutesScreen extends StatefulWidget {
   const RoutesScreen({super.key});
@@ -36,26 +37,8 @@ class _RoutesScreenState extends State<RoutesScreen> {
 
             const SizedBox(height: 20),
 
-            // Search Bar
-            Container(
-              height: 50,
-              width: 395,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                  labelText: "Search for a route or a station",
-                  labelStyle: const TextStyle(),
-                ),
-              ),
-            ),
+
+            Searchbarwidget(),
 
             const SizedBox(height: 40),
 
@@ -79,7 +62,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: isTrainSelected
-                              ? Color(0xFFC0001A)
+                              ? Color(0xFF00515A)
                               : const Color(0xFFE2E2E2),
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(40),
@@ -113,7 +96,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         decoration: BoxDecoration(
                           color: isTrainSelected
                               ? const Color(0xFFE2E2E2)
-                              : const Color(0xFFC0001A),
+                              : Color(0xFF00515A),
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(40),
                             bottomRight: Radius.circular(40),

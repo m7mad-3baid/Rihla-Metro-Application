@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'Profile.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 // import 'package:flutter_map/flutter_map.dart';
@@ -9,7 +10,6 @@ import 'package:rihla_4_0/widgets/metro_preview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
 // import 'package:rihla_4_0/screens/fullMapPage.dart';
-
 
 // StatefulWidget for the main home page
 class HomePage extends StatefulWidget {
@@ -65,45 +65,67 @@ class _HomePageState extends State<HomePage> {
                   // User avatar with initials
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 20),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFE4E1F7),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Color.fromARGB(255, 157, 142, 255),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          // Display first two initials of the user's name, or "?" if empty
-                          name.isNotEmpty
-                              ? name
-                                    .trim()
-                                    .split(" ")
-                                    .map((w) => w[0])
-                                    .take(2)
-                                    .join()
-                                    .toUpperCase()
-                              : "?",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 74, 46, 255),
-                          ),
-                        ),
-                      ),
-                    ),
+
+                    child: GestureDetector(
+  behavior: HitTestBehavior.opaque,
+
+  onTap: () {
+    print("AVATAR CLICKED");
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Profile(),
+      ),
+    );
+  },
+
+  child: Padding(
+    padding: const EdgeInsets.only(left: 10, top: 20, right: 30),
+
+    child: Container(
+      width: 60,
+height: 60,
+
+
+      decoration: BoxDecoration(
+        color: Color(0xFFE4E1F7),
+        borderRadius: BorderRadius.circular(50),
+        border: Border.all(
+          color: Color.fromARGB(255, 157, 142, 255),
+        ),
+      ),
+
+      child: Center(
+        child: Text(
+          name.isNotEmpty
+              ? name
+                  .trim()
+                  .split(" ")
+                  .map((w) => w[0])
+                  .take(2)
+                  .join()
+                  .toUpperCase()
+              : "?",
+
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Color.fromARGB(255, 74, 46, 255),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
                   ),
                   // Greeting text
                   Container(
-                    margin: const EdgeInsets.only(top: 30, right: 55),
+                    margin: const EdgeInsets.only(top: 30, right: 55, left: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 0),
@@ -118,7 +140,10 @@ class _HomePageState extends State<HomePage> {
 
                             Padding(
                               padding: const EdgeInsets.only(right: 50),
-                              child: Image.asset("assets/imgs/handwave.png", scale: 5),
+                              child: Image.asset(
+                                "assets/imgs/handwave.png",
+                                scale: 5,
+                              ),
                             ),
                           ],
                         ),
@@ -138,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(right: 10, top: 20),
                     child: Icon(
                       CupertinoIcons.bell,
-                      color: Color(0xFFBF001C),
+                      color: Color(0xFF00515A),
                       size: 30,
                     ),
                   ),
@@ -306,7 +331,11 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 20),
               // Student discount promotional card
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
+                  print("STUDENT CARD CLICKED");
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Studentinfo()),
@@ -436,7 +465,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: widget.onRoutesTap,
                     child: _buildQuickAction(
                       icon: CupertinoIcons.heart,
-                      title: "Favorites",
+                      title: "Saved",
                       color: Color.fromARGB(255, 0, 191, 51),
                     ),
                   ),
@@ -532,40 +561,80 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Builds a quick action card with an icon and title
+  // Builds the small action cards (Routes, Tickets, Favorites, Nearby)
   Widget _buildQuickAction({
     required IconData icon,
     required String title,
     required Color color,
   }) {
     return Container(
+      // Card size
       width: 130,
       height: 120,
+
       decoration: BoxDecoration(
+        // Main card background
         color: Colors.white,
+
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.blueGrey, width: 0.5),
+
+        // Soft premium shadow
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 10,
-            offset: Offset(0, 4),
+            blurRadius: 12,
+            offset: Offset(0, 5),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+
+      child: Stack(
         children: [
-          // Action icon
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 15),
-            child: Icon(icon, color: color, size: 30),
+          // =====================================
+          // BACKGROUND FADED ICON
+          // =====================================
+          // Large icon placed behind the content
+          // with low opacity like Next Train card
+          Positioned(
+            right: -15,
+            top: -15,
+
+            child: Opacity(
+              opacity: 0.12,
+
+              child: Icon(icon, size: 100, color: color),
+            ),
           ),
-          // Action title
+
+          // =====================================
+          // CARD CONTENT
+          // =====================================
           Padding(
-            padding: const EdgeInsets.only(left: 15, top: 15),
-            child: Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+            padding: EdgeInsets.all(15),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                // Small visible icon
+                // Icon(
+
+                //   icon,
+
+                //   color: color,
+
+                //   size: 32,
+
+                // ),
+                Spacer(),
+
+                // Card title
+                Text(
+                  title,
+
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                ),
+              ],
             ),
           ),
         ],
