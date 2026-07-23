@@ -13,6 +13,7 @@ class _TicketsState extends State<Tickets> {
   // Boolean state to track which toggle option is selected
   // true = "Buy A Ticket" view, false = "My Tickets" view
   bool isBuySelected = true;
+  bool showQR = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ],
               ),
-              
+
               SizedBox(height: 30),
 
               // Toggle button container for switching between Buy A Ticket and My Tickets
@@ -63,7 +64,7 @@ class _TicketsState extends State<Tickets> {
                           decoration: BoxDecoration(
                             // Highlight selected button with red color
                             color: isBuySelected
-                                ? const Color(0xFFC0001A)
+                                ? const Color(0xFF00515A)
                                 : const Color(0xFFE2E2E2),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(40),
@@ -99,7 +100,7 @@ class _TicketsState extends State<Tickets> {
                             // Highlight selected button with red color
                             color: isBuySelected
                                 ? const Color(0xFFE2E2E2)
-                                : const Color(0xFFC0001A),
+                                : Color(0xFF00515A),
                             borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(40),
                               bottomRight: Radius.circular(40),
@@ -503,8 +504,12 @@ class _TicketsState extends State<Tickets> {
                 SizedBox(height: 25),
               ] else ...[
                 // My Tickets view - Active trip card
-                Container(
-                  height: 200,
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 350),
+                  curve: Curves.easeInOut,
+
+                  height: showQR ? 420 : 250,
+
                   width: 350,
                   decoration: BoxDecoration(
                     color: Color(0xFF355C8A),
@@ -561,11 +566,28 @@ class _TicketsState extends State<Tickets> {
 
                             // Trip route information
                             Text(
-                              "Downtown to River Port",
+                              "2-HOURS-TICKET",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: AnimatedSwitcher(
+                                  duration: Duration(milliseconds: 300),
+
+                                  child: showQR
+                                      ? Icon(
+                                          Icons.qr_code_2_sharp,
+                                          size: 170,
+                                          key: ValueKey(true),
+                                          opticalSize: 170,
+                                          color: Colors.white,
+                                        )
+                                      : SizedBox(key: ValueKey(false)),
+                                ),
                               ),
                             ),
 
@@ -582,7 +604,7 @@ class _TicketsState extends State<Tickets> {
 
                                   children: [
                                     Text(
-                                      "Departure",
+                                      "Active Untill:",
                                       style: TextStyle(
                                         color: Colors.white70,
                                         fontSize: 12,
@@ -590,9 +612,22 @@ class _TicketsState extends State<Tickets> {
                                     ),
 
                                     Text(
-                                      "14:30 PM",
+                                      "14:30 PM ",
                                       style: TextStyle(
                                         color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Today ",
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(
+                                          158,
+                                          255,
+                                          255,
+                                          255,
+                                        ),
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -601,31 +636,40 @@ class _TicketsState extends State<Tickets> {
                                 ),
 
                                 // View QR code button
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 8,
-                                  ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      showQR = !showQR;
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 8,
+                                    ),
 
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
 
-                                  child: Text(
-                                    "View QR",
-                                    style: TextStyle(
-                                      color: Color(0xFF355C8A),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                    child: Text( 
+                                      showQR?
+                                      "Hide QR"
+                                      :"View QR",
+                                      style: TextStyle(
+                                        color: Color(0xFF355C8A),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
