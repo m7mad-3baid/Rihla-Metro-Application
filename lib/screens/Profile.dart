@@ -449,7 +449,7 @@ class _ProfileState extends State<Profile> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFBF001C),
+                    backgroundColor: Color(0xFF00515A),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
