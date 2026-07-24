@@ -9,6 +9,7 @@ import 'package:rihla_4_0/screens/rigesterpage.dart';
 import 'package:rihla_4_0/screens/routes_screen.dart';
 import 'package:rihla_4_0/screens/studentInfo.dart';
 import 'package:rihla_4_0/screens/ticketX.dart';
+import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/screens/Splash.dart';
 import 'package:rihla_4_0/widgets/metro_preview.dart';

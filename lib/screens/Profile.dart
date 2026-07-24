@@ -4,6 +4,7 @@ import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
 
+// Profile screen displaying user info, grouped settings cards, and logout
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -12,6 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  // User data loaded from local storage
   String name = "";
   String email = "";
   bool isStudent = false;
@@ -22,6 +24,7 @@ class _ProfileState extends State<Profile> {
     loadUser();
   }
 
+  // Fetch user details from SharedPreferences
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -33,14 +36,13 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      backgroundColor: Color(0xFFFCF9F8),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header
+              // Screen title
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -59,92 +61,129 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 30),
 
+              // User profile card with avatar, name, email, and student badge
               Container(
-                height: 150,
                 width: 370,
+                height: 220,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  border: Border.all(color: Colors.blueGrey, width: 0.5),
+                  color: const Color(0xFF00515A),
+                  borderRadius: BorderRadius.circular(24),
                 ),
-
-                child: Row(
+                child: Stack(
                   children: [
-                    //the circle
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Container(
-                        height: 60,
-                        width: 60,
-
-                        decoration: BoxDecoration(
-                          color: Color(0xFF00515A),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-
-                        // text for profile
-                        child: Center(
-                          child: Text(
-                            name.isNotEmpty
-                                ? name
-                                      .trim()
-                                      .split(" ")
-                                      .map((w) => w[0])
-                                      .take(2)
-                                      .join()
-                                      .toUpperCase()
-                                : "?",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
+                    // Decorative background profile icon
+                    Positioned(
+                      right: -20,
+                      top: -15,
+                      child: Opacity(
+                        opacity: 0.12,
+                        child: Icon(
+                          Icons.person,
+                          size: 140,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-
                     Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 15),
+                      padding: const EdgeInsets.all(22),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            name,
+                          // Account label
+                          const Text(
+                            "ACCOUNT",
                             style: TextStyle(
-                              fontSize: 20,
+                              color: Colors.white70,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(email, style: TextStyle(color: Colors.blueGrey)),
-                          SizedBox(height: 20),
-
-                          //the pill
-                          if (isStudent)
-                            Container(
-                              height: 30,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(131, 255, 214, 64),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.amber),
-                              ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Icon(
-                                      Icons.star,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        172,
-                                        130,
-                                        5,
-                                      ),
-                                      size: 20,
+                          const SizedBox(height: 15),
+                          // Avatar and user info row
+                          Row(
+                            children: [
+                              // Avatar circle with initials
+                              Container(
+                                width: 65,
+                                height: 65,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    name.isNotEmpty
+                                        ? name
+                                            .trim()
+                                            .split(" ")
+                                            .map((w) => w[0])
+                                            .take(2)
+                                            .join()
+                                            .toUpperCase()
+                                        : "?",
+                                    style: const TextStyle(
+                                      color: Color(0xFF00515A),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(" Student Discount"),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              // Name and email
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      name,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      email,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          // Verified student badge (shown only if isStudent is true)
+                          if (isStudent)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 7,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white24,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.verified,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    "Verified Student",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -157,96 +196,16 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 15),
 
-              // 2nd section
+              // ── Account Section ──────────────────────────
+              // Section header
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15),
+                    padding: const EdgeInsets.only(left: 30),
                     child: Text(
-                      "Saved Stations",
+                      "Account",
                       style: TextStyle(
-                        fontSize: 25,
-                        color: const Color.fromARGB(255, 103, 103, 103),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 20),
-
-              //2ns section 2
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35),
-                    child: Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1, color: Colors.blueGrey),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.circle, size: 15, color: Colors.green),
-                          Text(" Bahri Central"),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Container(
-                      height: 30,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1, color: Colors.blueGrey),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.circle, size: 15, color: Colors.red),
-                          Text(" Khartoum Central"),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(width: 5),
-
-                  Container(
-                    height: 30,
-                    width: 70,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(7),
-                      border: Border.all(width: 1, color: Colors.blueGrey),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          "    + ADD",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30),
-
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      "Settings",
-                      style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         color: const Color.fromARGB(255, 103, 103, 103),
                         fontWeight: FontWeight.bold,
                       ),
@@ -257,175 +216,362 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 10),
 
-              //settings column
+              // Account settings card: Personal Information & Wallet
               Container(
-                width: 375,
-                height: 320,
+                height: 170,
+                width: 360,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.blueGrey),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Color(0xFFF5F3F3),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 166, 193, 207),
+                    width: 0.25,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: [
-                    //first settings row
+                    // Personal Information row
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsets.only(left: 30, top: 20),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 193, 193, 193),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.notifications,
-                            color: const Color.fromARGB(255, 74, 74, 74),
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.person_outline_rounded),
                           ),
                         ),
-                        //text of container
+                        // Label
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 25),
+                          padding: const EdgeInsets.only(left: 10, top: 15),
                           child: Text(
-                            "Notifications",
+                            "Personal Informations",
                             style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
-
+                        Spacer(),
+                        // Navigation arrow
                         Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 150),
-                          child: Container(
-                            child: Icon(Icons.arrow_forward_ios_rounded),
-                          ),
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
                         ),
                       ],
                     ),
 
-                    Divider(indent: 10, endIndent: 10),
-
-                    Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsets.only(left: 30, top: 15),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 193, 193, 193),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.train_outlined,
-                            color: const Color.fromARGB(255, 74, 74, 74),
-                          ),
-                        ),
-                        //text of container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 25),
-                          child: Text(
-                            "My Trips",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 180),
-                          child: Container(
-                            child: Icon(Icons.arrow_forward_ios_rounded),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
 
                     Divider(indent: 10, endIndent: 10),
 
+                    // Wallet row
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsets.only(left: 30, top: 10),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 193, 193, 193),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.info_outline_rounded,
-                            color: const Color.fromARGB(255, 74, 74, 74),
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.wallet),
                           ),
                         ),
-                        //text of container
+                        // Label
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 15),
+                          padding: const EdgeInsets.only(left: 10, top: 15),
                           child: Text(
-                            "About Rihla",
+                            "wallet",
                             style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
-
+                        Spacer(),
+                        // Navigation arrow
                         Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 160),
-                          child: Container(
-                            child: Icon(Icons.arrow_forward_ios_rounded),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-
-                    Divider(indent: 10, endIndent: 10),
-
-                    Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsets.only(left: 30, top: 15),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 193, 193, 193),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.train_outlined,
-                            color: const Color.fromARGB(255, 74, 74, 74),
-                          ),
-                        ),
-                        //text of container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 25),
-                          child: Text(
-                            "Payment methods",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 115),
-                          child: Container(
-                            child: Icon(Icons.arrow_forward_ios_rounded),
-                          ),
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
+
+              SizedBox(height: 15),
+
+              // ── Travel Section ──────────────────────────
+              // Section header
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Text(
+                      "Travel",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: const Color.fromARGB(255, 103, 103, 103),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 10),
+
+              // Travel settings card: Route Alert & Rides History
+              Container(
+                height: 170,
+                width: 360,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Color(0xFFF5F3F3),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 166, 193, 207),
+                    width: 0.25,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    // Route Alert row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.notifications_active_outlined),
+                          ),
+                        ),
+                        // Label
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 15),
+                          child: Text(
+                            "Route Alert",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        // Navigation arrow
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 5),
+
+                    Divider(indent: 10, endIndent: 10),
+
+                    // Rides History row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.history_outlined),
+                          ),
+                        ),
+                        // Label
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 15),
+                          child: Text(
+                            "Rides History",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        // Navigation arrow
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 15),
+
+              // ── App Section ─────────────────────────────
+              // Section header
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Text(
+                      "App",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: const Color.fromARGB(255, 103, 103, 103),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 10),
+
+              // App settings card: Preferences & About Rihla
+              Container(
+                height: 170,
+                width: 360,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Color(0xFFF5F3F3),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 166, 193, 207),
+                    width: 0.25,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    // Preferences row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.settings),
+                          ),
+                        ),
+                        // Label
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 15),
+                          child: Text(
+                            "Preffrences",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        // Navigation arrow
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 5),
+
+                    Divider(indent: 10, endIndent: 10),
+
+                    // About Rihla row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // Icon container
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC4D5D9),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Icon(Icons.info_outlined),
+                          ),
+                        ),
+                        // Label
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 15),
+                          child: Text(
+                            "About Rihla",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        // Navigation arrow
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, right: 10),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+              // Logout button
               Container(
                 margin: EdgeInsets.only(
-                  top: 25,
+                  top: 10,
                   bottom: 25,
                   left: 10,
                   right: 10,
@@ -433,14 +579,30 @@ class _ProfileState extends State<Profile> {
                 height: 50,
                 width: 395,
                 child: ElevatedButton(
-                  child: Text(
-                    "LOG OUT",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Logout icon
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Icon(
+                          Icons.logout_rounded,
+                          color: Color(0xFF93000A),
+                          size: 30,
+                        ),
+                      ),
+                      // Logout label
+                      Text(
+                        "LOG OUT",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF93000A),
+                        ),
+                      ),
+                    ],
                   ),
+                  // Clears session and navigates to login screen
                   onPressed: () async {
                     await SessionService.logout();
                     Navigator.pushReplacement(
@@ -449,9 +611,9 @@ class _ProfileState extends State<Profile> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF00515A),
+                    backgroundColor: Color(0xFFFFDAD6),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),

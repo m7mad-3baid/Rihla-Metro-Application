@@ -1,0 +1,81 @@
+ // Saved Stations section header
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      "Saved Stations",
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: const Color.fromARGB(255, 103, 103, 103),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+
+              // Saved station chips with add button
+              Row(
+                children: [
+                  // Bahri Central station chip
+                  Padding(
+                    padding: const EdgeInsets.only(left: 35),
+                    child: Container(
+                      height: 30,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 1, color: Colors.blueGrey),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.circle, size: 15, color: Colors.green),
+                          Text(" Bahri Central"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Khartoum Central station chip
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Container(
+                      height: 30,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 1, color: Colors.blueGrey),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.circle, size: 15, color: Colors.red),
+                          Text(" Khartoum Central"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  // Add new station button
+                  Container(
+                    height: 30,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(width: 1, color: Colors.blueGrey),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "    + ADD",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rihla_4_0/screens/wallet.dart';
 import 'Profile.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
@@ -67,57 +68,58 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(left: 10, top: 20),
 
                     child: GestureDetector(
-  behavior: HitTestBehavior.opaque,
+                      behavior: HitTestBehavior.opaque,
 
-  onTap: () {
-    print("AVATAR CLICKED");
+                      onTap: () {
+                        print("AVATAR CLICKED");
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Profile(),
-      ),
-    );
-  },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Profile()),
+                        );
+                      },
 
-  child: Padding(
-    padding: const EdgeInsets.only(left: 10, top: 20, right: 30),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                          top: 20,
+                          right: 30,
+                        ),
 
-    child: Container(
-      width: 60,
-height: 60,
+                        child: Container(
+                          width: 60,
+                          height: 60,
 
+                          decoration: BoxDecoration(
+                            color: Color(0xFFE4E1F7),
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 157, 142, 255),
+                            ),
+                          ),
 
-      decoration: BoxDecoration(
-        color: Color(0xFFE4E1F7),
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(
-          color: Color.fromARGB(255, 157, 142, 255),
-        ),
-      ),
+                          child: Center(
+                            child: Text(
+                              name.isNotEmpty
+                                  ? name
+                                        .trim()
+                                        .split(" ")
+                                        .map((w) => w[0])
+                                        .take(2)
+                                        .join()
+                                        .toUpperCase()
+                                  : "?",
 
-      child: Center(
-        child: Text(
-          name.isNotEmpty
-              ? name
-                  .trim()
-                  .split(" ")
-                  .map((w) => w[0])
-                  .take(2)
-                  .join()
-                  .toUpperCase()
-              : "?",
-
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Color.fromARGB(255, 74, 46, 255),
-          ),
-        ),
-      ),
-    ),
-  ),
-),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 74, 46, 255),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   // Greeting text
                   Container(
@@ -462,10 +464,15 @@ height: 60,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: widget.onRoutesTap,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => wallet()),
+                      );
+                    },
                     child: _buildQuickAction(
-                      icon: CupertinoIcons.heart,
-                      title: "Saved",
+                      icon: Icons.wallet_rounded,
+                      title: "Top-Up",
                       color: Color.fromARGB(255, 0, 191, 51),
                     ),
                   ),
@@ -569,8 +576,8 @@ height: 60,
   }) {
     return Container(
       // Card size
-      width: 130,
-      height: 120,
+      width: 150,
+      height: 170,
 
       decoration: BoxDecoration(
         // Main card background
