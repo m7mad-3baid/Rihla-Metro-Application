@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
+import 'package:rihla_4_0/screens/line_stations_screen.dart';
 
 class RoutesScreen extends StatefulWidget {
   const RoutesScreen({super.key});
@@ -36,7 +37,6 @@ class _RoutesScreenState extends State<RoutesScreen> {
             ),
 
             const SizedBox(height: 20),
-
 
             Searchbarwidget(),
 
@@ -125,355 +125,496 @@ class _RoutesScreenState extends State<RoutesScreen> {
 
             if (isTrainSelected) ...[
               // routes cards 1
-              Container(
-                height: 150,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // vertical line
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      height: 60,
-                      width: 6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red,
-                      ),
-                    ),
-
-                    // line number small box
-                    Container(
-                      height: 40,
-                      width: 40,
-                      margin: EdgeInsets.only(left: 25),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9),
-                        color: Colors.red,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Red Line",
+                        lineColor: Colors.red,
+                        stations: [
+                          LineStation(
+                            number: "1",
+                            name: "Khartoum Central",
+                            status: "Open",
+                            nextTrain: "3 min",
+                            description:
+                                "The central hub of the Red Line, located in the heart of Khartoum near major government buildings and the historic Blue Nile bridge.",
                           ),
+                          LineStation(
+                            number: "2",
+                            name: "Al Mek Nimr",
+                            status: "Open",
+                            nextTrain: "6 min",
+                            description:
+                                "The central hub of the Red Line, located in the heart of Khartoum near major government buildings and the historic Blue Nile bridge.",
+                          ),
+                          LineStation(
+                            number: "3",
+                            name: "Kober",
+                            status: "Open",
+                            nextTrain: "9 min",
+                            description:
+                                "A major commercial and residential area with several shopping centers and educational institutions.",
+                          ),
+                          LineStation(
+                            number: "4",
+                            name: "Bahri South",
+                            status: "Open",
+                            nextTrain: "12 min",
+                            description:
+                                "A key transit point with connections to various parts of the city.",
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // vertical line
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red,
                         ),
                       ),
-                    ),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                      // line number small box
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: Colors.red,
+                        ),
+                        child: Center(
                           child: Text(
-                            "Red Line",
+                            "1",
                             style: TextStyle(
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                         ),
-
-                        Row(
-                          children: [
-                            Text(
-                              "     Khartoum central ",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(Icons.arrow_circle_left_outlined, size: 15),
-                            Icon(Icons.arrow_circle_right_outlined, size: 15),
-                            Text(
-                              " bahri south",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        Container(
-                          height: 30,
-                          width: 100,
-                          margin: EdgeInsets.only(left: 15, top: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "8 stations",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(left: 35),
-                        child: Icon(Icons.arrow_forward_ios),
                       ),
-                    ),
-                  ],
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                            child: Text(
+                              "Red Line",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+
+                          Row(
+                            children: [
+                              Text(
+                                "     Khartoum central ",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                " bahri south",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: EdgeInsets.only(left: 15, top: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "8 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(left: 35),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
               SizedBox(height: 10),
               // routes card 2
-              Container(
-                height: 150,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // vertical line
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      height: 60,
-                      width: 6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 11, 152, 16),
-                      ),
-                    ),
-
-                    // line number small box
-                    Container(
-                      height: 40,
-                      width: 40,
-                      margin: EdgeInsets.only(left: 25),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9),
-                        color: const Color.fromARGB(255, 11, 152, 16),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Green Line",
+                        lineColor: const Color.fromARGB(255, 11, 152, 16),
+                        stations: [
+                          LineStation(
+                            number: "1",
+                            name: "Omdurman Central",
+                            status: "Open",
+                            nextTrain: "2 min",
+                            description:
+                                "The central hub of the Red Line, located in the heart of Khartoum near major government buildings and the historic Blue Nile bridge.",
                           ),
+                          LineStation(
+                            number: "2",
+                            name: "Al Thawra",
+                            status: "Open",
+                            nextTrain: "5 min",
+                            description:
+                                "The central hub of the Red Line, located in the heart of Khartoum near major government buildings and the historic Blue Nile bridge.",
+                          ),
+                          LineStation(
+                            number: "3",
+                            name: "Wad Nubawi",
+                            status: "Open",
+                            nextTrain: "8 min",
+                            description:
+                                "A major commercial and residential area with several shopping centers and educational institutions.",
+                          ),
+                          LineStation(
+                            number: "4",
+                            name: "Khartoum Central",
+                            status: "Open",
+                            nextTrain: "11 min",
+                            description:
+                                "A vibrant neighborhood known for its cultural sites and lively atmosphere.",
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // vertical line
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(255, 11, 152, 16),
                         ),
                       ),
-                    ),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                      // line number small box
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: const Color.fromARGB(255, 11, 152, 16),
+                        ),
+                        child: Center(
                           child: Text(
-                            "Green Line",
+                            "1",
                             style: TextStyle(
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                         ),
-
-                        Row(
-                          children: [
-                            Text(
-                              "     Omdur Central ",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(Icons.arrow_circle_left_outlined, size: 15),
-                            Icon(Icons.arrow_circle_right_outlined, size: 15),
-                            Text(
-                              "Khartoum central",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        Container(
-                          height: 30,
-                          width: 100,
-                          margin: EdgeInsets.only(left: 15, top: 20),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 11, 152, 16),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "5 stations",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(left: 29),
-                        child: Icon(Icons.arrow_forward_ios),
                       ),
-                    ),
-                  ],
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                            child: Text(
+                              "Green Line",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+
+                          Row(
+                            children: [
+                              Text(
+                                "     Omdur Central ",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                "Khartoum central",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: EdgeInsets.only(left: 15, top: 20),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 11, 152, 16),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "5 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(left: 29),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 10),
 
               //routes card 3
-              Container(
-                height: 150,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // vertical line
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      height: 60,
-                      width: 6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue,
-                      ),
-                    ),
-
-                    // line number small box
-                    Container(
-                      height: 40,
-                      width: 40,
-                      margin: EdgeInsets.only(left: 25),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9),
-                        color: Colors.blue,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Blue Line",
+                        lineColor: Colors.blue,
+                        stations: [
+                          LineStation(
+                            number: "1",
+                            name: "Khartoum central",
+                            status: "Open",
+                            nextTrain: "1 min",
+                            description:
+                                "The central hub of the Red Line, located in the heart of Khartoum near major government buildings and the historic Blue Nile bridge.",
                           ),
+                          LineStation(
+                            number: "2",
+                            name: "Al Riyadh",
+                            status: "Open",
+                            nextTrain: "4 min",
+                            description:
+                                "A major commercial and residential area with several shopping centers and educational institutions.",
+                          ),
+                          LineStation(
+                            number: "3",
+                            name: "Al Kalakla",
+                            status: "Open",
+                            nextTrain: "7 min",
+                            description:
+                                "A vibrant neighborhood known for its cultural sites and lively atmosphere.",
+                          ),
+                          LineStation(
+                            number: "4",
+                            name: "Bahri central",
+                            status: "Open",
+                            nextTrain: "10 min",
+                            description:
+                                "A key transit point with connections to various parts of the city.",
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // vertical line
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue,
                         ),
                       ),
-                    ),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                      // line number small box
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: Colors.blue,
+                        ),
+                        child: Center(
                           child: Text(
-                            "Blue Line",
+                            "1",
                             style: TextStyle(
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                         ),
-
-                        Row(
-                          children: [
-                            Text(
-                              "     Khartoum central ",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(Icons.arrow_circle_left_outlined, size: 15),
-                            Icon(Icons.arrow_circle_right_outlined, size: 15),
-                            Text(
-                              " bahri central",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        Container(
-                          height: 30,
-                          width: 100,
-                          margin: EdgeInsets.only(left: 13, top: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "7 stations",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(left: 35),
-                        child: Icon(Icons.arrow_forward_ios),
                       ),
-                    ),
-                  ],
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsGeometry.only(left: 10, top: 20),
+                            child: Text(
+                              "Blue Line",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+
+                          Row(
+                            children: [
+                              Text(
+                                "     Khartoum central ",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                " bahri central",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: EdgeInsets.only(left: 13, top: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "7 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(left: 35),
+                          child: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ] else ...[

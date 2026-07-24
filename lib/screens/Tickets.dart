@@ -536,138 +536,143 @@ class _TicketsState extends State<Tickets> {
                       Padding(
                         padding: EdgeInsets.all(20),
 
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                          children: [
-                            // Active trip status badge
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
+                            children: [
+                              // Active trip status badge
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
+
+                                decoration: BoxDecoration(
+                                  color: Colors.white24,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+
+                                child: Text(
+                                  "ACTIVE TRIP",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
 
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                              SizedBox(height: 15),
 
-                              child: Text(
-                                "ACTIVE TRIP",
+                              // Trip route information
+                              Text(
+                                "2-HOURS-TICKET",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 10,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-
-                            SizedBox(height: 15),
-
-                            // Trip route information
-                            Text(
-                              "2-HOURS-TICKET",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: AnimatedSwitcher(
-                                  duration: Duration(milliseconds: 300),
-
-                                  child: showQR
-                                      ? Icon(
-                                          Icons.qr_code_2_sharp,
-                                          size: 170,
-                                          key: ValueKey(true),
-                                          opticalSize: 170,
-                                          color: Colors.white,
-                                        )
-                                      : SizedBox(key: ValueKey(false)),
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 330),
+                                curve: Curves.easeInOut,
+                                height: showQR ? 180 : 0,
+                                child: Center(
+                                  child: AnimatedSwitcher(
+                                    duration: Duration(milliseconds: 300),
+                                    child: showQR
+                                        ? Icon(
+                                            Icons.qr_code_2_sharp,
+                                            size: 170,
+                                            key: ValueKey(true),
+                                            opticalSize: 170,
+                                            color: Colors.white,
+                                          )
+                                        : SizedBox(key: ValueKey(false)),
+                                  ),
                                 ),
                               ),
-                            ),
+                              SizedBox(
+                                height: showQR ? 70 : 70,
+                              ), // replaces Spacer()
+                              // Departure time and QR code button row
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
 
-                            Spacer(),
+                                children: [
+                                  // Departure time column
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
 
-                            // Departure time and QR code button row
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                              children: [
-                                // Departure time column
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                                  children: [
-                                    Text(
-                                      "Active Untill:",
-                                      style: TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-
-                                    Text(
-                                      "14:30 PM ",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Today ",
-                                      style: TextStyle(
-                                        color: const Color.fromARGB(
-                                          158,
-                                          255,
-                                          255,
-                                          255,
+                                    children: [
+                                      Text(
+                                        "Active Untill:",
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 12,
                                         ),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ),
-                                  ],
-                                ),
 
-                                // View QR code button
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      showQR = !showQR;
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 8,
-                                    ),
+                                      Text(
+                                        "14:30 PM ",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Today ",
+                                        style: TextStyle(
+                                          color: const Color.fromARGB(
+                                            158,
+                                            255,
+                                            255,
+                                            255,
+                                          ),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
 
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
+                                  // View QR code button
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        showQR = !showQR;
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 8,
+                                      ),
 
-                                    child: Text( 
-                                      showQR?
-                                      "Hide QR"
-                                      :"View QR",
-                                      style: TextStyle(
-                                        color: Color(0xFF355C8A),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+
+                                      child: Text(
+                                        showQR ? "Hide QR" : "View QR",
+                                        style: TextStyle(
+                                          color: Color(0xFF355C8A),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
