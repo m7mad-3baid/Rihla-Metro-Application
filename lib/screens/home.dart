@@ -477,7 +477,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: widget.onTicketsTap,
+                    onTap:() {
+                      Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FullMapPage(),
+                                    ),
+                                  );
+                    },
                     child: _buildQuickAction(
                       icon: Icons.location_pin,
                       title: "Nearby",

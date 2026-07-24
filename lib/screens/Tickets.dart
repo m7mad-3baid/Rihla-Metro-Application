@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 
 // Screen displaying ticket purchasing options and user's active tickets
@@ -234,7 +235,14 @@ class _TicketsState extends State<Tickets> {
                               width: double.infinity,
                               height: 50,
                               child: ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => wallet(),
+                                    ),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF00515A),
                                   elevation: 0,
@@ -263,7 +271,7 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                SizedBox(height: 20),
 
                 // Card 2: 3-Day pass ticket
                 Container(
@@ -354,7 +362,15 @@ class _TicketsState extends State<Tickets> {
                               width: double.infinity,
                               height: 50,
                               child: ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => wallet(),
+                                    ),
+                                  );
+                                
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF4B5320),
                                   elevation: 0,
@@ -383,8 +399,7 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ),
 
-                                SizedBox(height: 20,),
-
+                SizedBox(height: 20),
 
                 // Card 3: Student discount 2-Hour ticket (50% off)
                 Container(
@@ -494,7 +509,12 @@ class _TicketsState extends State<Tickets> {
                               width: double.infinity,
                               height: 50,
                               child: ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => wallet(),
+                                    ),
+                                  );},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFC48A00),
                                   elevation: 0,
@@ -635,7 +655,10 @@ class _TicketsState extends State<Tickets> {
                                         "Today ",
                                         style: TextStyle(
                                           color: const Color.fromARGB(
-                                            158, 255, 255, 255,
+                                            158,
+                                            255,
+                                            255,
+                                            255,
                                           ),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,

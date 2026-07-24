@@ -40,7 +40,7 @@ class _RigesterpageState extends State<Rigesterpage> {
             // ============================================================
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFFBF001C), // Brand red color
+                color: Color(0xFF122E64), // Brand red color
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(20),
                   bottomLeft: Radius.circular(20),
@@ -92,7 +92,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       child: Text(
                         "USERNAME",
                         style: TextStyle(
-                          color: Color(0xFFBF001C),
+                          color: Color(0xFF122E64),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -120,7 +120,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         child: Text(
                           "EMAIL",
                           style: TextStyle(
-                            color: Color(0xFFBF001C),
+                            color: Color(0xFF122E64),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -149,7 +149,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         child: Text(
                           "PASSWORD",
                           style: TextStyle(
-                            color: Color(0xFFBF001C),
+                            color: Color(0xFF122E64),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -179,7 +179,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         child: Text(
                           "CONFIRM PASSWORD",
                           style: TextStyle(
-                            color: Color(0xFFBF001C),
+                            color: Color(0xFF122E64),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -212,7 +212,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         children: [
                           Checkbox(
                             value: isStudent,
-                            activeColor: Color(0xFFBF001C),
+                            activeColor: Color(0xFF122E64),
                             onChanged: (value) {
                               setState(() {
                                 isStudent = value ?? false;
@@ -244,7 +244,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       children: [
                         Checkbox(
                           value: agreedToTerms,
-                          activeColor: Color(0xFFBF001C),
+                          activeColor: Color(0xFF122E64),
                           onChanged: (value) {
                             setState(() {
                               agreedToTerms = value ?? false;
@@ -253,7 +253,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         ),
                         Text(
                           "I agree to Terms & Privacy Policy",
-                          style: TextStyle(color: Color(0xFFBF001C)),
+                          style: TextStyle(color: Color(0xFF122E64)),
                         ),
                       ],
                     ),
@@ -344,7 +344,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                       
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFBF001C),
+                        backgroundColor: Color(0xFF122E64),
                         minimumSize: Size(395, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -359,7 +359,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     // ==========================================================
                     Text(
                       " Already Have An Account ? ",
-                      style: TextStyle(color: Color(0xFFBF001C)),
+                      style: TextStyle(color: Color(0xFF122E64)),
                     ),
 
                     SizedBox(height: 25),
@@ -377,7 +377,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       },
                       child: Text(
                         "LOGIN",
-                        style: TextStyle(color: Color(0xFFBF001C)),
+                        style: TextStyle(color: Color(0xFF122E64)),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,

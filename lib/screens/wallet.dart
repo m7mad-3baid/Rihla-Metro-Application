@@ -243,9 +243,19 @@ class wallet extends StatelessWidget {
                                   left: 100,
                                   top: 30,
                                 ),
-                                child: Text(
-                                  "Change",
-                                  style: TextStyle(color: Color(0xff1A318F)),
+                                child: Container(
+                                  height: 30,
+                                  width: 75,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color:  Color(0xff4B0082))
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Change",
+                                      style: TextStyle(color: Color(0xff1A318F)),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],

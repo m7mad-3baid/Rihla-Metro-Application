@@ -19,7 +19,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
 
-    _controller = VideoPlayerController.asset('assets/Video/Splash.mp4');
+    _controller = VideoPlayerController.asset('assets/Video/Splash2.mp4');
 
     _controller.initialize().then((value) {
       setState(() {});
@@ -65,7 +65,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 232, 231, 233),
+      backgroundColor: Color(0xFF122E64),
 
       body: Center(
         child: _controller.value.isInitialized

@@ -25,7 +25,7 @@ class _LoginpageState extends State<Loginpage> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFBF001C),
+              color: Color(0xFF122E64),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -72,7 +72,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       "USERNAME",
                       style: TextStyle(
-                        color: Color(0xFFBF001C),
+                        color: Color(0xFF122E64),
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
@@ -98,7 +98,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       "PASSWORD",
                       style: TextStyle(
-                        color: Color(0xFFBF001C),
+                        color: Color(0xFF122E64),
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
@@ -126,7 +126,7 @@ class _LoginpageState extends State<Loginpage> {
                       child: Text(
                         "Forgot Your Password?",
                         style: TextStyle(
-                          color: Color(0xFFBF001C),
+                          color: Color(0xFF122E64),
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -197,7 +197,7 @@ class _LoginpageState extends State<Loginpage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFBF001C),
+                        backgroundColor: Color(0xFF122E64),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -210,7 +210,7 @@ class _LoginpageState extends State<Loginpage> {
                     child: Text(
                       " Dont Have An Account ?",
                       style: TextStyle(
-                        color: Color(0xFFBF001C),
+                        color: Color(0xFF122E64),
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
                       ),
@@ -226,7 +226,7 @@ class _LoginpageState extends State<Loginpage> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFBF001C),
+                          color: Color(0xFF122E64),
                         ),
                       ),
                       onPressed: () {

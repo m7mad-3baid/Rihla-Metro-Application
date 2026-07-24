@@ -17,16 +17,18 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
-      width: double.infinity,
+      height: 70,
+      width: 300,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
         // Top border line
         border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
         // Rounded top corners
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
         ),
         // Shadow effect for elevation
         boxShadow: [
@@ -55,7 +57,7 @@ class BottomBar extends StatelessWidget {
                   // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 0 ? Icons.house_rounded : Icons.house_outlined,
-                    size: selectedIndex == 0 ? 35 : 30,
+                    size: selectedIndex == 0 ? 30 : 25,
                     color: selectedIndex == 0 ?  Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
@@ -84,7 +86,7 @@ class BottomBar extends StatelessWidget {
                   // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 1 ? Icons.map : Icons.map_outlined,
-                    size: selectedIndex == 1 ? 35 : 30,
+                    size: selectedIndex == 1 ? 30 : 25,
                     color: selectedIndex == 1 ?  Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
@@ -115,7 +117,7 @@ class BottomBar extends StatelessWidget {
                     selectedIndex == 2
                         ? Icons.confirmation_num
                         : Icons.confirmation_num_outlined,
-                    size: selectedIndex == 2 ? 35 : 30,
+                    size: selectedIndex == 2 ? 30 : 25,
                     color: selectedIndex == 2 ?  Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
@@ -144,7 +146,7 @@ class BottomBar extends StatelessWidget {
                   // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 3 ? Icons.person : Icons.person_outline,
-                    size: selectedIndex == 3 ? 35 : 30,
+                    size: selectedIndex == 3 ? 30 : 25,
                     color: selectedIndex == 3 ?  Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
