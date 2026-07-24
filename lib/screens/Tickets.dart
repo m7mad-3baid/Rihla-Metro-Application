@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 
-// StatefulWidget for the Tickets screen, allowing toggle between Buy and My Tickets views
+// Screen displaying ticket purchasing options and user's active tickets
 class Tickets extends StatefulWidget {
   const Tickets({super.key});
 
@@ -10,9 +10,9 @@ class Tickets extends StatefulWidget {
 }
 
 class _TicketsState extends State<Tickets> {
-  // Boolean state to track which toggle option is selected
-  // true = "Buy A Ticket" view, false = "My Tickets" view
+  // Toggle state: true shows Buy Tickets, false shows My Tickets
   bool isBuySelected = true;
+  // Toggles QR code visibility in the active trip card
   bool showQR = false;
 
   @override
@@ -23,7 +23,7 @@ class _TicketsState extends State<Tickets> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Page header with title
+              // Screen title
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -42,7 +42,7 @@ class _TicketsState extends State<Tickets> {
 
               SizedBox(height: 30),
 
-              // Toggle button container for switching between Buy A Ticket and My Tickets
+              // Segmented toggle: Buy A Ticket | My Tickets
               Container(
                 width: 350,
                 height: 40,
@@ -52,7 +52,7 @@ class _TicketsState extends State<Tickets> {
                 ),
                 child: Row(
                   children: [
-                    // "Buy A Ticket" toggle button
+                    // Buy A Ticket segment
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -62,7 +62,6 @@ class _TicketsState extends State<Tickets> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            // Highlight selected button with red color
                             color: isBuySelected
                                 ? const Color(0xFF00515A)
                                 : const Color(0xFFE2E2E2),
@@ -86,8 +85,7 @@ class _TicketsState extends State<Tickets> {
                         ),
                       ),
                     ),
-
-                    // "My Tickets" toggle button
+                    // My Tickets segment
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -97,7 +95,6 @@ class _TicketsState extends State<Tickets> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            // Highlight selected button with red color
                             color: isBuySelected
                                 ? const Color(0xFFE2E2E2)
                                 : Color(0xFF00515A),
@@ -127,395 +124,418 @@ class _TicketsState extends State<Tickets> {
 
               SizedBox(height: 25),
 
-              // Conditionally render content based on selected toggle
+              // Buy Tickets View
               if (isBuySelected) ...[
-                // First ticket pricing card - 2-HOUR Ticket
+                // Card 1: 2-Hour standard ticket (Most Popular)
                 Container(
-                  height: 250,
+                  height: 375,
                   width: 350,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
-                    // Outer shadow effect for card elevation
+                    color: Color(0xFFDCEEFF),
+                    borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        spreadRadius: 0.5,
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
                       ),
                     ],
                   ),
-
-                  // Card content elements
-                  child: Column(
+                  child: Stack(
                     children: [
-                      // Ticket name and price row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 35),
-                            child: Text(
-                              "2-HOUR Ticket",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                      // Decorative watermark ticket icon
+                      Positioned(
+                        right: -25,
+                        top: -20,
+                        child: Opacity(
+                          opacity: 0.08,
+                          child: Icon(
+                            Icons.confirmation_num_rounded,
+                            size: 170,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Most Popular badge
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00515A).withOpacity(.12),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Text(
+                                "MOST POPULAR",
+                                style: TextStyle(
+                                  color: Color(0xFF00515A),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15, top: 10),
-                            child: Text(
+                            const SizedBox(height: 18),
+                            const Text(
+                              "2-HOUR TICKET",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
                               "200 SDG",
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 213, 33, 20),
+                                color: Color(0xFF00515A),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Ticket description text
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          "**unlimited rides on all 3 metro lines for 2 hours after activation.",
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      // View Details link row
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "View Details",
+                            const SizedBox(height: 14),
+                            const Text(
+                              "Unlimited rides on all 3 metro lines for 2 hours after activation.",
                               style: TextStyle(
-                                color: const Color.fromARGB(255, 180, 12, 0),
+                                color: Colors.black54,
+                                fontSize: 14,
+                                height: 1.5,
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: const Color.fromARGB(255, 58, 4, 0),
-                            size: 15,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Purchase button
-                      Container(
-                        width: 300,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 180, 12, 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Purchase Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 25),
-
-                // Second ticket pricing card - 3-DAYS Pass
-                Container(
-                  height: 250,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
-                    // Outer shadow effect for card elevation
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        spreadRadius: 0.5,
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
-                      ),
-                    ],
-                  ),
-
-                  // Card content elements
-                  child: Column(
-                    children: [
-                      // Ticket name and price row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 35),
-                            child: Text(
-                              "3-DAYS Pass",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15, top: 10),
-                            child: Text(
-                              "900 SDG",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 213, 33, 20),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Ticket description text
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          "**unlimited rides on all 3 metro lines for 3 Days.",
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      // View Details link row
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "View Details",
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 180, 12, 0),
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: const Color.fromARGB(255, 58, 4, 0),
-                            size: 15,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Purchase button
-                      Container(
-                        width: 300,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 180, 12, 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Purchase Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 25),
-
-                // Third ticket pricing card - STUDENT pass
-                Container(
-                  height: 250,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
-                    // Outer shadow effect for card elevation
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        spreadRadius: 0.5,
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
-                      ),
-                    ],
-                  ),
-
-                  // Card content elements
-                  child: Column(
-                    children: [
-                      // Ticket name and price row with student badge
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 35),
-                            child: Text(
-                              "STUDENT pass",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15, top: 10),
-                            child: Column(
-                              children: [
-                                // Student discount badge
-                                Container(
-                                  margin: EdgeInsets.only(top: 5, bottom: 3),
-                                  height: 30,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                      47,
-                                      255,
-                                      191,
-                                      0,
+                            const Spacer(),
+                            // View details link
+                            InkWell(
+                              onTap: () {},
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline,
+                                    size: 18,
+                                    color: Color(0xFF00515A),
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "View Details",
+                                    style: TextStyle(
+                                      color: Color(0xFF00515A),
+                                      fontWeight: FontWeight.w600,
                                     ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            // Purchase button
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF00515A),
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
-                                    border: Border.all(color: Colors.amber),
-                                  ),
-
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 4),
-                                        child: Icon(
-                                          Icons.backpack_rounded,
-                                          color: const Color.fromARGB(
-                                            255,
-                                            135,
-                                            120,
-                                            0,
-                                          ),
-                                          size: 20,
-                                        ),
-                                      ),
-
-                                      Text(
-                                        "  students",
-                                        style: TextStyle(
-                                          color: const Color.fromARGB(
-                                            255,
-                                            165,
-                                            124,
-                                            0,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
-                                // Student ticket price
-                                Text(
-                                  "100 SDG",
+                                icon: const Icon(
+                                  Icons.shopping_cart_checkout,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  "Purchase Ticket",
                                   style: TextStyle(
-                                    fontSize: 25,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    color: const Color.fromARGB(
-                                      255,
-                                      213,
-                                      33,
-                                      20,
-                                    ),
+                                    fontSize: 16,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Student ticket description text
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          "** 50% discoint on the 2-HOURS Ticket for students with valid ID",
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      // View Details link row
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "View Details",
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 180, 12, 0),
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: const Color.fromARGB(255, 58, 4, 0),
-                            size: 15,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // Purchase button
-                      Container(
-                        width: 300,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 180, 12, 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Purchase Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
+
+                SizedBox(height: 20,),
+
+                // Card 2: 3-Day pass ticket
+                Container(
+                  height: 375,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFBFC988),
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      // Decorative watermark ticket icon
+                      Positioned(
+                        right: -25,
+                        top: -20,
+                        child: Opacity(
+                          opacity: 0.08,
+                          child: Icon(
+                            Icons.confirmation_num_rounded,
+                            size: 170,
+                            color: Color(0xFF4B5320),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 18),
+                            const Text(
+                              "3 DAYS PASS",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              "700 SDG",
+                              style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF4B5320),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            const Text(
+                              "Unlimited rides on all 3 metro lines for 3-DAYS after activation.",
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 14,
+                                height: 1.5,
+                              ),
+                            ),
+                            const Spacer(),
+                            // View details link
+                            InkWell(
+                              onTap: () {},
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline,
+                                    size: 18,
+                                    color: Color(0xFF4B5320),
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "View Details",
+                                    style: TextStyle(
+                                      color: Color(0xFF4B5320),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            // Purchase button
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4B5320),
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.shopping_cart_checkout,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  "Purchase Ticket",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                                SizedBox(height: 20,),
+
+
+                // Card 3: Student discount 2-Hour ticket (50% off)
+                Container(
+                  height: 375,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFF2C7),
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      // Decorative watermark ticket icon
+                      Positioned(
+                        right: -25,
+                        top: -20,
+                        child: Opacity(
+                          opacity: 0.08,
+                          child: Icon(
+                            Icons.confirmation_num_rounded,
+                            size: 170,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Student discount badge
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFC48A00).withOpacity(.12),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Text(
+                                "STUDENT DISCOUNT",
+                                style: TextStyle(
+                                  color: Color(0xFFC48A00),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            const Text(
+                              "2-HOUR TICKET",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              "100 SDG",
+                              style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFC48A00),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            const Text(
+                              "Unlimited rides on all 3 metro lines for 2 hours after activation.",
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 14,
+                                height: 1.5,
+                              ),
+                            ),
+                            const Spacer(),
+                            // View details link
+                            InkWell(
+                              onTap: () {},
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline,
+                                    size: 18,
+                                    color: Color(0xFFC48A00),
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "View Details",
+                                    style: TextStyle(
+                                      color: Color(0xFFC48A00),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            // Purchase button
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFC48A00),
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.shopping_cart_checkout,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  "Purchase Ticket",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 25),
                 SizedBox(height: 25),
               ] else ...[
-                // My Tickets view - Active trip card
+                // My Tickets View: Active trip card with animated QR code
                 AnimatedContainer(
                   duration: Duration(milliseconds: 350),
                   curve: Curves.easeInOut,
-
-                  height: showQR ? 420 : 250,
-
+                  height: showQR ? 470 : 250,
                   width: 350,
                   decoration: BoxDecoration(
                     color: Color(0xFF355C8A),
                     borderRadius: BorderRadius.circular(20),
                   ),
-
                   child: Stack(
                     children: [
                       // Decorative background ticket icon
@@ -531,29 +551,23 @@ class _TicketsState extends State<Tickets> {
                           ),
                         ),
                       ),
-
-                      // Main card content
                       Padding(
                         padding: EdgeInsets.all(20),
-
                         child: SingleChildScrollView(
                           physics: const NeverScrollableScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-
                             children: [
-                              // Active trip status badge
+                              // Active trip badge
                               Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 10,
                                   vertical: 4,
                                 ),
-
                                 decoration: BoxDecoration(
                                   color: Colors.white24,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-
                                 child: Text(
                                   "ACTIVE TRIP",
                                   style: TextStyle(
@@ -563,10 +577,7 @@ class _TicketsState extends State<Tickets> {
                                   ),
                                 ),
                               ),
-
                               SizedBox(height: 15),
-
-                              // Trip route information
                               Text(
                                 "2-HOURS-TICKET",
                                 style: TextStyle(
@@ -575,6 +586,7 @@ class _TicketsState extends State<Tickets> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              // Animated QR code section
                               AnimatedContainer(
                                 duration: Duration(milliseconds: 330),
                                 curve: Curves.easeInOut,
@@ -594,20 +606,15 @@ class _TicketsState extends State<Tickets> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: showQR ? 70 : 70,
-                              ), // replaces Spacer()
-                              // Departure time and QR code button row
+                              SizedBox(height: showQR ? 70 : 70),
+                              // Expiry info and QR toggle
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-
                                 children: [
-                                  // Departure time column
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-
                                     children: [
                                       Text(
                                         "Active Untill:",
@@ -616,7 +623,6 @@ class _TicketsState extends State<Tickets> {
                                           fontSize: 12,
                                         ),
                                       ),
-
                                       Text(
                                         "14:30 PM ",
                                         style: TextStyle(
@@ -629,10 +635,7 @@ class _TicketsState extends State<Tickets> {
                                         "Today ",
                                         style: TextStyle(
                                           color: const Color.fromARGB(
-                                            158,
-                                            255,
-                                            255,
-                                            255,
+                                            158, 255, 255, 255,
                                           ),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -640,8 +643,7 @@ class _TicketsState extends State<Tickets> {
                                       ),
                                     ],
                                   ),
-
-                                  // View QR code button
+                                  // QR toggle button
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
@@ -653,12 +655,10 @@ class _TicketsState extends State<Tickets> {
                                         horizontal: 20,
                                         vertical: 8,
                                       ),
-
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
-
                                       child: Text(
                                         showQR ? "Hide QR" : "View QR",
                                         style: TextStyle(
@@ -684,7 +684,6 @@ class _TicketsState extends State<Tickets> {
           ),
         ),
       ),
-      // Bottom navigation bar - currently commented out
       // bottomNavigationBar: BottomBar(selectedIndex: 2, onTap: (index) {},),
     );
   }
