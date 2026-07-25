@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/personalinfo.dart';
+import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,12 +116,12 @@ class _ProfileState extends State<Profile> {
                                   child: Text(
                                     name.isNotEmpty
                                         ? name
-                                            .trim()
-                                            .split(" ")
-                                            .map((w) => w[0])
-                                            .take(2)
-                                            .join()
-                                            .toUpperCase()
+                                              .trim()
+                                              .split(" ")
+                                              .map((w) => w[0])
+                                              .take(2)
+                                              .join()
+                                              .toUpperCase()
                                         : "?",
                                     style: const TextStyle(
                                       color: Color(0xFF00515A),
@@ -238,40 +240,50 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     // Personal Information row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        // Icon container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Icon(Icons.person_outline_rounded),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => personalInfo(),
                           ),
-                        ),
-                        // Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 15),
-                          child: Text(
-                            "Personal Informations",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Icon container
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 15),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC4D5D9),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Icon(Icons.person_outline_rounded),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        // Navigation arrow
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, right: 10),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
+                          // Label
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 15),
+                            child: Text(
+                              "Personal Informations",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          // Navigation arrow
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            child: Icon(Icons.arrow_forward_ios),
+                          ),
+                        ],
+                      ),
                     ),
 
                     SizedBox(height: 5),
@@ -279,40 +291,48 @@ class _ProfileState extends State<Profile> {
                     Divider(indent: 10, endIndent: 10),
 
                     // Wallet row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        // Icon container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Icon(Icons.wallet),
-                          ),
-                        ),
-                        // Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 15),
-                          child: Text(
-                            "wallet",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => wallet()),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Icon container
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 15),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC4D5D9),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Icon(Icons.wallet),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        // Navigation arrow
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, right: 10),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
+                          // Label
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 15),
+                            child: Text(
+                              "wallet",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          // Navigation arrow
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            child: Icon(Icons.arrow_forward_ios),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

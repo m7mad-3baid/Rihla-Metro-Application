@@ -5,6 +5,7 @@ import 'package:rihla_4_0/screens/Tickets.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/screens/home.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
+import 'package:rihla_4_0/screens/personalinfo.dart';
 import 'package:rihla_4_0/screens/rigesterpage.dart';
 import 'package:rihla_4_0/screens/routes_screen.dart';
 import 'package:rihla_4_0/screens/studentInfo.dart';

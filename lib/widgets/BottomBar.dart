@@ -25,10 +25,10 @@ class BottomBar extends StatelessWidget {
         border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
         // Rounded top corners
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-          bottomLeft: Radius.circular(40),
-          bottomRight: Radius.circular(40),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+          // bottomLeft: Radius.circular(40),
+          // bottomRight: Radius.circular(40),
         ),
         // Shadow effect for elevation
         boxShadow: [
@@ -150,7 +150,7 @@ class BottomBar extends StatelessWidget {
                     color: selectedIndex == 3 ?  Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
-                    "Profile",
+                    "Account",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == 3
