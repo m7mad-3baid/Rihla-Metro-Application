@@ -5,10 +5,16 @@ class editinfo extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: SafeArea(child: Column(
-
-
-      )),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              "Edit Info",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

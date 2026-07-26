@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Screen displaying ticket purchasing options and user's active tickets
 class Tickets extends StatefulWidget {
@@ -15,6 +16,20 @@ class _TicketsState extends State<Tickets> {
   bool isBuySelected = true;
   // Toggles QR code visibility in the active trip card
   bool showQR = false;
+  bool isStudent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadStudentStatus();
+  }
+
+  Future<void> loadStudentStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isStudent = prefs.getBool("is_student") ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -369,7 +384,6 @@ class _TicketsState extends State<Tickets> {
                                       builder: (context) => wallet(),
                                     ),
                                   );
-                                
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF4B5320),
@@ -399,149 +413,155 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                if (isStudent) ...[
+                  SizedBox(height: 20),
 
-                // Card 3: Student discount 2-Hour ticket (50% off)
-                Container(
-                  height: 375,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFFF2C7),
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      // Decorative watermark ticket icon
-                      Positioned(
-                        right: -25,
-                        top: -20,
-                        child: Opacity(
-                          opacity: 0.08,
-                          child: Icon(
-                            Icons.confirmation_num_rounded,
-                            size: 170,
-                            color: Colors.black,
+                  // Card 3: Student discount 2-Hour ticket (50% off)
+                  Container(
+                    height: 375,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFF2C7),
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 20,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        // Decorative watermark ticket icon
+                        Positioned(
+                          right: -25,
+                          top: -20,
+                          child: Opacity(
+                            opacity: 0.08,
+                            child: Icon(
+                              Icons.confirmation_num_rounded,
+                              size: 170,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(22),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Student discount badge
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 5,
+                        Padding(
+                          padding: const EdgeInsets.all(22),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Student discount badge
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xFFC48A00,
+                                  ).withOpacity(.12),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: const Text(
+                                  "STUDENT DISCOUNT",
+                                  style: TextStyle(
+                                    color: Color(0xFFC48A00),
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFC48A00).withOpacity(.12),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Text(
-                                "STUDENT DISCOUNT",
+                              const SizedBox(height: 18),
+                              const Text(
+                                "2-HOUR TICKET",
                                 style: TextStyle(
-                                  color: Color(0xFFC48A00),
-                                  fontSize: 11,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 18),
-                            const Text(
-                              "2-HOUR TICKET",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                              const SizedBox(height: 6),
+                              const Text(
+                                "100 SDG",
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFC48A00),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            const Text(
-                              "100 SDG",
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFC48A00),
+                              const SizedBox(height: 14),
+                              const Text(
+                                "Unlimited rides on all 3 metro lines for 2 hours after activation.",
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  height: 1.5,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 14),
-                            const Text(
-                              "Unlimited rides on all 3 metro lines for 2 hours after activation.",
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                height: 1.5,
-                              ),
-                            ),
-                            const Spacer(),
-                            // View details link
-                            InkWell(
-                              onTap: () {},
-                              child: const Row(
-                                children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    size: 18,
-                                    color: Color(0xFFC48A00),
-                                  ),
-                                  SizedBox(width: 6),
-                                  Text(
-                                    "View Details",
-                                    style: TextStyle(
+                              const Spacer(),
+                              // View details link
+                              InkWell(
+                                onTap: () {},
+                                child: const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.info_outline,
+                                      size: 18,
                                       color: Color(0xFFC48A00),
-                                      fontWeight: FontWeight.w600,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 6),
+                                    Text(
+                                      "View Details",
+                                      style: TextStyle(
+                                        color: Color(0xFFC48A00),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            // Purchase button
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: ElevatedButton.icon(
-                                onPressed: () {Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => wallet(),
+                              const SizedBox(height: 16),
+                              // Purchase button
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => wallet(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFFC48A00),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
-                                  );},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFC48A00),
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                ),
-                                icon: const Icon(
-                                  Icons.shopping_cart_checkout,
-                                  color: Colors.white,
-                                ),
-                                label: const Text(
-                                  "Purchase Ticket",
-                                  style: TextStyle(
+                                  icon: const Icon(
+                                    Icons.shopping_cart_checkout,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                  ),
+                                  label: const Text(
+                                    "Purchase Ticket",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
 
                 SizedBox(height: 25),
                 SizedBox(height: 25),
