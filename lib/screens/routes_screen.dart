@@ -149,7 +149,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       MaterialPageRoute(
                         builder: (context) => LineStationsScreen(
                           lineName: "Red Line",
-                          lineColor: Colors.red,
+                          lineColor: Color(0xFFC1443B),
                           stations: [
                             LineStation(
                               number: "1",
@@ -211,7 +211,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           width: 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red,
+                            color: Color(0xFFC1443B),
                           ),
                         ),
                         Container(
@@ -220,7 +220,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           margin: EdgeInsets.only(left: 25),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(9),
-                            color: Colors.red,
+                            color: Color(0xFFC1443B),
                           ),
                           child: Center(
                             child: Text(
@@ -280,7 +280,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                               width: 100,
                               margin: EdgeInsets.only(left: 15, top: 20),
                               decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Color(0xFFC1443B),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
@@ -318,7 +318,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       MaterialPageRoute(
                         builder: (context) => LineStationsScreen(
                           lineName: "Green Line",
-                          lineColor: const Color.fromARGB(255, 11, 152, 16),
+                          lineColor: const Color(0xFF3F7D5C),
                           stations: [
                             LineStation(
                               number: "1",
@@ -380,7 +380,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           width: 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: const Color.fromARGB(255, 11, 152, 16),
+                            color: const Color(0xFF3F7D5C),
                           ),
                         ),
                         Container(
@@ -389,7 +389,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           margin: EdgeInsets.only(left: 25),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(9),
-                            color: const Color.fromARGB(255, 11, 152, 16),
+                            color: const Color(0xFF3F7D5C),
                           ),
                           child: Center(
                             child: Text(
@@ -449,7 +449,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                               width: 100,
                               margin: EdgeInsets.only(left: 15, top: 20),
                               decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 11, 152, 16),
+                                color: const Color(0xFF3F7D5C),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
@@ -487,7 +487,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       MaterialPageRoute(
                         builder: (context) => LineStationsScreen(
                           lineName: "Blue Line",
-                          lineColor: Colors.blue,
+                          lineColor: Color(0xFF3B5B92),
                           stations: [
                             LineStation(
                               number: "1",
@@ -549,7 +549,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           width: 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.blue,
+                            color: Color(0xFF3B5B92),
                           ),
                         ),
                         Container(
@@ -558,7 +558,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           margin: EdgeInsets.only(left: 25),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(9),
-                            color: Colors.blue,
+                            color: Color(0xFF3B5B92),
                           ),
                           child: Center(
                             child: Text(
@@ -618,7 +618,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                               width: 100,
                               margin: EdgeInsets.only(left: 13, top: 20),
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: Color(0xFF3B5B92),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
@@ -670,7 +670,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                       ),
                       Container(
@@ -679,7 +679,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                         child: Center(
                           child: Text(
@@ -730,7 +730,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Color(0xFFC1443B),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -781,7 +781,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                       ),
                       Container(
@@ -790,7 +790,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                         child: Center(
                           child: Text(
@@ -841,7 +841,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Color(0xFFC1443B),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -892,7 +892,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                       ),
                       Container(
@@ -901,7 +901,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                         child: Center(
                           child: Text(
@@ -952,7 +952,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Color(0xFFC1443B),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1003,7 +1003,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                       ),
                       Container(
@@ -1012,7 +1012,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.red,
+                          color: Color(0xFFC1443B),
                         ),
                         child: Center(
                           child: Text(
@@ -1063,7 +1063,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Color(0xFFC1443B),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1115,7 +1115,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                       ),
                       Container(
@@ -1124,7 +1124,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                         child: Center(
                           child: Text(
@@ -1175,7 +1175,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 11, 152, 16),
+                              color: const Color(0xFF3F7D5C),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1226,7 +1226,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                       ),
                       Container(
@@ -1235,7 +1235,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                         child: Center(
                           child: Text(
@@ -1286,7 +1286,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 11, 152, 16),
+                              color: const Color(0xFF3F7D5C),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1337,7 +1337,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                       ),
                       Container(
@@ -1346,7 +1346,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                         child: Center(
                           child: Text(
@@ -1397,7 +1397,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 11, 152, 16),
+                              color: const Color(0xFF3F7D5C),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1453,7 +1453,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                       ),
                       Container(
@@ -1462,7 +1462,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: const Color.fromARGB(255, 11, 152, 16),
+                          color: const Color(0xFF3F7D5C),
                         ),
                         child: Center(
                           child: Text(
@@ -1513,7 +1513,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 15, top: 20),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 11, 152, 16),
+                              color: const Color(0xFF3F7D5C),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1567,7 +1567,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                       ),
                       Container(
@@ -1576,7 +1576,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                         child: Center(
                           child: Text(
@@ -1627,7 +1627,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 13, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(0xFF3B5B92),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1678,7 +1678,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                       ),
                       Container(
@@ -1687,7 +1687,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                         child: Center(
                           child: Text(
@@ -1738,7 +1738,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 13, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(0xFF3B5B92),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1789,7 +1789,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                       ),
                       Container(
@@ -1798,7 +1798,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                         child: Center(
                           child: Text(
@@ -1849,7 +1849,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 13, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(0xFF3B5B92),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -1900,7 +1900,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                       ),
                       Container(
@@ -1909,7 +1909,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         margin: EdgeInsets.only(left: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
-                          color: Colors.blue,
+                          color: Color(0xFF3B5B92),
                         ),
                         child: Center(
                           child: Text(
@@ -1960,7 +1960,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             width: 70,
                             margin: EdgeInsets.only(left: 13, top: 20),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(0xFF3B5B92),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
