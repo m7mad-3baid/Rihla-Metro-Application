@@ -18,7 +18,7 @@ class _RigesterpageState extends State<Rigesterpage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
-
+  final TextEditingController studentIdController = TextEditingController();
   // ============================================================
   // STATE VARIABLES
   // ============================================================
@@ -230,6 +230,24 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 "Unlock 50% off all tickets",
                                 style: TextStyle(color: Colors.grey),
                               ),
+                              if (isStudent) ...[
+                                SizedBox(height: 10),
+                                SizedBox(
+                                  width: 250,
+                                  child: TextField(
+                                    controller: studentIdController,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      prefixIcon: Icon(Icons.badge_outlined),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      labelText: "Student ID",
+                                    ),
+                                  ),
+                                ),
+                              ],
                               SizedBox(height: 10),
                             ],
                           ),
@@ -277,6 +295,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                                     content: Text("Please fill all fields"),
                                   ),
                                 );
+                                setState(() {
+                                  isLoading = false;
+                                });
                                 return;
                               }
 
@@ -287,7 +308,27 @@ class _RigesterpageState extends State<Rigesterpage> {
                                     content: Text("Passwords dont match"),
                                   ),
                                 );
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                return;
+                              }
+                              // ---- Student ID validation ----
+                              const validStudentIds = [
+                                "202103056",
+                                "202103035",
+                              ];
 
+                              if (isStudent &&
+                                  !validStudentIds.contains(
+                                    studentIdController.text.trim(),
+                                  )) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Invalid student ID")),
+                                );
+                                setState(() {
+                                  isLoading = false;
+                                });
                                 return;
                               }
 
@@ -297,6 +338,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 emailController.text,
                                 passwordController.text,
                                 isStudent,
+                                isStudent
+                                    ? studentIdController.text.trim()
+                                    : "",
                               );
 
                               setState(() {
@@ -336,13 +380,15 @@ class _RigesterpageState extends State<Rigesterpage> {
                             }
                           : null, // Button disabled if terms not agreed
                       child: isLoading
-                      ?CircularProgressIndicator()
-                      
-                       :Text(
-                        "Create Your Account",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      
+                          ? CircularProgressIndicator()
+                          : Text(
+                              "Create Your Account",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF122E64),
                         minimumSize: Size(395, 50),

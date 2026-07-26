@@ -2,10 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  // ============================================================
-  // BASE URL FOR API ENDPOINTS
-  // ============================================================
   static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
+
   // ============================================================
   // REGISTER - Creates a new user account
   // ============================================================
@@ -14,9 +12,9 @@ class ApiService {
     String email,
     String password,
     bool isStudent,
+    String studentId,
   ) async {
     try {
-      // Send POST request to register endpoint
       final response = await http.post(
         Uri.parse("$baseUrl/register.php"),
         body: {
@@ -24,15 +22,13 @@ class ApiService {
           "email": email,
           "password": password,
           "is_student": isStudent.toString(),
+          "student_id": studentId,
         },
       );
 
-      // Parse JSON response
       final data = jsonDecode(response.body);
-
       return data;
     } catch (e) {
-      // Return error response if unable to connect to server
       return {"success": false, "message": "unable to connect to server "};
     }
   }
@@ -42,18 +38,14 @@ class ApiService {
   // ============================================================
   static Future<dynamic> login(String email, String password) async {
     try {
-      // Send POST request to login endpoint
       final response = await http.post(
         Uri.parse("$baseUrl/login.php"),
         body: {"email": email, "password": password},
       );
 
-      // Parse JSON response
       final data = jsonDecode(response.body);
-
       return data;
     } catch (e) {
-      // Return error response if unable to connect to server
       return {"success": false, "message": "unable to connect to server "};
     }
   }
