@@ -4,7 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:rihla_4_0/models/station.dart';
 import '../data/stationsdata.dart';
 import '../data/metro_lines.dart';
-
+import 'dart:async';
 
 // Full map page widget displaying metro lines and stations
 class FullMapPage extends StatefulWidget {
@@ -14,9 +14,30 @@ class FullMapPage extends StatefulWidget {
   State<FullMapPage> createState() => _FullMapPageState();
 }
 
-class _FullMapPageState extends State<FullMapPage> {
+class _FullMapPageState extends State<FullMapPage>
+    with SingleTickerProviderStateMixin {
   // Currently selected station from marker tap
   Station? selectedStation;
+
+  late AnimationController trainController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    trainController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 20),
+    );
+
+    trainController.repeat();
+  }
+
+  @override
+void dispose() {
+  trainController.dispose();
+  super.dispose();
+}
 
   // Returns color based on metro line name
   Color getStationColor(String line) {
@@ -46,11 +67,11 @@ class _FullMapPageState extends State<FullMapPage> {
             children: [
               // OpenStreetMap tile layer
               TileLayer(
-  urlTemplate:
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  subdomains: const ['a', 'b', 'c', 'd'],
-  userAgentPackageName: 'com.example.rihla',
-),
+                urlTemplate:
+                    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+                subdomains: const ['a', 'b', 'c', 'd'],
+                userAgentPackageName: 'com.example.rihla',
+              ),
               // Render colored polylines for each metro line
               PolylineLayer(
                 polylines: [
@@ -64,11 +85,7 @@ class _FullMapPageState extends State<FullMapPage> {
                     color: Colors.green,
                     strokeWidth: 5,
                   ),
-                  Polyline(
-                    points: redLine,
-                    color: Colors.red,
-                    strokeWidth: 5,
-                  ),
+                  Polyline(points: redLine, color: Colors.red, strokeWidth: 5),
                 ],
               ),
               // Display station markers from data source
@@ -93,10 +110,7 @@ class _FullMapPageState extends State<FullMapPage> {
                             decoration: BoxDecoration(
                               color: getStationColor(station.line),
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 3,
-                              ),
+                              border: Border.all(color: Colors.white, width: 3),
                             ),
                           ),
                           SizedBox(height: 3),
@@ -131,12 +145,7 @@ class _FullMapPageState extends State<FullMapPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 15,
-                    ),
-                  ],
+                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 15)],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -161,17 +170,11 @@ class _FullMapPageState extends State<FullMapPage> {
                       "Next Train: ${selectedStation!.nextTrain}",
                       style: TextStyle(fontSize: 18),
                     ),
-
-              
                   ],
                 ),
               ),
             ),
-
-            
         ],
-
-      
       ),
     );
   }

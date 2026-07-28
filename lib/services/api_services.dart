@@ -5,7 +5,7 @@ class ApiService {
   // ============================================================
   // BASE URL FOR API ENDPOINTS
   // ============================================================
-  static const String baseUrl = "http://10.5.50.5/Rihla_backend/api";
+  static const String baseUrl = "http://10.5.50.48/Rihla_backend/api";
   // ============================================================
   // REGISTER - Creates a new user account
   // ============================================================
