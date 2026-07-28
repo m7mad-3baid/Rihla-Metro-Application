@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Wallet screen displaying balance, payment methods, and recent activity
-class wallet extends StatelessWidget {
+class wallet extends StatefulWidget {
   const wallet({super.key});
+
+  @override
+  State<wallet> createState() => _walletState();
+}
+
+class _walletState extends State<wallet> {
+  bool isStudent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadStudentStatus();
+  }
+
+  Future<void> loadStudentStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isStudent = prefs.getBool("is_student") ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +106,22 @@ class wallet extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Icon(
-                              Icons.account_balance_wallet_rounded,
-                              color: Colors.white,
-                              size: 35,
+                            Row(
+                              children: [
+                                if (isStudent) ...[
+                                  Icon(
+                                    Icons.school_rounded,
+                                    color: Colors.white,
+                                    size: 26,
+                                  ),
+                                  const SizedBox(width: 10),
+                                ],
+                                Icon(
+                                  Icons.account_balance_wallet_rounded,
+                                  color: Colors.white,
+                                  size: 35,
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -248,12 +281,16 @@ class wallet extends StatelessWidget {
                                   width: 75,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color:  Color(0xff4B0082))
+                                    border: Border.all(
+                                      color: Color(0xff4B0082),
+                                    ),
                                   ),
                                   child: Center(
                                     child: Text(
                                       "Change",
-                                      style: TextStyle(color: Color(0xff1A318F)),
+                                      style: TextStyle(
+                                        color: Color(0xff1A318F),
+                                      ),
                                     ),
                                   ),
                                 ),

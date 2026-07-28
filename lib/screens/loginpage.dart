@@ -70,7 +70,7 @@ class _LoginpageState extends State<Loginpage> {
                     margin: EdgeInsets.only(top: 10, right: 250),
                     height: 35,
                     child: Text(
-                      "USERNAME",
+                      "EMAIL",
                       style: TextStyle(
                         color: Color(0xFF122E64),
                         fontSize: 15,
@@ -88,7 +88,7 @@ class _LoginpageState extends State<Loginpage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       contentPadding: const EdgeInsets.only(left: 10, top: 3),
-                      labelText: "Username",
+                      labelText: "Email",
                       labelStyle: const TextStyle(),
                     ),
                   ),
