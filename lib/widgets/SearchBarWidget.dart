@@ -1,12 +1,10 @@
-// to import it else where : import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
+
 import 'package:flutter/material.dart';
 
 class Searchbarwidget extends StatelessWidget {
-  // Both optional — existing calls like Searchbarwidget() with no
-  // arguments keep working exactly as before (e.g. in home.dart).
+
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
-
   const Searchbarwidget({super.key, this.controller, this.onChanged});
 
   @override

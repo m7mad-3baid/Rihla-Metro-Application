@@ -4,24 +4,17 @@ import 'package:rihla_4_0/screens/wallet.dart';
 import 'Profile.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
-// import 'package:flutter_map/flutter_map.dart';
-// import 'package:latlong2/latlong.dart';
 import 'package:rihla_4_0/widgets/metro_preview.dart';
-// import '../widgets/rihla_map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
-// import 'package:rihla_4_0/screens/fullMapPage.dart';
 
-// StatefulWidget for the main home page
 class HomePage extends StatefulWidget {
-  // Callback functions for navigation
-  final VoidCallback onViewRoutesTap;
   final VoidCallback onRoutesTap;
   final VoidCallback onTicketsTap;
 
   const HomePage({
     super.key,
-    required this.onViewRoutesTap,
+
     required this.onRoutesTap,
     required this.onTicketsTap,
   });
@@ -30,19 +23,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-// State class for HomePage
 class _HomePageState extends State<HomePage> {
-  // User's name, loaded from shared preferences
   String name = "";
 
   @override
   void initState() {
     super.initState();
-    // Load user data when the widget initializes
+
     loadUser();
   }
 
-  // Loads the user's name from shared preferences
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -121,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+
                   // Greeting text
                   Container(
                     margin: const EdgeInsets.only(top: 30, right: 55, left: 0),
@@ -171,9 +162,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+
               SizedBox(height: 40),
+
               // Search bar widget
               Searchbarwidget(),
+
               SizedBox(height: 30),
 
               ClipRRect(
@@ -187,12 +181,13 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // BACKGROUND TRAIN ICON
                       Positioned(
-                        right: -20,
-                        top: -10,
-                        child: Opacity(
+                        right: -15,
+                        top: -5,
+                        child:
+                           Opacity(
                           opacity: 0.15,
                           child: Icon(
-                            Icons.train,
+                            Icons.train_outlined,
                             size: 120,
                             color: Colors.white,
                           ),
@@ -271,32 +266,34 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+
+
+
+
+
+
               SizedBox(height: 20),
               // Map section title
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      "Metro Network",
-                      style: TextStyle(fontSize: 25, color: Color(0xFF00515A)),
-                    ),
+              Align(
+                alignment: AlignmentGeometry.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Metro Network",
+                    style: TextStyle(fontSize: 25, color: Color(0xFF00515A)),
                   ),
-                ],
+                ),
               ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      "Tap A Line To Explore Stations",
-                      style: TextStyle(fontSize: 14, color: Colors.blueGrey),
-                    ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Tap A Line To Explore Stations",
+                    style: TextStyle(fontSize: 14, color: Colors.blueGrey),
                   ),
-                ],
+                ),
               ),
 
               SizedBox(height: 10),
@@ -477,13 +474,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap:() {
+                    onTap: () {
                       Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FullMapPage(),
-                                    ),
-                                  );
+                        context,
+                        MaterialPageRoute(builder: (context) => FullMapPage()),
+                      );
                     },
                     child: _buildQuickAction(
                       icon: Icons.location_pin,

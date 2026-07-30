@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/home.dart';
-import 'package:rihla_4_0/screens/studentInfo.dart';
-
 import 'routes_screen.dart';
 import 'Tickets.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
@@ -20,33 +18,33 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      HomePage(
-        onViewRoutesTap: () {
-          setState(() {
-            currentIndex = 1; // Routes tab
-          });
-        },
-        onRoutesTap: () {
-          setState(() {
-            currentIndex = 1; // Routes tab
-          });
-        },
-        onTicketsTap: () {
-          setState(() {
-            currentIndex = 2; // Tickets tab
-          });
-        },
-      ),
-      RoutesScreen(),
-      Tickets(),
-      Profile(),
-      Studentinfo(),
-    ];
+  HomePage(
+    onRoutesTap: () {
+      setState(() {
+        currentIndex = 1;
+      });
+    },
+    onTicketsTap: () {
+      setState(() {
+        currentIndex = 2;
+      });
+    },
+  ),
+  RoutesScreen(),
+  Tickets(),
+  Profile(),
+  
+];
+
+
+
+
     return Scaffold(
       backgroundColor: Color(0xFFFCF9F8),
       body: pages[currentIndex],
 
       bottomNavigationBar: BottomBar(
+        
         selectedIndex: currentIndex,
         onTap: (index) {
           setState(() {
