@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
+import 'package:rihla_4_0/widgets/LineInfo.dart';
+import 'package:rihla_4_0/widgets/LinePreview.dart';
 import 'Profile.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/widgets/metro_preview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
+import '../widgets/LinePreview.dart';
+import '../widgets/LineInfo.dart';
 
 class HomePage extends StatefulWidget {
   final VoidCallback onRoutesTap;
@@ -25,6 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String name = "";
+  String selectedLine = "Default";
 
   @override
   void initState() {
@@ -164,6 +169,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
               SizedBox(height: 40),
+            
 
               // Search bar widget
               Searchbarwidget(),
@@ -183,8 +189,7 @@ class _HomePageState extends State<HomePage> {
                       Positioned(
                         right: -15,
                         top: -5,
-                        child:
-                           Opacity(
+                        child: Opacity(
                           opacity: 0.15,
                           child: Icon(
                             Icons.train_outlined,
@@ -266,12 +271,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-
-
-
-
-
-
               SizedBox(height: 20),
               // Map section title
               Align(
@@ -297,8 +296,12 @@ class _HomePageState extends State<HomePage> {
               ),
 
               SizedBox(height: 10),
-              // Interactive map widget
-              MetroPreview(),
+
+                LinePreview(),
+
+                  SizedBox(height: 10),
+
+                  LineInfo(),
 
               SizedBox(height: 10),
               // Saved stations section title

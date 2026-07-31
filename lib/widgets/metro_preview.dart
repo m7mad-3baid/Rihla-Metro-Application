@@ -65,6 +65,8 @@ class _MetroPreviewState extends State<MetroPreview> {
           child: Stack(
             children: [
 
+
+
               // ===============================
               // GRID BACKGROUND
               // ===============================
@@ -72,6 +74,9 @@ class _MetroPreviewState extends State<MetroPreview> {
               //   size: Size(350,220),
               //   painter: GridPainter(),
               // ),
+
+
+
 
               // ===============================
               // METRO LINES
