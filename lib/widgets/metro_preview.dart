@@ -1,270 +1,270 @@
-import 'package:flutter/material.dart';
-import 'package:rihla_4_0/screens/fullMapPage.dart';
-import "../widgets/MetroNetworkPainter.dart";
+// import 'package:flutter/material.dart';
+// import 'package:rihla_4_0/screens/fullMapPage.dart';
+// import "../widgets/MetroNetworkPainter.dart";
 
-class MetroPreview extends StatefulWidget {
+// class MetroPreview extends StatefulWidget {
 
-  const MetroPreview({super.key});
+//   const MetroPreview({super.key});
 
-  @override
-  State<MetroPreview> createState() => _MetroPreviewState();
+//   @override
+//   State<MetroPreview> createState() => _MetroPreviewState();
 
-}
+// }
 
-class _MetroPreviewState extends State<MetroPreview> {
+// class _MetroPreviewState extends State<MetroPreview> {
 
-  String? selectedLine;
+//   String? selectedLine;
 
-  Map<String, List<String>> lineStations = {
+//   Map<String, List<String>> lineStations = {
 
-    "blue": [
-      "Khartoum Central",
-      "Bahri Station",
-      "North Terminal",
-    ],
+//     "blue": [
+//       "Khartoum Central",
+//       "Bahri Station",
+//       "North Terminal",
+//     ],
 
-    "green": [
-      "Airport Station",
-      "Green Square",
-      "University Station",
-    ],
+//     "green": [
+//       "Airport Station",
+//       "Green Square",
+//       "University Station",
+//     ],
 
-    "red": [
-      "Airport Station",
-      "Market Station",
-      "Downtown Station",
-    ],
+//     "red": [
+//       "Airport Station",
+//       "Market Station",
+//       "Downtown Station",
+//     ],
 
-  };
+//   };
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
 
-      children: [
+//       children: [
 
-        Container(
-          width: 355,
-          height: 300,
+//         Container(
+//           width: 355,
+//           height: 300,
 
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+//           decoration: BoxDecoration(
+//             color: Colors.white,
+//             borderRadius: BorderRadius.circular(20),
 
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0,4),
-                blurRadius:10,
-              )
-            ],
-          ),
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.black12,
+//                 offset: Offset(0,4),
+//                 blurRadius:10,
+//               )
+//             ],
+//           ),
 
-          child: Stack(
-            children: [
-
-
-
-              // ===============================
-              // GRID BACKGROUND
-              // ===============================
-              // CustomPaint(
-              //   size: Size(350,220),
-              //   painter: GridPainter(),
-              // ),
+//           child: Stack(
+//             children: [
 
 
 
+//               // ===============================
+//               // GRID BACKGROUND
+//               // ===============================
+//               // CustomPaint(
+//               //   size: Size(350,220),
+//               //   painter: GridPainter(),
+//               // ),
 
-              // ===============================
-              // METRO LINES
-              // ===============================
-              GestureDetector(
 
-                onTapDown: (details){
 
-                  double x = details.localPosition.dx;
-                  double y = details.localPosition.dy;
 
-                  setState(() {
+//               // ===============================
+//               // METRO LINES
+//               // ===============================
+//               GestureDetector(
+
+//                 onTapDown: (details){
+
+//                   double x = details.localPosition.dx;
+//                   double y = details.localPosition.dy;
+
+//                   setState(() {
                    
-                    if(x < 150 && y < 120){
-                      selectedLine = "red";
-                    }
-                    else if(x >=120 && x <250){
-                      selectedLine = "blue";
-                    }
-                    else{
-                      selectedLine = "green";
-                    }
-                  });
+//                     if(x < 150 && y < 120){
+//                       selectedLine = "red";
+//                     }
+//                     else if(x >=120 && x <250){
+//                       selectedLine = "blue";
+//                     }
+//                     else{
+//                       selectedLine = "green";
+//                     }
+//                   });
 
-                },
+//                 },
 
-                child: CustomPaint(
-                  size: Size(350,220),
-                  painter: MetroNetworkPainter(
-                    selectedLine: selectedLine,
-                  ),
-                ),
-              ),
+//                 child: CustomPaint(
+//                   size: Size(350,220),
+//                   painter: MetroNetworkPainter(
+//                     selectedLine: selectedLine,
+//                   ),
+//                 ),
+//               ),
 
-              // ===============================
-              // FULL SCREEN BUTTON
-              // ===============================
-              Positioned(
-                right:10,
-                top:10,
+//               // ===============================
+//               // FULL SCREEN BUTTON
+//               // ===============================
+//               Positioned(
+//                 right:10,
+//                 top:10,
 
-                child: GestureDetector(
+//                 child: GestureDetector(
 
-                  onTap:(){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:(context)=> FullMapPage(),
-                      ),
-                    );
-                  },
+//                   onTap:(){
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder:(context)=> FullMapPage(),
+//                       ),
+//                     );
+//                   },
 
-                  child: Container(
+//                   child: Container(
 
-                    height:40,
-                    width:40,
+//                     height:40,
+//                     width:40,
 
-                    decoration: BoxDecoration(
-                      color:Colors.white,
-                      borderRadius:BorderRadius.circular(10),
+//                     decoration: BoxDecoration(
+//                       color:Colors.white,
+//                       borderRadius:BorderRadius.circular(10),
 
-                      boxShadow:[
-                        BoxShadow(
-                          color:Colors.black12,
-                          blurRadius:8,
-                        )
-                      ],
-                    ),
+//                       boxShadow:[
+//                         BoxShadow(
+//                           color:Colors.black12,
+//                           blurRadius:8,
+//                         )
+//                       ],
+//                     ),
 
-                    child: Icon(
-                      Icons.fullscreen_rounded,
-                      color:Color(0xFF00515A),
-                    ),
-                  ),
-                ),
-              ),
+//                     child: Icon(
+//                       Icons.fullscreen_rounded,
+//                       color:Color(0xFF00515A),
+//                     ),
+//                   ),
+//                 ),
+//               ),
 
-              // ===============================
-              // SELECTED LINE INFO BAR
-              // ===============================
-              if(selectedLine != null)
-              Positioned(
+//               // ===============================
+//               // SELECTED LINE INFO BAR
+//               // ===============================
+//               if(selectedLine != null)
+//               Positioned(
 
-                bottom:0,
-                left:0,
-                right:0,
+//                 bottom:0,
+//                 left:0,
+//                 right:0,
 
-                child: Container(
+//                 child: Container(
 
-                  height:75,
+//                   height:75,
 
-                  decoration:BoxDecoration(
+//                   decoration:BoxDecoration(
 
-                    color:Colors.white,
+//                     color:Colors.white,
 
-                    borderRadius:BorderRadius.only(
-                      bottomLeft:Radius.circular(20),
-                      bottomRight:Radius.circular(20),
-                    ),
+//                     borderRadius:BorderRadius.only(
+//                       bottomLeft:Radius.circular(20),
+//                       bottomRight:Radius.circular(20),
+//                     ),
 
-                    boxShadow:[
-                      BoxShadow(
-                        color:Colors.black12,
-                        blurRadius:10,
-                      )
-                    ],
-                  ),
+//                     boxShadow:[
+//                       BoxShadow(
+//                         color:Colors.black12,
+//                         blurRadius:10,
+//                       )
+//                     ],
+//                   ),
 
-                  child:Padding(
+//                   child:Padding(
 
-                    padding:EdgeInsets.all(10),
+//                     padding:EdgeInsets.all(10),
 
-                    child:Column(
+//                     child:Column(
 
-                      crossAxisAlignment:CrossAxisAlignment.start,
+//                       crossAxisAlignment:CrossAxisAlignment.start,
 
-                      children:[
+//                       children:[
 
-                        Text(
+//                         Text(
 
-                          "${selectedLine!.toUpperCase()} LINE",
+//                           "${selectedLine!.toUpperCase()} LINE",
 
-                          style:TextStyle(
-                            fontWeight:FontWeight.bold,
-                            color:Color(0xFF00515A),
-                          ),
-                        ),
+//                           style:TextStyle(
+//                             fontWeight:FontWeight.bold,
+//                             color:Color(0xFF00515A),
+//                           ),
+//                         ),
 
-                        SizedBox(height:5),
+//                         SizedBox(height:5),
 
-                        Text(
+//                         Text(
 
-                          lineStations[selectedLine]!.join(" • "),
+//                           lineStations[selectedLine]!.join(" • "),
 
-                          overflow:TextOverflow.ellipsis,
+//                           overflow:TextOverflow.ellipsis,
 
-                          style:TextStyle(
-                            fontSize:12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// // ==========================================
-// // SIMPLE GRID PAINTER
-// // ==========================================
-// class GridPainter extends CustomPainter {
-
-//   @override
-//   void paint(Canvas canvas, Size size){
-
-//     final paint = Paint()
-//       ..color = Colors.grey.withOpacity(0.12)
-//       ..strokeWidth = 1;
-
-//     // Vertical lines
-//     for(double x=0; x<=size.width; x+=25){
-
-//       canvas.drawLine(
-//         Offset(x,0),
-//         Offset(x,size.height),
-//         paint,
-//       );
-//     }
-
-//     // Horizontal lines
-//     for(double y=0; y<=size.height; y+=25){
-
-//       canvas.drawLine(
-//         Offset(0,y),
-//         Offset(size.width,y),
-//         paint,
-//       );
-//     }
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate){
-//     return false;
+//                           style:TextStyle(
+//                             fontSize:12,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
 //   }
 // }
+
+// // // ==========================================
+// // // SIMPLE GRID PAINTER
+// // // ==========================================
+// // class GridPainter extends CustomPainter {
+
+// //   @override
+// //   void paint(Canvas canvas, Size size){
+
+// //     final paint = Paint()
+// //       ..color = Colors.grey.withOpacity(0.12)
+// //       ..strokeWidth = 1;
+
+// //     // Vertical lines
+// //     for(double x=0; x<=size.width; x+=25){
+
+// //       canvas.drawLine(
+// //         Offset(x,0),
+// //         Offset(x,size.height),
+// //         paint,
+// //       );
+// //     }
+
+// //     // Horizontal lines
+// //     for(double y=0; y<=size.height; y+=25){
+
+// //       canvas.drawLine(
+// //         Offset(0,y),
+// //         Offset(size.width,y),
+// //         paint,
+// //       );
+// //     }
+// //   }
+
+// //   @override
+// //   bool shouldRepaint(covariant CustomPainter oldDelegate){
+// //     return false;
+// //   }
+// // }

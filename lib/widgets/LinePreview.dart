@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/fullMapPage.dart';
 
 class LinePreview extends StatefulWidget {
-  const LinePreview({super.key});
+  final String selectedLineToView;
+
+  final Function(String) onLineSelected;
+
+  const LinePreview({
+    super.key,
+    required this.selectedLineToView,
+    required this.onLineSelected,
+  });
 
   @override
   State<LinePreview> createState() => _LinePreviewState();
 }
 
 class _LinePreviewState extends State<LinePreview> {
-  String selectedLine = "default";
-
   String get imagepath {
-    if (selectedLine == "red") {
+    if (widget.selectedLineToView == "red") {
       return "assets/imgs/Rselected.png";
-    } else if (selectedLine == "blue") {
+    } else if (widget.selectedLineToView == "blue") {
       return "assets/imgs/Bselected.png";
-    } else if (selectedLine == "green") {
+    } else if (widget.selectedLineToView == "green") {
       return "assets/imgs/Gselected.png";
     }
 
@@ -40,7 +47,9 @@ class _LinePreviewState extends State<LinePreview> {
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            Positioned.fill(child: Image.asset(imagepath, fit: BoxFit.fitWidth)),
+            Positioned.fill(
+              child: Image.asset(imagepath, fit: BoxFit.fitWidth),
+            ),
 
             Positioned(
               left: 20,
@@ -49,9 +58,7 @@ class _LinePreviewState extends State<LinePreview> {
                 onTap: () {
                   print("red line selected");
 
-                  setState(() {
-                    selectedLine = "red";
-                  });
+                  widget.onLineSelected("red");
                 },
 
                 child: Container(
@@ -69,9 +76,7 @@ class _LinePreviewState extends State<LinePreview> {
                 onTap: () {
                   print("Blue line selected");
 
-                  setState(() {
-                    selectedLine = "blue";
-                  });
+                  widget.onLineSelected("blue");
                 },
 
                 child: Container(
@@ -89,9 +94,7 @@ class _LinePreviewState extends State<LinePreview> {
                 onTap: () {
                   print("green line selected");
 
-                  setState(() {
-                    selectedLine = "green";
-                  });
+                  widget.onLineSelected("green");
                 },
 
                 child: Container(
@@ -102,7 +105,6 @@ class _LinePreviewState extends State<LinePreview> {
               ),
             ),
 
-
             Positioned(
               left: 35,
               top: 140,
@@ -110,15 +112,48 @@ class _LinePreviewState extends State<LinePreview> {
                 onTap: () {
                   print("blue line selected");
 
-                  setState(() {
-                    selectedLine = "blue";
-                  });
+                  widget.onLineSelected("blue");
+                  ;
                 },
 
                 child: Container(
                   width: 100,
                   height: 80,
                   color: Colors.transparent,
+                ),
+              ),
+            ),
+
+            Positioned(
+              top: 20,
+              right: 15,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FullMapPage()),
+                  );
+                },
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+
+                  child: Icon(
+                    Icons.fullscreen_rounded,
+                    size: 45,
+                    color: Color(0xFF00515A),
+                  ),
                 ),
               ),
             ),

@@ -19,14 +19,7 @@ void main() {
   runApp(Rihla());
 }
 
-class Rihla extends StatefulWidget {
-  @override
-  State<Rihla> createState() => _RihlaState();
-}
-
-class _RihlaState extends State<Rihla> {
-  bool isTrainSelected = true;
-
+class Rihla extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String name = "";
-  String selectedLine = "Default";
+  String selectedLine = "";
 
   @override
   void initState() {
@@ -168,11 +168,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
 
-              SizedBox(height: 40),
-            
+              // SizedBox(height: 40),
 
               // Search bar widget
-              Searchbarwidget(),
+              // Searchbarwidget(),
 
               SizedBox(height: 30),
 
@@ -297,11 +296,26 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 10),
 
-                LinePreview(),
+              LinePreview(
+                selectedLineToView: selectedLine,
+                onLineSelected: (line) {
+                  setState(() {
+                    selectedLine = line;
+                  });
+                },
+              ),
 
-                  SizedBox(height: 10),
+              SizedBox(height: 10),
 
-                  LineInfo(),
+
+
+              LineInfo(
+                selectedlineToDisplay: selectedLine,
+              ),
+
+
+
+              
 
               SizedBox(height: 10),
               // Saved stations section title

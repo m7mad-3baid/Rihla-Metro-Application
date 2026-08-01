@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl = "http://10.5.50.72/Rihla_backend/api";
+  static const String baseUrl = "http://10.5.50.75/Rihla_backend/api";
 
   // ============================================================
   // REGISTER - Creates a new user account

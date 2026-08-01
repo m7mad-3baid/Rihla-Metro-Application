@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-// Custom bottom navigation bar widget
 class BottomBar extends StatelessWidget {
-  // Currently selected tab index
+  
   final int selectedIndex;
-  // Callback function when a tab is tapped
-  final Function(int) onTap;
+  final Function(int) onTapp;
+  
 
   const BottomBar({
     super.key,
     required this.selectedIndex,
-    required this.onTap,
+    required this.onTapp,
   });
 
   @override
@@ -50,7 +49,7 @@ class BottomBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Notify parent of tab selection
-                onTap(0);
+                onTapp(0);
               },
               child: Column(
                 children: [
@@ -79,7 +78,7 @@ class BottomBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Notify parent of tab selection
-                onTap(1);
+                onTapp(1);
               },
               child: Column(
                 children: [
@@ -108,7 +107,7 @@ class BottomBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Notify parent of tab selection
-                onTap(2);
+                onTapp(2);
               },
               child: Column(
                 children: [
@@ -139,7 +138,7 @@ class BottomBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Notify parent of tab selection
-                onTap(3);
+                onTapp(3);
               },
               child: Column(
                 children: [

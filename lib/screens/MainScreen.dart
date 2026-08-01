@@ -17,6 +17,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     final List<Widget> pages = [
   HomePage(
     onRoutesTap: () {
@@ -46,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomBar(
         
         selectedIndex: currentIndex,
-        onTap: (index) {
+        onTapp: (index) {
           setState(() {
             currentIndex = index;
           });
