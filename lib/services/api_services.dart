@@ -2,11 +2,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl = "http://10.5.50.75/Rihla_backend/api";
+  static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
 
-  // ============================================================
   // REGISTER - Creates a new user account
-  // ============================================================
   static Future<dynamic> register(
     String name,
     String email,
@@ -33,9 +31,7 @@ class ApiService {
     }
   }
 
-  // ============================================================
   // LOGIN - Authenticates user credentials
-  // ============================================================
   static Future<dynamic> login(String email, String password) async {
     try {
       final response = await http.post(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Wallet screen displaying balance, payment methods, and recent activity
@@ -11,6 +12,7 @@ class wallet extends StatefulWidget {
 
 class _walletState extends State<wallet> {
   bool isStudent = false;
+  TextEditingController amountController = TextEditingController();
 
   @override
   void initState() {
@@ -23,6 +25,43 @@ class _walletState extends State<wallet> {
     setState(() {
       isStudent = prefs.getBool("is_student") ?? false;
     });
+  }
+
+  void showTopUpDialog() {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text("Top Up Wallet"),
+          content: TextField(
+            controller: amountController,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(labelText: "Enter The Amount"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+              },
+              child: Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("You Entered: ${amountController.text} SDG"),
+                  ),
+                );
+                amountController.clear();
+              },
+              child: Text("Top Up"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -63,7 +102,7 @@ class _walletState extends State<wallet> {
 
               const SizedBox(height: 30),
 
-              // Wallet card showing balance and add money button
+              // Wallet card showing balance and Top UP button
               Container(
                 width: 350,
                 height: 260,
@@ -156,34 +195,37 @@ class _walletState extends State<wallet> {
                         // Pushes button to bottom of card
                         const Spacer(),
 
-                        // Add money button
+                        // Top UP button
                         Align(
                           alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 150,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.add,
-                                  color: Color(0xff4B0082),
-                                  size: 22,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  "Add Money",
-                                  style: TextStyle(
+                          child: GestureDetector(
+                            onTap: showTopUpDialog,
+                            child: Container(
+                              width: 150,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add,
                                     color: Color(0xff4B0082),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                                    size: 22,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    "TOP UP",
+                                    style: TextStyle(
+                                      color: Color(0xff4B0082),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
