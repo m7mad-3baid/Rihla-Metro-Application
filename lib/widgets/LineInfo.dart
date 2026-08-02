@@ -41,6 +41,8 @@ class _LineInfoState extends State<LineInfo> {
       ];
     }
 
+    
+
     // TODO: implement build
     return Container(
       width: 375,

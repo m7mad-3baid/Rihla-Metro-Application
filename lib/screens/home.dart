@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rihla_4_0/models/NextTrainCardData.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/LineInfo.dart';
 import 'package:rihla_4_0/widgets/LinePreview.dart';
 import 'Profile.dart';
+import '../models/NexttrainServices.dart';
+import '../models/NextTrainCardData.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/widgets/metro_preview.dart';
@@ -30,10 +33,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String name = "";
   String selectedLine = "";
+  late NextTrainCard currentTrain;
 
   @override
   void initState() {
     super.initState();
+
+    currentTrain = NextTrainServices.getNextTrain();
 
     loadUser();
   }
@@ -225,9 +231,18 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
-                            Text(
-                              "Green Line • Platform 3",
-                              style: TextStyle(color: Colors.white70),
+                            Row(
+                              children: [
+                                Text(
+                                  currentTrain.LineName,
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                                SizedBox(width: 10,),
+                                Text(
+                                  currentTrain.platform,
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                              ],
                             ),
 
                             Spacer(),
@@ -236,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "5 mins away",
+                                 currentTrain.minutes,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -309,9 +324,9 @@ class _HomePageState extends State<HomePage> {
 
 
 
-              LineInfo(
-                selectedlineToDisplay: selectedLine,
-              ),
+            selectedLine.isNotEmpty
+            ? LineInfo(selectedlineToDisplay: selectedLine)
+            : const SizedBox(),
 
 
 
@@ -343,7 +358,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // Next train information card
               SizedBox(height: 20),
               // Student discount promotional card
               GestureDetector(
@@ -642,16 +656,8 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
-                // Small visible icon
-                // Icon(
-
-                //   icon,
-
-                //   color: color,
-
-                //   size: 32,
-
-                // ),
+             
+               
                 Spacer(),
 
                 // Card title
