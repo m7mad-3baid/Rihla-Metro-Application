@@ -44,9 +44,7 @@ class ApiService {
 
   
 
-  // ============================================================
   // REGISTER - Creates a new user account
-  // ============================================================
   static Future<dynamic> register(
 
     String name,
@@ -76,9 +74,7 @@ print(response.body);
     }
   }
 
-  // ============================================================
   // LOGIN - Authenticates user credentials
-  // ============================================================
   static Future<dynamic> login(String email, String password) async {
     try {
       final response = await http.post(
