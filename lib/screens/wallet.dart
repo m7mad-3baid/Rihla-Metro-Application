@@ -64,6 +64,76 @@ class _walletState extends State<wallet> {
     );
   }
 
+  void showBuyTicketDialog() {
+    String selectedTicket = "2-Hours Ticket";
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              title: const Text("Buy a Ticket"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RadioListTile(
+                    title: const Text("2-Hours Ticket"),
+                    value: "2-Hours Ticket",
+                    groupValue: selectedTicket,
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedTicket = value!;
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: const Text("1-Day Ticket"),
+                    value: "1-Day Ticket",
+                    groupValue: selectedTicket,
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedTicket = value!;
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: const Text("7-Days Ticket"),
+                    value: "7 Days Ticket",
+                    groupValue: selectedTicket,
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedTicket = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+                  },
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("You Selected $selectedTicket")),
+                    );
+                  },
+                  child: const Text("BUY"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,38 +266,71 @@ class _walletState extends State<wallet> {
                         const Spacer(),
 
                         // Top UP button
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: GestureDetector(
-                            onTap: showTopUpDialog,
-                            child: Container(
-                              width: 150,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.add,
-                                    color: Color(0xff4B0082),
-                                    size: 22,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    "TOP UP",
-                                    style: TextStyle(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: showBuyTicketDialog,
+                              child: Container(
+                                width: 135,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.confirmation_number_outlined,
                                       color: Color(0xff4B0082),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                                      size: 22,
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      "BUY TICKET",
+                                      style: TextStyle(
+                                        color: Color(0xff4B0082),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 8),
+                            GestureDetector(
+                              onTap: showTopUpDialog,
+                              child: Container(
+                                width: 135,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add,
+                                      color: Color(0xff4B0082),
+                                      size: 22,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      "TOP UP",
+                                      style: TextStyle(
+                                        color: Color(0xff4B0082),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
