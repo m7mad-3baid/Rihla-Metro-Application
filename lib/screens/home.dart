@@ -5,7 +5,7 @@ import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/LineInfo.dart';
 import 'package:rihla_4_0/widgets/LinePreview.dart';
 import 'Profile.dart';
-import '../models/NexttrainServices.dart';
+import '../services/NexttrainServices.dart';
 import '../models/NextTrainCardData.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
 import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
@@ -14,6 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
 import '../widgets/LinePreview.dart';
 import '../widgets/LineInfo.dart';
+
+import '../services/SavedStationServices.dart';
+import '../models/station.dart';
 
 class HomePage extends StatefulWidget {
   final VoidCallback onRoutesTap;
