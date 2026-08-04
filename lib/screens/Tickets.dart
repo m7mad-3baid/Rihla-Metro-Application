@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
+import 'package:rihla_4_0/services/api_services.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,13 +16,14 @@ class _TicketsState extends State<Tickets> {
   // Toggle state: true shows Buy Tickets, false shows My Tickets
   bool isBuySelected = true;
   // Toggles QR code visibility in the active trip card
-  bool showQR = false;
+  Set<int> visibleQR = {};
   bool isStudent = false;
 
   @override
   void initState() {
     super.initState();
     loadStudentStatus();
+    loadUserId();
   }
 
   Future<void> loadStudentStatus() async {
@@ -29,6 +31,27 @@ class _TicketsState extends State<Tickets> {
     setState(() {
       isStudent = prefs.getBool("is_student") ?? false;
     });
+  }
+
+  int? userId;
+  List<dynamic> myTickets = [];
+
+  Future<void> loadTickets() async {
+    if (userId == null) return;
+    final result = await ApiService.getMyTickets(userId!);
+    if (result['success'] == true) {
+      setState(() {
+        myTickets = result["data"];
+      });
+    }
+  }
+
+  Future<void> loadUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userId = prefs.getInt("user_id");
+    });
+    await loadTickets();
   }
 
   @override
@@ -108,6 +131,7 @@ class _TicketsState extends State<Tickets> {
                           setState(() {
                             isBuySelected = false;
                           });
+                          loadTickets();
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -142,7 +166,7 @@ class _TicketsState extends State<Tickets> {
 
               // Buy Tickets View
               if (isBuySelected) ...[
-                // Card 1: 2-Hour standard ticket (Most Popular)
+                // Card 1: 2-Hour standard ticket
                 Container(
                   height: 375,
                   width: 350,
@@ -288,7 +312,7 @@ class _TicketsState extends State<Tickets> {
 
                 SizedBox(height: 20),
 
-                // Card 2: 3-Day pass ticket
+                // Card 2: 7-Day pass ticket
                 Container(
                   height: 375,
                   width: 350,
@@ -325,7 +349,7 @@ class _TicketsState extends State<Tickets> {
                           children: [
                             const SizedBox(height: 18),
                             const Text(
-                              "3 DAYS PASS",
+                              "7 DAYS PASS",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -333,7 +357,7 @@ class _TicketsState extends State<Tickets> {
                             ),
                             const SizedBox(height: 6),
                             const Text(
-                              "700 SDG",
+                              "2000 SDG",
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -342,7 +366,7 @@ class _TicketsState extends State<Tickets> {
                             ),
                             const SizedBox(height: 14),
                             const Text(
-                              "Unlimited rides on all 3 metro lines for 3-DAYS after activation.",
+                              "Unlimited rides on all 3 metro lines for 7-DAYS after activation.",
                               style: TextStyle(
                                 color: Colors.black54,
                                 fontSize: 14,
@@ -566,161 +590,198 @@ class _TicketsState extends State<Tickets> {
                 SizedBox(height: 25),
                 SizedBox(height: 25),
               ] else ...[
-                // My Tickets View: Active trip card with animated QR code
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 350),
-                  curve: Curves.easeInOut,
-                  height: showQR ? 470 : 250,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF355C8A),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Stack(
-                    children: [
-                      // Decorative background ticket icon
-                      Positioned(
-                        right: -20,
-                        top: -15,
-                        child: Opacity(
-                          opacity: 0.15,
-                          child: Icon(
-                            Icons.confirmation_num,
-                            size: 120,
-                            color: Colors.white,
+                if (myTickets.isEmpty)
+                  // Empty state: nothing purchased yet
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 60),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.confirmation_num_outlined,
+                          size: 60,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(height: 15),
+                        const Text(
+                          "No active tickets",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        const SizedBox(height: 8),
+                        const Text(
+                          "Buy a ticket to see it here",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  // One card per active ticket, most recent first (already sorted by the backend)
+                  Column(
+                    children: myTickets.map((ticket) {
+                      final int ticketId = ticket['id'];
+                      final bool isQRVisible = visibleQR.contains(ticketId);
+                      final DateTime expiresAt = DateTime.parse(
+                        ticket['expires_at'],
+                      );
+
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 350),
+                          curve: Curves.easeInOut,
+                          height: isQRVisible ? 470 : 250,
+                          width: 350,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF355C8A),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Stack(
                             children: [
-                              // Active trip badge
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white24,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  "ACTIVE TRIP",
-                                  style: TextStyle(
+                              Positioned(
+                                right: -20,
+                                top: -15,
+                                child: Opacity(
+                                  opacity: 0.15,
+                                  child: Icon(
+                                    Icons.confirmation_num,
+                                    size: 120,
                                     color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
-                              Text(
-                                "2-HOURS-TICKET",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              // Animated QR code section
-                              AnimatedContainer(
-                                duration: Duration(milliseconds: 330),
-                                curve: Curves.easeInOut,
-                                height: showQR ? 180 : 0,
-                                child: Center(
-                                  child: AnimatedSwitcher(
-                                    duration: Duration(milliseconds: 300),
-                                    child: showQR
-                                        ? Icon(
-                                            Icons.qr_code_2_sharp,
-                                            size: 170,
-                                            key: ValueKey(true),
-                                            opticalSize: 170,
-                                            color: Colors.white,
-                                          )
-                                        : SizedBox(key: ValueKey(false)),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: showQR ? 70 : 70),
-                              // Expiry info and QR toggle
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Active Untill:",
-                                        style: TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 12,
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white24,
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "ACTIVE TRIP",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
+                                      SizedBox(height: 15),
                                       Text(
-                                        "14:30 PM ",
+                                        ticket['ticket_name'],
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 20,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Text(
-                                        "Today ",
-                                        style: TextStyle(
-                                          color: const Color.fromARGB(
-                                            158,
-                                            255,
-                                            255,
-                                            255,
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 330),
+                                        curve: Curves.easeInOut,
+                                        height: isQRVisible ? 180 : 0,
+                                        child: Center(
+                                          child: AnimatedSwitcher(
+                                            duration: Duration(
+                                              milliseconds: 300,
+                                            ),
+                                            child: isQRVisible
+                                                ? Icon(
+                                                    Icons.qr_code_2_sharp,
+                                                    size: 170,
+                                                    key: ValueKey(true),
+                                                    opticalSize: 170,
+                                                    color: Colors.white,
+                                                  )
+                                                : SizedBox(
+                                                    key: ValueKey(false),
+                                                  ),
                                           ),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
                                         ),
+                                      ),
+                                      SizedBox(height: 70),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Active Untill:",
+                                                style: TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${expiresAt.day}/${expiresAt.month}/${expiresAt.year}  ${TimeOfDay.fromDateTime(expiresAt).format(context)}",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                if (isQRVisible) {
+                                                  visibleQR.remove(ticketId);
+                                                } else {
+                                                  visibleQR.add(ticketId);
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                                vertical: 8,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Text(
+                                                isQRVisible
+                                                    ? "Hide QR"
+                                                    : "View QR",
+                                                style: TextStyle(
+                                                  color: Color(0xFF355C8A),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  // QR toggle button
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        showQR = !showQR;
-                                      });
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 8,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Text(
-                                        showQR ? "Hide QR" : "View QR",
-                                        style: TextStyle(
-                                          color: Color(0xFF355C8A),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
-                ),
                 SizedBox(height: 25),
               ],
             ],

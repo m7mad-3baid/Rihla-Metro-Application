@@ -6,10 +6,7 @@ class SessionService {
   static Future<void> saveUser(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
 
-await prefs.setInt(
-  "user_id",
-  int.parse(user["id"].toString())
-);
+    await prefs.setInt("user_id", int.parse(user["id"].toString()));
 
     await prefs.setString("name", user["name"]);
 
@@ -36,7 +33,8 @@ await prefs.setInt(
   static Future<void> checkUser() async {
     final prefs = await SharedPreferences.getInstance();
 
-  print("USER ID: ${prefs.getInt("user_id")}");;
+    print("USER ID: ${prefs.getInt("user_id")}");
+    ;
     print("NAME: ${prefs.getString("name")}");
     print("EMAIL: ${prefs.getString("email")}");
     print("STUDENT: ${prefs.getBool("is_student")}");

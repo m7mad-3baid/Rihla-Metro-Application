@@ -21,8 +21,41 @@ CREATE TABLE user_tickets (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   ticket_name VARCHAR(100) NOT NULL,
-  price INT NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
   purchased_at DATETIME NOT NULL,
   expires_at DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+4 - add a balance column in the users table
+
+ALTER TABLE users
+ADD balance DECIMAL(10,2) NOT NULL DEFAULT 0.00;
+
+
+5 - create the wallet transaction table
+
+
+CREATE TABLE wallet_transactions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type VARCHAR(30) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  description VARCHAR(150) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+5 - make the student ID unique
+
+ALTER TABLE users
+ADD CONSTRAINT unique_student_id UNIQUE (student_id);
+
+
+
+
+
+
+
+

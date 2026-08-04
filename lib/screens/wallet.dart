@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rihla_4_0/services/api_services.dart';
 
 // Wallet screen displaying balance, payment methods, and recent activity
 class wallet extends StatefulWidget {
@@ -12,6 +13,7 @@ class wallet extends StatefulWidget {
 
 class _walletState extends State<wallet> {
   bool isStudent = false;
+  double balance = 0;
   TextEditingController amountController = TextEditingController();
 
   @override
@@ -47,14 +49,34 @@ class _walletState extends State<wallet> {
               child: Text("Cancel"),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(dialogContext);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("You Entered: ${amountController.text} SDG"),
-                  ),
-                );
-                amountController.clear();
+              onPressed: () async {
+                String amount = amountController.text;
+                if (amount.isEmpty) {
+                  return;
+                }
+                final prefs = await SharedPreferences.getInstance();
+                int? userId = prefs.getInt("user_id");
+                if (userId == null) {
+                  return;
+                }
+                final result = await ApiService.topUp(userId, amount);
+                if (!mounted) return;
+                if (result['success'] == true) {
+                  setState(() {
+                    balance = double.parse(
+                      result['data']['balance'].toString(),
+                    );
+                  });
+                  Navigator.pop(dialogContext);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Money added Successful!")),
+                  );
+                  amountController.clear();
+                } else {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(result['message'])));
+                }
               },
               child: Text("Top Up"),
             ),
@@ -87,19 +109,10 @@ class _walletState extends State<wallet> {
                       });
                     },
                   ),
-                  RadioListTile(
-                    title: const Text("1-Day Ticket"),
-                    value: "1-Day Ticket",
-                    groupValue: selectedTicket,
-                    onChanged: (value) {
-                      setDialogState(() {
-                        selectedTicket = value!;
-                      });
-                    },
-                  ),
+
                   RadioListTile(
                     title: const Text("7-Days Ticket"),
-                    value: "7 Days Ticket",
+                    value: "7-Days Ticket",
                     groupValue: selectedTicket,
                     onChanged: (value) {
                       setDialogState(() {
@@ -111,18 +124,36 @@ class _walletState extends State<wallet> {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(dialogContext);
-                  },
-                  child: const Text("Cancel"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(dialogContext);
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    int? userId = prefs.getInt("user_id");
+                    if (userId == null) {
+                      return;
+                    }
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("You Selected $selectedTicket")),
+                    final result = await ApiService.purchaseTicket(
+                      userId,
+                      selectedTicket,
                     );
+                    if (!mounted) return;
+
+                    if (result['success'] == true) {
+                      setState(() {
+                        balance = double.parse(
+                          result['data']['balance'].toString(),
+                        );
+                      });
+                      Navigator.pop(dialogContext);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Ticket purchased: $selectedTicket"),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result['message'])),
+                      );
+                    }
                   },
                   child: const Text("BUY"),
                 ),
@@ -242,7 +273,7 @@ class _walletState extends State<wallet> {
                           children: [
                             // Balance amount
                             Text(
-                              "125",
+                              balance.toStringAsFixed(0),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 45,
