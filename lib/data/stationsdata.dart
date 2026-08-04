@@ -5,6 +5,7 @@ import '../models/station.dart';
 final List<Station> stations = [
 
  Station(
+  id: 1,
    name:"Khartoum Central",
    location:LatLng(15.6000,32.5340),
    line:"Blue Line",
@@ -12,6 +13,7 @@ final List<Station> stations = [
  ),
 
  Station(
+  id: 2,
    name:"Bahri Station",
    location:LatLng(15.6400,32.5600),
    line:"Green Line",
@@ -19,6 +21,7 @@ final List<Station> stations = [
  ),
 
  Station(
+  id: 3,
    name:"Airport Station",
    location:LatLng(15.5890,32.5530),
    line:"Red Line",

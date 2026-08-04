@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
+  static const String baseUrl = "http://10.5.50.149/Rihla_backend/api";
 
   static Future updateprofile(
     int id,
@@ -27,6 +27,69 @@ class ApiService {
     print(response.body);
 
     return jsonDecode(response.body);
+  }
+
+  // SAVE STATION
+  static Future<bool> saveStation(int userId, int stationId) async {
+    try {
+      print("Saving station id: $stationId");
+      print("User id: $userId");
+      final response = await http.post(
+        Uri.parse("$baseUrl/savestations.php"),
+
+        body: {
+          "user_id": userId.toString(),
+
+          "station_id": stationId.toString(),
+        },
+      );
+
+      final data = jsonDecode(response.body);
+
+      return data["success"];
+    } catch (e) {
+      print(e);
+
+      return false;
+    }
+  }
+
+  // GET SAVED STATIONS
+  static Future<List<dynamic>> getSavedStations(int userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/getsavedstations.php?user_id=$userId"),
+      );
+
+      return jsonDecode(response.body);
+    } catch (e) {
+      print(e);
+
+      return [];
+    }
+  }
+
+  // REMOVE SAVED STATION
+  static Future<bool> removeSavedStation(int userId, int stationId) async {
+    try {
+      final response = await http.post(
+        Uri.parse("$baseUrl/removestations.php"),
+
+        body: {
+          "user_id": userId.toString(),
+
+          "station_id": stationId.toString(),
+        },
+      );
+
+      final data = jsonDecode(response.body);
+
+      return data["success"];
+    } catch (e) {
+      print(e);
+
+      return false;
+    }
   }
 
   // REGISTER - Creates a new user account

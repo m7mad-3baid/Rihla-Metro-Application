@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-//static means we can call it directly EX :  SessionService.logout();
-//void means its not returning anything
 class SessionService {
   static Future<void> saveUser(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
@@ -17,6 +15,12 @@ class SessionService {
     await prefs.setBool("logged_in", true);
   }
 
+  static Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getInt("user_id");
+  }
+
   static Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -25,16 +29,14 @@ class SessionService {
 
   static Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
-    // to access phone storage
+
     await prefs.clear();
   }
 
-  //test if it saves
   static Future<void> checkUser() async {
     final prefs = await SharedPreferences.getInstance();
 
     print("USER ID: ${prefs.getInt("user_id")}");
-    ;
     print("NAME: ${prefs.getString("name")}");
     print("EMAIL: ${prefs.getString("email")}");
     print("STUDENT: ${prefs.getBool("is_student")}");

@@ -1,4 +1,4 @@
-import 'NextTrainCardData.dart';
+import '../models/NextTrainCardData.dart';
 
 class NextTrainServices {
   static NextTrainCard getNextTrain() {
