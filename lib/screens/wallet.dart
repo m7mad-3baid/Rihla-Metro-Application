@@ -14,12 +14,28 @@ class wallet extends StatefulWidget {
 class _walletState extends State<wallet> {
   bool isStudent = false;
   double balance = 0;
+  List<dynamic> transactions = [];
   TextEditingController amountController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     loadStudentStatus();
+    loadBalance();
+    loadTransactions();
+  }
+
+  Future<void> loadBalance() async {
+    final prefs = await SharedPreferences.getInstance();
+    int? userId = prefs.getInt("user_id");
+    if (userId == null) return;
+
+    final result = await ApiService.getBalance(userId);
+    if (result['success'] == true) {
+      setState(() {
+        balance = double.parse(result['data']['balance'].toString());
+      });
+    }
   }
 
   Future<void> loadStudentStatus() async {
@@ -27,6 +43,19 @@ class _walletState extends State<wallet> {
     setState(() {
       isStudent = prefs.getBool("is_student") ?? false;
     });
+  }
+
+  Future<void> loadTransactions() async {
+    final prefs = await SharedPreferences.getInstance();
+    int? userId = prefs.getInt("user_id");
+    if (userId == null) return;
+
+    final result = await ApiService.getTransactions(userId);
+    if (result['success'] == true) {
+      setState(() {
+        transactions = result['data'];
+      });
+    }
   }
 
   void showTopUpDialog() {
@@ -63,6 +92,7 @@ class _walletState extends State<wallet> {
                 if (!mounted) return;
                 if (result['success'] == true) {
                   setState(() {
+                    loadTransactions();
                     balance = double.parse(
                       result['data']['balance'].toString(),
                     );
@@ -139,6 +169,7 @@ class _walletState extends State<wallet> {
 
                     if (result['success'] == true) {
                       setState(() {
+                        loadTransactions();
                         balance = double.parse(
                           result['data']['balance'].toString(),
                         );
@@ -496,162 +527,82 @@ class _walletState extends State<wallet> {
 
               SizedBox(height: 15),
 
-              // Recent activity transaction card: 2-Hours ticket purchase
-              Container(
-                width: 375,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    // Ticket icon
-                    Container(
-                      width: 50,
-                      height: 50,
-                      margin: const EdgeInsets.only(left: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 194, 180, 219),
-                      ),
-                      child: Icon(
-                        Icons.confirmation_number_outlined,
-                        color: Color(0xff4B0082),
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    // Ticket information
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Ticket name
-                        Text("2-Hours ticket"),
-                        // Transaction date and time
-                        Text(
-                          "Oct 22, 06:45 PM",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                      ],
-                    ),
-                    // Pushes amount details to the right
-                    Spacer(),
-                    // Transaction amount and payment method
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          // Amount spent
-                          Text(
-                            "-200",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.red[900],
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          // Payment method label
-                          Text(
-                            "Online",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              Column(
+                children: transactions.map((tx) {
+                  final double amount = double.parse(tx['amount'].toString());
+                  final bool isPositive = amount >= 0;
+                  final DateTime createdAt = DateTime.parse(tx['created_at']);
 
-              SizedBox(height: 10),
-              Container(
-                width: 375,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    // Ticket icon
-                    Container(
-                      width: 50,
-                      height: 50,
-                      margin: const EdgeInsets.only(left: 20),
+                  final bool isTopUp = tx['type'] == 'top_up';
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Container(
+                      width: 375,
+                      height: 100,
                       decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 109, 225, 113),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 8,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
                       ),
-                      child: Icon(
-                        Icons.wallet,
-                        color: Color.fromARGB(255, 9, 100, 17),
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    // Ticket information
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Ticket name
-                        Text("Wallet Top-Up"),
-                        // Transaction date and time
-                        Text(
-                          "Oct 20, 06:55 PM",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                      ],
-                    ),
-                    // Pushes amount details to the right
-                    Spacer(),
-                    // Transaction amount and payment method
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                      child: Row(
                         children: [
-                          // Amount spent
-                          Text(
-                            "+5000",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.green[900],
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            width: 50,
+                            height: 50,
+                            margin: const EdgeInsets.only(left: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: isTopUp
+                                  ? const Color.fromARGB(255, 109, 225, 113)
+                                  : const Color.fromARGB(255, 194, 180, 219),
+                            ),
+                            child: Icon(
+                              isTopUp
+                                  ? Icons.wallet
+                                  : Icons.confirmation_number_outlined,
+                              color: isTopUp
+                                  ? const Color.fromARGB(255, 9, 100, 17)
+                                  : const Color(0xff4B0082),
                             ),
                           ),
-                          // Payment method label
-                          Text(
-                            "Via Bankak *4532",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.grey[700],
+                          const SizedBox(width: 15),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(tx['description']),
+                              Text(
+                                "${createdAt.day}/${createdAt.month}/${createdAt.year}  ${TimeOfDay.fromDateTime(createdAt).format(context)}",
+                                style: TextStyle(color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: Text(
+                              "${isPositive ? '+' : ''}${amount.toStringAsFixed(0)}",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: isPositive
+                                    ? Colors.green[900]
+                                    : Colors.red[900],
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                }).toList(),
               ),
             ],
           ),

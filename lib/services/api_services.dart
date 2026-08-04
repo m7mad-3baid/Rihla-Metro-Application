@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl = "http://10.5.50.149/Rihla_backend/api";
+  static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
 
   static Future updateprofile(
     int id,
@@ -11,7 +11,7 @@ class ApiService {
     String password,
   ) async {
     var response = await http.post(
-      Uri.parse("http://10.5.50.2/Rihla_backend/api/updateProfile.php"),
+      Uri.parse("http://10.0.2.2/Rihla_backend/api/updateProfile.php"),
 
       body: {
         "id": id.toString(),
@@ -167,6 +167,28 @@ class ApiService {
       );
       final data = jsonDecode(response.body);
       return data;
+    } catch (e) {
+      return {"success": false, "message": "unable to connect to server "};
+    }
+  }
+
+  static Future<dynamic> getBalance(int userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/get_balance.php?user_id=$userId"),
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"success": false, "message": "unable to connect to server "};
+    }
+  }
+
+  static Future<dynamic> getTransactions(int userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/get_transactions.php?user_id=$userId"),
+      );
+      return jsonDecode(response.body);
     } catch (e) {
       return {"success": false, "message": "unable to connect to server "};
     }
