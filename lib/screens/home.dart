@@ -7,6 +7,7 @@ import 'package:rihla_4_0/services/api_services.dart';
 import 'package:rihla_4_0/widgets/LineInfo.dart';
 import 'package:rihla_4_0/widgets/LinePreview.dart';
 import 'Profile.dart';
+import '../models/MetroStatusModel.dart';
 import '../screens/notifcationsScreen.dart';
 import '../services/NexttrainServices.dart';
 import '../models/NextTrainCardData.dart';
@@ -40,10 +41,9 @@ class _HomePageState extends State<HomePage> {
   String name = "";
   String selectedLine = "";
   late NextTrainCard currentTrain;
-
   bool hasNotification = false;
-
   List<Station> savedStations = [];
+  List<MetroStatus> metroStatuses=[];
 
   @override
   void initState() {
@@ -54,7 +54,28 @@ class _HomePageState extends State<HomePage> {
     loadUser();
     loadSavedStations();
     checkNotifications();
+    loadMetroStatus();
   }
+
+Future<void> loadMetroStatus() async {
+
+  final data = await ApiService.getMetroStatus();
+
+  print("========== Metro Status ==========");
+
+  print("Items received: ${data.length}");
+
+  for (var item in data) {
+    print("${item.lineName} -> ${item.status}");
+  }
+
+  setState(() {
+    metroStatuses = data;
+  });
+
+}
+
+
 
   void checkNotifications() async {
 
@@ -628,30 +649,30 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 15),
                     // Blue line status
                     _buildMetroLine(
-                      "BL",
-                      "Blue Line",
-                      Colors.blue,
-                      "normal",
-                      Colors.green,
-                    ),
+ "BL",
+ "Blue Line",
+ Colors.blue,
+ getStatus("Blue Line"),
+ getStatusColor(getStatus("Blue Line")),
+),
                     Divider(indent: 20, endIndent: 20),
                     // Green line status
                     _buildMetroLine(
-                      "GR",
-                      "Green Line",
-                      Colors.green,
-                      "5 MIN Delay",
-                      Colors.yellow,
-                    ),
+ "GR",
+ "Green Line",
+ Colors.green,
+ getStatus("Green Line"),
+ getStatusColor(getStatus("Green Line")),
+),
                     Divider(indent: 20, endIndent: 20),
                     // Red line status
                     _buildMetroLine(
-                      "RD",
-                      "Red Line",
-                      Colors.red,
-                      "Maintenance",
-                      Color(0xFF900912),
-                    ),
+ "RD",
+ "Red Line",
+ Colors.red,
+ getStatus("Red Line"),
+ getStatusColor(getStatus("Red Line")),
+),
                   ],
                 ),
               ),
@@ -785,6 +806,48 @@ class _HomePageState extends State<HomePage> {
         return Colors.grey;
     }
   }
+  String getStatus(String line){
+
+  for(var item in metroStatuses){
+
+    if(item.lineName == line){
+
+      return item.status;
+
+    }
+
+  }
+
+  return "normal";
+
+}
+
+
+
+Color getStatusColor(String status){
+
+  switch(status.toLowerCase()){
+
+
+    case "normal":
+      return Colors.green;
+
+
+    case "busy":
+      return Colors.orange;
+
+
+    case "maintenance":
+      return Colors.red;
+
+
+    default:
+      return Colors.grey;
+
+  }
+
+}
+  
 
   // Builds a row representing a metro line's status
   Widget _buildMetroLine(

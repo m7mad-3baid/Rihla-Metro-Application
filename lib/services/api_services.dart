@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/notificationsModel.dart';
+import '../models/MetroStatusModel.dart';
 
 class ApiService {
   static const String baseUrl = "http://10.5.50.44/Rihla_backend/api";
@@ -235,5 +236,62 @@ class ApiService {
 
 
   return notifications;
+}
+
+
+static Future<List<MetroStatus>> getMetroStatus() async {
+
+  final response = await http.get(
+    Uri.parse("$baseUrl/get_MetroStatus.php")
+  );
+
+
+  if(response.statusCode == 200){
+
+    List data = jsonDecode(response.body);
+
+    return data.map(
+      (item)=>MetroStatus.fromJson(item)
+    ).toList();
+
+  }
+
+
+  return [];
+
+}
+static Future<bool> updateMetroStatus(
+    String line,
+    String status
+) async {
+
+  final response = await http.post(
+
+    Uri.parse("$baseUrl/update_metroStatus.php"),
+
+    body: {
+
+      "line_name": line,
+      "status": status,
+
+    },
+
+  );
+
+
+  print(response.body);
+
+
+  if(response.statusCode == 200){
+
+    final data = jsonDecode(response.body);
+
+    return data["success"];
+
+  }
+
+
+  return false;
+
 }
 }
