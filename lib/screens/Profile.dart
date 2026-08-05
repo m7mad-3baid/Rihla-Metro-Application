@@ -5,6 +5,7 @@ import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
+import 'package:rihla_4_0/screens/ride_history_screen.dart';
 
 // Profile screen displaying user info, grouped settings cards, and logout
 class Profile extends StatefulWidget {
@@ -357,7 +358,6 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-
               SizedBox(height: 10),
 
               // Travel settings card: Route Alert & Rides History
@@ -423,40 +423,51 @@ class _ProfileState extends State<Profile> {
                     Divider(indent: 10, endIndent: 10),
 
                     // Rides History row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        // Icon container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Icon(Icons.history_outlined),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RideHistoryScreen(),
                           ),
-                        ),
-                        // Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 15),
-                          child: Text(
-                            "Rides History",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
+                        );
+                      },
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Icon container
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 15),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC4D5D9),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Icon(Icons.history_outlined),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        // Navigation arrow
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, right: 10),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
+                          // Label
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 15),
+                            child: Text(
+                              "Rides History",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          // Navigation arrow
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            child: Icon(Icons.arrow_forward_ios),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

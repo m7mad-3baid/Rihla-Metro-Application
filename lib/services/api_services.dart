@@ -172,6 +172,17 @@ class ApiService {
     }
   }
 
+  static Future<dynamic> getRideHistory(int userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/get_ride_history.php?user_id=$userId"),
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"success": false, "message": "unable to connect to server "};
+    }
+  }
+
   static Future<dynamic> getBalance(int userId) async {
     try {
       final response = await http.get(
