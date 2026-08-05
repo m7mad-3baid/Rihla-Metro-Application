@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../models/notificationsModel.dart';
 
 class ApiService {
   static const String baseUrl = "http://10.5.50.44/Rihla_backend/api";
@@ -12,7 +13,7 @@ class ApiService {
     String password,
   ) async {
     var response = await http.post(
-      Uri.parse("http://10.0.2.2/Rihla_backend/api/updateProfile.php"),
+      Uri.parse("http://10.5.50.44/Rihla_backend/api/updateProfile.php"),
 
       body: {
         "id": id.toString(),
@@ -205,4 +206,34 @@ class ApiService {
       return {"success": false, "message": "unable to connect to server "};
     }
   }
+
+  static Future<List<NotificationModel>> getNotifications() async {
+
+  final response = await http.get(
+    Uri.parse(
+      "http://10.5.50.44//Rihla_backend/api/get_notifications.php"
+    )
+  );
+
+
+  List data = jsonDecode(response.body);
+
+  List<NotificationModel> notifications = [];
+
+
+  for(var item in data){
+
+    notifications.add(
+      NotificationModel(
+        title: item['title'],
+        message: item['message'],
+        date: item['created_at'],
+      )
+    );
+
+  }
+
+
+  return notifications;
+}
 }

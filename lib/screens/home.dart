@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rihla_4_0/models/NextTrainCardData.dart';
+import 'package:rihla_4_0/screens/notifcationsScreen.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
+import 'package:rihla_4_0/services/api_services.dart';
 import 'package:rihla_4_0/widgets/LineInfo.dart';
 import 'package:rihla_4_0/widgets/LinePreview.dart';
 import 'Profile.dart';
+import '../screens/notifcationsScreen.dart';
 import '../services/NexttrainServices.dart';
 import '../models/NextTrainCardData.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
@@ -38,6 +41,10 @@ class _HomePageState extends State<HomePage> {
   String selectedLine = "";
   late NextTrainCard currentTrain;
 
+  bool hasNotification = false;
+
+  List<Station> savedStations = [];
+
   @override
   void initState() {
     super.initState();
@@ -45,13 +52,40 @@ class _HomePageState extends State<HomePage> {
     currentTrain = NextTrainServices.getNextTrain();
 
     loadUser();
+    loadSavedStations();
+    checkNotifications();
   }
+
+  void checkNotifications() async {
+
+  var notifications = await ApiService.getNotifications();
+
+
+  if(notifications.isNotEmpty){
+
+    setState((){
+
+      hasNotification = true;
+
+    });
+
+  }
+
+}
 
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       // Default to "Guest" if no name is saved
       name = prefs.getString("name") ?? "Guest";
+    });
+  }
+
+  Future<void> loadSavedStations() async {
+    final stations = await SavedStationServices.getSavedStations();
+
+    setState(() {
+      savedStations = stations;
     });
   }
 
@@ -166,12 +200,43 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   // Notification bell icon
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10, top: 20),
-                    child: Icon(
-                      CupertinoIcons.bell,
-                      color: Color(0xFF00515A),
-                      size: 30,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationsScreen(),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10, top: 20),
+                      child:  Stack(
+  children: [
+
+    Icon(
+      CupertinoIcons.bell,
+      color: Color(0xFF00515A),
+      size: 30,
+    ),
+
+    hasNotification
+        ? Positioned(
+            right: 0,
+            top: 0,
+            child: Container(
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+            ),
+          )
+        : SizedBox(),
+
+  ],
+),
                     ),
                   ),
                 ],
@@ -181,7 +246,6 @@ class _HomePageState extends State<HomePage> {
 
               // Search bar widget
               // Searchbarwidget(),
-
               SizedBox(height: 30),
 
               ClipRRect(
@@ -240,7 +304,7 @@ class _HomePageState extends State<HomePage> {
                                   currentTrain.LineName,
                                   style: TextStyle(color: Colors.white70),
                                 ),
-                                SizedBox(width: 10,),
+                                SizedBox(width: 10),
                                 Text(
                                   currentTrain.platform,
                                   style: TextStyle(color: Colors.white70),
@@ -254,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                 currentTrain.minutes,
+                                  currentTrain.minutes,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -325,15 +389,9 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 10),
 
-
-
-            selectedLine.isNotEmpty
-            ? LineInfo(selectedlineToDisplay: selectedLine)
-            : const SizedBox(),
-
-
-
-              
+              selectedLine.isNotEmpty
+                  ? LineInfo(selectedlineToDisplay: selectedLine)
+                  : const SizedBox(),
 
               SizedBox(height: 10),
               // Saved stations section title
@@ -353,10 +411,12 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    _buildStationPill("EL MAK NIMIR", Colors.blue),
-                    _buildStationPill("KOBER", Colors.red),
-                    _buildStationPill("ARKAWEET", Colors.green),
-                    _buildStationPill("WAD NUBAWI", Colors.green),
+                    ...savedStations.map(
+                      (station) => _buildStationPill(
+                        station.name,
+                        _getLineColor(station.line),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -659,8 +719,6 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
-             
-               
                 Spacer(),
 
                 // Card title
@@ -710,6 +768,22 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Color _getLineColor(String line) {
+    switch (line.toLowerCase()) {
+      case "red":
+        return Colors.red;
+
+      case "blue":
+        return Colors.blue;
+
+      case "green":
+        return Colors.green;
+
+      default:
+        return Colors.grey;
+    }
   }
 
   // Builds a row representing a metro line's status

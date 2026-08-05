@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla_4_0/screens/notifcationsScreen.dart';
 import 'package:rihla_4_0/screens/personalinfo.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
@@ -382,40 +383,50 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     // Route Alert row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        // Icon container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
-                              borderRadius: BorderRadius.circular(7),
+                    GestureDetector(
+                     onTap: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationsScreen(),
+                        ),
+                      );
+                     },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Icon container
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 15),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC4D5D9),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Icon(Icons.notifications_active_outlined),
                             ),
-                            child: Icon(Icons.notifications_active_outlined),
                           ),
-                        ),
-                        // Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 15),
-                          child: Text(
-                            "Route Alert",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
+                          // Label
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 15),
+                            child: Text(
+                              "Route Alert",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        // Navigation arrow
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, right: 10),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
+                          Spacer(),
+                          // Navigation arrow
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            child: Icon(Icons.arrow_forward_ios),
+                          ),
+                        ],
+                      ),
                     ),
 
                     SizedBox(height: 5),
