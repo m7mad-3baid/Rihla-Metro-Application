@@ -1,31 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:rihla_4_0/screens/MainScreen.dart';
-import 'package:rihla_4_0/screens/Profile.dart';
-import 'package:rihla_4_0/screens/Tickets.dart';
-import 'package:rihla_4_0/screens/editInfo.dart';
-import 'package:rihla_4_0/screens/fullMapPage.dart';
-import 'package:rihla_4_0/screens/home.dart';
-import 'package:rihla_4_0/screens/loginpage.dart';
-import 'package:rihla_4_0/screens/personalinfo.dart';
-import 'package:rihla_4_0/screens/rigesterpage.dart';
-import 'package:rihla_4_0/screens/routes_screen.dart';
-import 'package:rihla_4_0/screens/studentInfo.dart';
-import 'package:rihla_4_0/screens/wallet.dart';
-import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
-import 'package:rihla_4_0/screens/Splash.dart';
-import 'package:rihla_4_0/widgets/metro_preview.dart';
 
-void main() {
-  runApp(Rihla());
+import 'package:rihla_4_0/screens/MainScreen.dart';
+import 'package:rihla_4_0/services/theme_service.dart';
+import 'package:rihla_4_0/services/theme_controller.dart';
+import 'package:rihla_4_0/themes/app_theme.dart';
+
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+
+  bool isDark = await ThemeService.getTheme();
+
+
+  themeNotifier.value = isDark;
+
+
+  runApp(
+    const Rihla(),
+  );
+
 }
 
+
+
 class Rihla extends StatelessWidget {
+
+  const Rihla({
+    super.key,
+  });
+
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-       home:MainScreen(),
-       
-       );
+
+
+    return ValueListenableBuilder<bool>(
+
+      valueListenable: themeNotifier,
+
+
+      builder: (context, isDark, child) {
+
+
+        return MaterialApp(
+
+          debugShowCheckedModeBanner: false,
+
+
+          theme: AppTheme.lightTheme,
+
+darkTheme: AppTheme.darkTheme,
+
+
+          themeMode:
+              isDark
+              ?
+              ThemeMode.dark
+              :
+              ThemeMode.light,
+
+
+          home: MainScreen(),
+
+        );
+
+
+      },
+
+    );
+
+
   }
+
 }
