@@ -52,9 +52,61 @@ CREATE TABLE wallet_transactions (
 ALTER TABLE users
 ADD CONSTRAINT unique_student_id UNIQUE (student_id);
 
+6 - create the notification table
+
+CREATE TABLE notifications (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    title VARCHAR(255) NOT NULL,
+
+    message TEXT NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    status ENUM('active', 'inactive') DEFAULT 'active'
+
+);
 
 
+7 - create the stations table
 
+CREATE TABLE stations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    line VARCHAR(50) NOT NULL,
+    latitude DECIMAL(10,7) NOT NULL,
+    longitude DECIMAL(10,7) NOT NULL
+);
+
+8 - create the saved_stations table
+
+CREATE TABLE saved_stations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    station_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (station_id) REFERENCES stations(id) ON DELETE CASCADE
+);
+
+9 - adding 3 stations to stations table
+
+INSERT INTO stations (id, name, line, latitude, longitude)
+VALUES
+(1, 'Khartoum Central', 'Blue', 15.5007, 32.5599),
+(2, 'Bahri Station', 'Green', 15.6400, 32.5300),
+(3, 'Airport Station', 'Red', 15.5890, 32.5530);
+
+10 - create the admins table
+
+CREATE TABLE admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
+);
 
 
 
