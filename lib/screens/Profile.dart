@@ -8,6 +8,7 @@ import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
 import 'package:rihla_4_0/screens/ride_history_screen.dart';
+import 'package:rihla_4_0/services/api_services.dart';
 
 
 // Profile screen displaying user info, grouped settings cards, and logout
@@ -23,11 +24,13 @@ class _ProfileState extends State<Profile> {
   String name = "";
   String email = "";
   bool isStudent = false;
+  double balance = 0.0;
 
   @override
   void initState() {
     super.initState();
     loadUser();
+    loadBalance();
   }
 
   // Fetch user details from SharedPreferences
@@ -38,6 +41,19 @@ class _ProfileState extends State<Profile> {
       email = prefs.getString("email") ?? "";
       isStudent = prefs.getBool("is_student") ?? false;
     });
+  }
+
+  Future<void> loadBalance() async {
+    final prefs = await SharedPreferences.getInstance();
+    int? userId = prefs.getInt("user_id");
+    if (userId == null) return;
+
+    final result = await ApiService.getBalance(userId);
+    if (result['success'] == true) {
+      setState(() {
+        balance = double.parse(result['data']['balance'].toString());
+      });
+    }
   }
 
   @override
@@ -163,6 +179,14 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                           const Spacer(),
+                          Text(
+                            "${balance.toStringAsFixed(0)} SDG",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           // Verified student badge (shown only if isStudent is true)
                           if (isStudent)
                             Container(

@@ -4,8 +4,7 @@ import '../models/notificationsModel.dart';
 import '../models/MetroStatusModel.dart';
 
 class ApiService {
-  static const String baseUrl = "http://10.5.50.44/Rihla_backend/api";
-
+  static const String baseUrl = "http://10.0.2.2/Rihla_backend/api";
 
   static Future updateprofile(
     int id,
@@ -14,7 +13,7 @@ class ApiService {
     String password,
   ) async {
     var response = await http.post(
-      Uri.parse("http://10.5.50.44/Rihla_backend/api/updateProfile.php"),
+      Uri.parse("http://10.0.2.2/Rihla_backend/api/updateProfile.php"),
 
       body: {
         "id": id.toString(),
@@ -209,89 +208,54 @@ class ApiService {
   }
 
   static Future<List<NotificationModel>> getNotifications() async {
-
-  final response = await http.get(
-    Uri.parse(
-      "http://10.5.50.44//Rihla_backend/api/get_notifications.php"
-    )
-  );
-
-
-  List data = jsonDecode(response.body);
-
-  List<NotificationModel> notifications = [];
-
-
-  for(var item in data){
-
-    notifications.add(
-      NotificationModel(
-        title: item['title'],
-        message: item['message'],
-        date: item['created_at'],
-      )
+    final response = await http.get(
+      Uri.parse("http://10.0.2.2/Rihla_backend/api/get_notifications.php"),
     );
-
-  }
-
-
-  return notifications;
-}
-
-
-static Future<List<MetroStatus>> getMetroStatus() async {
-
-  final response = await http.get(
-    Uri.parse("$baseUrl/get_MetroStatus.php")
-  );
-
-
-  if(response.statusCode == 200){
 
     List data = jsonDecode(response.body);
 
-    return data.map(
-      (item)=>MetroStatus.fromJson(item)
-    ).toList();
+    List<NotificationModel> notifications = [];
 
+    for (var item in data) {
+      notifications.add(
+        NotificationModel(
+          title: item['title'],
+          message: item['message'],
+          date: item['created_at'],
+        ),
+      );
+    }
+
+    return notifications;
   }
 
+  static Future<List<MetroStatus>> getMetroStatus() async {
+    final response = await http.get(Uri.parse("$baseUrl/get_MetroStatus.php"));
 
-  return [];
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
 
-}
-static Future<bool> updateMetroStatus(
-    String line,
-    String status
-) async {
+      return data.map((item) => MetroStatus.fromJson(item)).toList();
+    }
 
-  final response = await http.post(
-
-    Uri.parse("$baseUrl/update_metroStatus.php"),
-
-    body: {
-
-      "line_name": line,
-      "status": status,
-
-    },
-
-  );
-
-
-  print(response.body);
-
-
-  if(response.statusCode == 200){
-
-    final data = jsonDecode(response.body);
-
-    return data["success"];
-
+    return [];
   }
 
+  static Future<bool> updateMetroStatus(String line, String status) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/update_metroStatus.php"),
 
-  return false;
+      body: {"line_name": line, "status": status},
+    );
 
-}
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      return data["success"];
+    }
+
+    return false;
+  }
 }
