@@ -117,4 +117,8 @@ VALUES (
   'PASTE_THE_LONG_HASH_HERE'
 );
 
+12 - adding columnto notification
+
+ALTER TABLE notifications
+ADD COLUMN user_id INT NULL AFTER id;
 
