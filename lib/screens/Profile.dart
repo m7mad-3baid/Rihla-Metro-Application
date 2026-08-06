@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/notifcationsScreen.dart';
 import 'package:rihla_4_0/screens/personalinfo.dart';
+import 'package:rihla_4_0/screens/preferences.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
 import 'package:rihla_4_0/screens/ride_history_screen.dart';
+
 
 // Profile screen displaying user info, grouped settings cards, and logout
 class Profile extends StatefulWidget {
@@ -384,14 +386,14 @@ class _ProfileState extends State<Profile> {
                   children: [
                     // Route Alert row
                     GestureDetector(
-                     onTap: () {
+                      onTap: () {
                         Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationsScreen(),
-                        ),
-                      );
-                     },
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NotificationsScreen(),
+                          ),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -528,40 +530,50 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     // Preferences row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        // Icon container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Icon(Icons.settings),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Preferences(),
                           ),
-                        ),
-                        // Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 15),
-                          child: Text(
-                            "Preffrences",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Icon container
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 15),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC4D5D9),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Icon(Icons.settings),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        // Navigation arrow
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, right: 10),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
+                          // Label
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 15),
+                            child: Text(
+                              "Preffrences",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          // Navigation arrow
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            child: Icon(Icons.arrow_forward_ios),
+                          ),
+                        ],
+                      ),
                     ),
 
                     SizedBox(height: 5),
