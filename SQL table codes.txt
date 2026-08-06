@@ -108,6 +108,13 @@ CREATE TABLE admins (
   password VARCHAR(255) NOT NULL
 );
 
+11 - adding an admin user to admins table
 
+INSERT INTO admins (name, email, password)
+VALUES (
+  'Mohammed Khalil',
+  'admin@rihla.sd',
+  'PASTE_THE_LONG_HASH_HERE'
+);
 
 
