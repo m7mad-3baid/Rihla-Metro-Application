@@ -233,8 +233,11 @@ class ApiService {
     final response = await http.get(Uri.parse("$baseUrl/get_MetroStatus.php"));
 
     if (response.statusCode == 200) {
-      List data = jsonDecode(response.body);
+      if (response.body.startsWith('<')) {
+        return [];
+      }
 
+      List data = jsonDecode(response.body);
       return data.map((item) => MetroStatus.fromJson(item)).toList();
     }
 

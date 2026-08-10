@@ -28,6 +28,8 @@ class _TicketsState extends State<Tickets> {
 
   Future<void> loadStudentStatus() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
+
     setState(() {
       isStudent = prefs.getBool("is_student") ?? false;
     });
@@ -39,6 +41,8 @@ class _TicketsState extends State<Tickets> {
   Future<void> loadTickets() async {
     if (userId == null) return;
     final result = await ApiService.getMyTickets(userId!);
+    if (!mounted) return;
+
     if (result['success'] == true) {
       setState(() {
         myTickets = result["data"];
@@ -48,6 +52,8 @@ class _TicketsState extends State<Tickets> {
 
   Future<void> loadUserId() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
+
     setState(() {
       userId = prefs.getInt("user_id");
     });
