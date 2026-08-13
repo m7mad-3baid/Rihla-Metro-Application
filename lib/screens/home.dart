@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   late NextTrainCard currentTrain;
   bool hasNotification = false;
   List<Station> savedStations = [];
-  List<MetroStatus> metroStatuses=[];
+  List<MetroStatus> metroStatuses = [];
 
   @override
   void initState() {
@@ -57,45 +57,39 @@ class _HomePageState extends State<HomePage> {
     loadMetroStatus();
   }
 
-Future<void> loadMetroStatus() async {
+  Future<void> loadMetroStatus() async {
+    final data = await ApiService.getMetroStatus();
 
-  final data = await ApiService.getMetroStatus();
+    print("========== Metro Status ==========");
 
-  print("========== Metro Status ==========");
+    print("Items received: ${data.length}");
 
-  print("Items received: ${data.length}");
+    for (var item in data) {
+      print("${item.lineName} -> ${item.status}");
+    }
 
-  for (var item in data) {
-    print("${item.lineName} -> ${item.status}");
+    if (!mounted) return;
+    setState(() {
+      metroStatuses = data;
+    });
   }
-
-  setState(() {
-    metroStatuses = data;
-  });
-
-}
-
-
 
   void checkNotifications() async {
+    var notifications = await ApiService.getNotifications();
 
-  var notifications = await ApiService.getNotifications();
+    if (!mounted) return;
 
-
-  if(notifications.isNotEmpty){
-
-    setState((){
-
-      hasNotification = true;
-
-    });
-
+    if (notifications.isNotEmpty) {
+      setState(() {
+        hasNotification = true;
+      });
+    }
   }
-
-}
 
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
+
     setState(() {
       // Default to "Guest" if no name is saved
       name = prefs.getString("name") ?? "Guest";
@@ -104,6 +98,7 @@ Future<void> loadMetroStatus() async {
 
   Future<void> loadSavedStations() async {
     final stations = await SavedStationServices.getSavedStations();
+    if (!mounted) return;
 
     setState(() {
       savedStations = stations;
@@ -232,32 +227,30 @@ Future<void> loadMetroStatus() async {
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10, top: 20),
-                      child:  Stack(
-  children: [
+                      child: Stack(
+                        children: [
+                          Icon(
+                            CupertinoIcons.bell,
+                            color: Color(0xFF00515A),
+                            size: 30,
+                          ),
 
-    Icon(
-      CupertinoIcons.bell,
-      color: Color(0xFF00515A),
-      size: 30,
-    ),
-
-    hasNotification
-        ? Positioned(
-            right: 0,
-            top: 0,
-            child: Container(
-              width: 10,
-              height: 10,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-            ),
-          )
-        : SizedBox(),
-
-  ],
-),
+                          hasNotification
+                              ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -649,30 +642,30 @@ Future<void> loadMetroStatus() async {
                     SizedBox(height: 15),
                     // Blue line status
                     _buildMetroLine(
- "BL",
- "Blue Line",
- Colors.blue,
- getStatus("Blue Line"),
- getStatusColor(getStatus("Blue Line")),
-),
+                      "BL",
+                      "Blue Line",
+                      Colors.blue,
+                      getStatus("Blue"),
+                      getStatusColor(getStatus("Blue")),
+                    ),
                     Divider(indent: 20, endIndent: 20),
                     // Green line status
                     _buildMetroLine(
- "GR",
- "Green Line",
- Colors.green,
- getStatus("Green Line"),
- getStatusColor(getStatus("Green Line")),
-),
+                      "GR",
+                      "Green Line",
+                      Colors.green,
+                      getStatus("Green"),
+                      getStatusColor(getStatus("Green")),
+                    ),
                     Divider(indent: 20, endIndent: 20),
                     // Red line status
                     _buildMetroLine(
- "RD",
- "Red Line",
- Colors.red,
- getStatus("Red Line"),
- getStatusColor(getStatus("Red Line")),
-),
+                      "RD",
+                      "Red",
+                      Colors.red,
+                      getStatus("Red"),
+                      getStatusColor(getStatus("Red Line")),
+                    ),
                   ],
                 ),
               ),
@@ -806,48 +799,32 @@ Future<void> loadMetroStatus() async {
         return Colors.grey;
     }
   }
-  String getStatus(String line){
 
-  for(var item in metroStatuses){
-
-    if(item.lineName == line){
-
-      return item.status;
-
+  String getStatus(String line) {
+    for (var item in metroStatuses) {
+      if (item.lineName == line) {
+        return item.status;
+      }
     }
 
+    return "normal";
   }
 
-  return "normal";
+  Color getStatusColor(String status) {
+    switch (status.toLowerCase().trim()) {
+      case "normal":
+        return Colors.green;
 
-}
+      case "delayed":
+        return Colors.orange;
 
+      case "closed":
+        return Colors.red;
 
-
-Color getStatusColor(String status){
-
-  switch(status.toLowerCase()){
-
-
-    case "normal":
-      return Colors.green;
-
-
-    case "busy":
-      return Colors.orange;
-
-
-    case "maintenance":
-      return Colors.red;
-
-
-    default:
-      return Colors.grey;
-
+      default:
+        return Colors.grey;
+    }
   }
-
-}
-  
 
   // Builds a row representing a metro line's status
   Widget _buildMetroLine(

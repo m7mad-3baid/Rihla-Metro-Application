@@ -230,7 +230,7 @@ class ApiService {
   }
 
   static Future<List<MetroStatus>> getMetroStatus() async {
-    final response = await http.get(Uri.parse("$baseUrl/get_MetroStatus.php"));
+    final response = await http.get(Uri.parse("$baseUrl/get_metroStatus.php"));
 
     if (response.statusCode == 200) {
       if (response.body.startsWith('<')) {
