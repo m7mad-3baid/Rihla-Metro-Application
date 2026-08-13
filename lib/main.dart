@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:rihla_4_0/screens/splash.dart';
 import 'package:rihla_4_0/screens/MainScreen.dart';
 import 'package:rihla_4_0/services/theme_service.dart';
 import 'package:rihla_4_0/services/theme_controller.dart';
@@ -33,7 +34,7 @@ class Rihla extends StatelessWidget {
 
           themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
 
-          home: MainScreen(),
+          home: const Splash(),
         );
       },
     );
