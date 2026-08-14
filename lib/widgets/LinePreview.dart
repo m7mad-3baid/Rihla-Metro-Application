@@ -36,7 +36,7 @@ class _LinePreviewState extends State<LinePreview> {
       width: 375,
       height: 250,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 4)),
@@ -146,7 +146,7 @@ class _LinePreviewState extends State<LinePreview> {
                       ),
                     ],
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                   ),
 
                   child: Icon(

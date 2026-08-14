@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
 
 
     return Scaffold(
-      backgroundColor: Color(0xFFFCF9F8),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: pages[currentIndex],
 
       bottomNavigationBar: BottomBar(

@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -603,7 +603,7 @@ class _HomePageState extends State<HomePage> {
                 height: 300,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -664,7 +664,7 @@ class _HomePageState extends State<HomePage> {
                       "Red",
                       Colors.red,
                       getStatus("Red"),
-                      getStatusColor(getStatus("Red Line")),
+                      getStatusColor(getStatus("Red")),
                     ),
                   ],
                 ),
@@ -691,7 +691,7 @@ class _HomePageState extends State<HomePage> {
 
       decoration: BoxDecoration(
         // Main card background
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
 
         borderRadius: BorderRadius.circular(20),
 
@@ -757,7 +757,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

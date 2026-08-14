@@ -46,7 +46,7 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: widget.lineColor,
         foregroundColor: Colors.white,
@@ -84,7 +84,7 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
                 height: isExpanded ? 230 : 100,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
@@ -176,8 +176,11 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
                                       const Divider(),
                                       Text(
                                         station.description,
-                                        style: const TextStyle(
-                                          color: Colors.black87,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.color,
                                           fontSize: 13,
                                           height: 1.4,
                                         ),

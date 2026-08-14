@@ -20,7 +20,7 @@ class Searchbarwidget extends StatelessWidget {
             offset: Offset(0, 4),
           ),
         ],
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(

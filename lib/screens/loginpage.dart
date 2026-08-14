@@ -21,6 +21,7 @@ class _LoginpageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Container(
@@ -63,7 +64,7 @@ class _LoginpageState extends State<Loginpage> {
               padding: EdgeInsets.all(25),
               height: 500,
               width: 400,
-              color: Colors.white,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: Column(
                 children: [
                   Container(
@@ -81,7 +82,8 @@ class _LoginpageState extends State<Loginpage> {
                   TextField(
                     controller: emailController,
                     decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 238, 240, 243),
+                      fillColor:
+                          Theme.of(context).inputDecorationTheme.fillColor,
                       filled: true,
                       prefixIcon: const Icon(Icons.person_outlined),
                       border: OutlineInputBorder(
@@ -108,7 +110,8 @@ class _LoginpageState extends State<Loginpage> {
                     controller: passwordController,
                     obscureText: hidePassword,
                     decoration: InputDecoration(
-                      fillColor: const Color.fromARGB(255, 255, 255, 255),
+                      fillColor:
+                          Theme.of(context).inputDecorationTheme.fillColor,
                       filled: true,
                       prefixIcon: const Icon(Icons.lock_outline),
                       border: OutlineInputBorder(
@@ -238,7 +241,7 @@ class _LoginpageState extends State<Loginpage> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: Theme.of(context).cardColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

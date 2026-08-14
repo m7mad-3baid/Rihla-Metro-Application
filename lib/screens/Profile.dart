@@ -58,8 +58,18 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = Theme.of(context).cardColor;
+    final iconBoxColor = isDark
+        ? const Color(0xFF2A3A3D)
+        : const Color(0xFFC4D5D9);
+    final sectionTitleColor = isDark
+        ? Colors.white70
+        : const Color.fromARGB(255, 103, 103, 103);
+    final borderColor = Theme.of(context).dividerColor;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -236,7 +246,7 @@ class _ProfileState extends State<Profile> {
                       "Account",
                       style: TextStyle(
                         fontSize: 15,
-                        color: const Color.fromARGB(255, 103, 103, 103),
+                        color: sectionTitleColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -252,9 +262,9 @@ class _ProfileState extends State<Profile> {
                 width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xFFF5F3F3),
+                  color: cardColor,
                   border: Border.all(
-                    color: const Color.fromARGB(255, 166, 193, 207),
+                    color: borderColor,
                     width: 0.25,
                   ),
                   boxShadow: [
@@ -287,7 +297,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: Color(0xFFC4D5D9),
+                                color: iconBoxColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Icon(Icons.person_outline_rounded),
@@ -336,7 +346,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: Color(0xFFC4D5D9),
+                                color: iconBoxColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Icon(Icons.wallet),
@@ -378,7 +388,7 @@ class _ProfileState extends State<Profile> {
                       "Travel",
                       style: TextStyle(
                         fontSize: 15,
-                        color: const Color.fromARGB(255, 103, 103, 103),
+                        color: sectionTitleColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -393,9 +403,9 @@ class _ProfileState extends State<Profile> {
                 width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xFFF5F3F3),
+                  color: cardColor,
                   border: Border.all(
-                    color: const Color.fromARGB(255, 166, 193, 207),
+                    color: borderColor,
                     width: 0.25,
                   ),
                   boxShadow: [
@@ -428,7 +438,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: Color(0xFFC4D5D9),
+                                color: iconBoxColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Icon(Icons.notifications_active_outlined),
@@ -480,7 +490,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: Color(0xFFC4D5D9),
+                                color: iconBoxColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Icon(Icons.history_outlined),
@@ -522,7 +532,7 @@ class _ProfileState extends State<Profile> {
                       "App",
                       style: TextStyle(
                         fontSize: 15,
-                        color: const Color.fromARGB(255, 103, 103, 103),
+                        color: sectionTitleColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -538,9 +548,9 @@ class _ProfileState extends State<Profile> {
                 width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xFFF5F3F3),
+                  color: cardColor,
                   border: Border.all(
-                    color: const Color.fromARGB(255, 166, 193, 207),
+                    color: borderColor,
                     width: 0.25,
                   ),
                   boxShadow: [
@@ -573,7 +583,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: Color(0xFFC4D5D9),
+                                color: iconBoxColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Icon(Icons.settings),
@@ -615,7 +625,7 @@ class _ProfileState extends State<Profile> {
                             height: 50,
                             width: 50,
                             decoration: BoxDecoration(
-                              color: Color(0xFFC4D5D9),
+                              color: iconBoxColor,
                               borderRadius: BorderRadius.circular(7),
                             ),
                             child: Icon(Icons.info_outlined),

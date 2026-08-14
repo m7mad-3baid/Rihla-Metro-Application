@@ -50,7 +50,7 @@ class _RideHistoryScreenState extends State<RideHistoryScreen> {
                   margin: EdgeInsets.only(bottom: 10),
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(

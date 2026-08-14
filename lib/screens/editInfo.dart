@@ -96,7 +96,7 @@ var result = await ApiService.updateprofile(
   Widget build(BuildContext context) {
     return Scaffold(
 
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
       body: SafeArea(
 
@@ -165,7 +165,7 @@ var result = await ApiService.updateprofile(
 
               decoration: BoxDecoration(
 
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
 
                 borderRadius: BorderRadius.circular(20),
 
@@ -219,7 +219,7 @@ var result = await ApiService.updateprofile(
 
               decoration: BoxDecoration(
 
-                color:Colors.white,
+                color: Theme.of(context).cardColor,
 
                 borderRadius:BorderRadius.circular(20),
 
@@ -302,7 +302,7 @@ var result = await ApiService.updateprofile(
 
               decoration:BoxDecoration(
 
-                color:Colors.white,
+                color: Theme.of(context).cardColor,
 
                 borderRadius:BorderRadius.circular(20),
 
@@ -361,7 +361,7 @@ var result = await ApiService.updateprofile(
 
               decoration:BoxDecoration(
 
-                color:Colors.white,
+                color: Theme.of(context).cardColor,
 
                 borderRadius:BorderRadius.circular(20),
 

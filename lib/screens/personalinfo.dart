@@ -37,8 +37,7 @@ class _personalInfoState extends State<personalInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Set background color to white
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -132,7 +131,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -153,7 +152,7 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Color(0xFFE8E8EB),
+                        color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Icon(Icons.person, color: Colors.blue[900]),
@@ -203,7 +202,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -224,7 +223,7 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Color(0xFFE8E8EB),
+                        color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Icon(Icons.mail_outline_rounded, color: Colors.blue[900]),
@@ -274,7 +273,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -295,7 +294,7 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Color(0xFFE8E8EB),
+                        color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Icon(Icons.school_outlined, color: Colors.blue[900]),

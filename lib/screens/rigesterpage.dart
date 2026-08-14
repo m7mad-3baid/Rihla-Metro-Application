@@ -32,6 +32,7 @@ class _RigesterpageState extends State<Rigesterpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -81,7 +82,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 child: Column(
                   children: [
                     // ==========================================================
@@ -100,7 +101,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                     TextField(
                       controller: usernameController,
                       decoration: InputDecoration(
-                        fillColor: Colors.white,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
                         filled: true,
                         prefixIcon: Icon(Icons.person_outlined),
                         border: OutlineInputBorder(
@@ -129,7 +131,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
-                        fillColor: Colors.white,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
                         filled: true,
                         prefixIcon: Icon(Icons.email_outlined),
                         border: OutlineInputBorder(
@@ -159,7 +162,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       controller: passwordController,
                       obscureText: true, // Hides password characters
                       decoration: InputDecoration(
-                        fillColor: Colors.white,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
                         filled: true,
                         prefixIcon: Icon(Icons.lock_outline),
                         border: OutlineInputBorder(
@@ -189,7 +193,8 @@ class _RigesterpageState extends State<Rigesterpage> {
                       controller: repasswordController,
                       obscureText: true, // Hides password characters
                       decoration: InputDecoration(
-                        fillColor: Colors.white,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
                         filled: true,
                         prefixIcon: Icon(Icons.lock_outline),
                         border: OutlineInputBorder(
@@ -205,7 +210,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
@@ -237,7 +242,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                                   child: TextField(
                                     controller: studentIdController,
                                     decoration: InputDecoration(
-                                      fillColor: Colors.white,
+                                      fillColor: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .fillColor,
                                       filled: true,
                                       prefixIcon: Icon(Icons.badge_outlined),
                                       border: OutlineInputBorder(
@@ -426,7 +433,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         style: TextStyle(color: Color(0xFF122E64)),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: Theme.of(context).cardColor,
                         minimumSize: Size(395, 50),
                       ),
                     ),

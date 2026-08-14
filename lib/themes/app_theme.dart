@@ -33,6 +33,23 @@ class AppTheme {
     cardColor:
         Colors.white,
 
+    dividerColor: const Color(0xFFE2E2E2),
+
+    inputDecorationTheme: const InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+    ),
+
+    dialogTheme: const DialogThemeData(
+      backgroundColor: Colors.white,
+    ),
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: Color(0xFF00515A),
+      unselectedItemColor: Colors.grey,
+    ),
+
 
 
     colorScheme: const ColorScheme.light(
@@ -84,6 +101,23 @@ class AppTheme {
 
     cardColor:
         const Color(0xFF1E1E1E),
+
+    dividerColor: const Color(0xFF3A3A3A),
+
+    inputDecorationTheme: const InputDecorationTheme(
+      filled: true,
+      fillColor: Color(0xFF252525),
+    ),
+
+    dialogTheme: const DialogThemeData(
+      backgroundColor: Color(0xFF1E1E1E),
+    ),
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFF1E1E1E),
+      selectedItemColor: Color(0xFFF1E2AC),
+      unselectedItemColor: Colors.grey,
+    ),
 
 
 

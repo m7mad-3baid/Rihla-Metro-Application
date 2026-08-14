@@ -3,7 +3,8 @@ import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/screens/line_stations_screen.dart';
 import '../models/station.dart';
 import '../services/SavedStationServices.dart';
-import '../data/stationsdata.dart';
+import 'package:latlong2/latlong.dart';
+import '../services/api_services.dart';
 
 class RoutesScreen extends StatefulWidget {
   const RoutesScreen({super.key});
@@ -15,7 +16,43 @@ class RoutesScreen extends StatefulWidget {
 class _RoutesScreenState extends State<RoutesScreen> {
   bool isTrainSelected = true;
 
+  @override
+  void initState() {
+    super.initState();
+    loadStations();
+  }
+
   Set<int> savedStationIds = {};
+  List<Station> routeStations = [];
+
+  Future<void> loadStations() async {
+    final result = await ApiService.getAllStations();
+
+    if (!mounted) return;
+
+    if (result['success'] == true) {
+      setState(() {
+        routeStations = List<dynamic>.from(result['data']).map((item) {
+          String line = item['line'].toString();
+
+          if (line == "Red") line = "Red Line";
+          if (line == "Green") line = "Green Line";
+          if (line == "Blue") line = "Blue Line";
+
+          return Station(
+            id: int.parse(item['id'].toString()),
+            name: item['name'].toString(),
+            line: line,
+            location: LatLng(
+              double.tryParse(item['latitude']?.toString() ?? '') ?? 0,
+              double.tryParse(item['longitude']?.toString() ?? '') ?? 0,
+            ),
+            nextTrain: "Unknown",
+          );
+        }).toList();
+      });
+    }
+  }
 
   final searchController = TextEditingController();
   String searchQuery = "";
@@ -25,7 +62,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
   }
 
   List<LineStation> _lineStationsFor(String line) {
-    return stations
+    return routeStations
         .where((station) => station.line == line)
         .map(
           (station) => LineStation(
@@ -62,13 +99,9 @@ class _RoutesScreenState extends State<RoutesScreen> {
         width: 350,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 20,
-              offset: Offset(0, 4),
-            ),
+            BoxShadow(color: Colors.grey, blurRadius: 20, offset: Offset(0, 4)),
           ],
         ),
         child: Row(
@@ -145,38 +178,32 @@ class _RoutesScreenState extends State<RoutesScreen> {
               ),
             ),
             GestureDetector(
-  onTap: () async {
+              onTap: () async {
+                if (savedStationIds.contains(station.id)) {
+                  await SavedStationServices.removeStations(station);
 
-    if (savedStationIds.contains(station.id)) {
+                  setState(() {
+                    savedStationIds.remove(station.id);
+                  });
+                } else {
+                  await SavedStationServices.saveStation(station);
 
-      await SavedStationServices.removeStations(station);
-
-      setState(() {
-        savedStationIds.remove(station.id);
-      });
-
-    } else {
-
-      await SavedStationServices.saveStation(station);
-
-      setState(() {
-        savedStationIds.add(station.id);
-      });
-
-    }
-
-  },
-  child: Padding(
-    padding: const EdgeInsets.only(left: 10, right: 15),
-    child: Icon(
-      savedStationIds.contains(station.id)
-          ? Icons.bookmark
-          : Icons.bookmark_add_outlined,
-      size: 30,
-      color: const Color(0xFF00515A),
-    ),
-  ),
-),
+                  setState(() {
+                    savedStationIds.add(station.id);
+                  });
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 15),
+                child: Icon(
+                  savedStationIds.contains(station.id)
+                      ? Icons.bookmark
+                      : Icons.bookmark_add_outlined,
+                  size: 30,
+                  color: const Color(0xFF00515A),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -186,7 +213,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -317,7 +344,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                     width: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -447,7 +474,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                     width: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -577,7 +604,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                     width: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -686,7 +713,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   ),
                 ),
             ] else ...[
-              ...stations
+              ...routeStations
                   .where((station) => matches(station.name))
                   .map((station) => _buildStationCard(station)),
             ],
