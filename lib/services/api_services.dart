@@ -298,4 +298,21 @@ class ApiService {
       };
     }
   }
+
+  // GET CURRENT TICKET PRICES FROM DATABASE
+  static Future<dynamic> getTicketPrices() async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/admin_ticket_prices.php"),
+      );
+
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {
+        "success": false,
+        "message": "unable to connect to server",
+        "data": [],
+      };
+    }
+  }
 }
