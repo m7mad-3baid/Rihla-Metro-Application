@@ -1,26 +1,10 @@
 import 'package:flutter/material.dart';
-
-// Simple data holder for one station on a line.
-class LineStation {
-  final String number;
-  final String name;
-  final String status;
-  final String nextTrain;
-  final String description; // shown only when the card is expanded
-
-  LineStation({
-    required this.number,
-    required this.name,
-    required this.status,
-    required this.nextTrain,
-    required this.description,
-  });
-}
+import '../models/station.dart';
 
 class LineStationsScreen extends StatefulWidget {
   final String lineName;
   final Color lineColor;
-  final List<LineStation> stations;
+  final List<Station> stations;
 
   const LineStationsScreen({
     super.key,
@@ -108,7 +92,7 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              station.number,
+                              station.id.toString(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -146,12 +130,10 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
                         Icon(
                           Icons.circle,
                           size: 10,
-                          color: station.status == "Open"
-                              ? Colors.green
-                              : Colors.orange,
+                          color: Colors.green,
                         ),
                         const SizedBox(width: 6),
-                        Text(station.status),
+                        const Text("Open"),
                       ],
                     ),
 
@@ -175,7 +157,7 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
                                     children: [
                                       const Divider(),
                                       Text(
-                                        station.description,
+                                        "Station on ${station.line}.",
                                         style: TextStyle(
                                           color: Theme.of(context)
                                               .textTheme

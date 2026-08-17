@@ -1,5 +1,4 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/screens/line_stations_screen.dart';
 import '../models/station.dart';
 import '../services/SavedStationServices.dart';
@@ -54,43 +53,22 @@ class _RoutesScreenState extends State<RoutesScreen> {
     }
   }
 
-  final searchController = TextEditingController();
-  String searchQuery = "";
-
-  bool matches(String name) {
-    return name.toLowerCase().contains(searchQuery.toLowerCase());
-  }
-
-  List<LineStation> _lineStationsFor(String line) {
-    return routeStations
-        .where((station) => station.line == line)
-        .map(
-          (station) => LineStation(
-            number: station.id.toString(),
-            name: station.name,
-            status: "Open",
-            nextTrain: station.nextTrain,
-            description: "Station on ${station.line}.",
-          ),
-        )
-        .toList();
-  }
-
-  Color _stationLineColor(String line) {
-    switch (line) {
-      case 'Red Line':
-        return const Color(0xFFC1443B);
-      case 'Green Line':
-        return const Color(0xFF3F7D5C);
-      case 'Blue Line':
-        return const Color(0xFF3B5B92);
-      default:
-        return const Color(0xFF00515A);
-    }
-  }
-
   Widget _buildStationCard(Station station) {
-    final lineColor = _stationLineColor(station.line);
+    Color lineColor;
+
+    switch (station.line) {
+      case 'Red Line':
+        lineColor = const Color(0xFFC1443B);
+        break;
+      case 'Green Line':
+        lineColor = const Color(0xFF3F7D5C);
+        break;
+      case 'Blue Line':
+        lineColor = const Color(0xFF3B5B92);
+        break;
+      default:
+        lineColor = const Color(0xFF00515A);
+    }
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -232,17 +210,6 @@ class _RoutesScreenState extends State<RoutesScreen> {
               ],
             ),
 
-            const SizedBox(height: 20),
-
-            Searchbarwidget(
-              controller: searchController,
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                });
-              },
-            ),
-
             const SizedBox(height: 40),
 
             Container(
@@ -325,8 +292,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
             const SizedBox(height: 40),
 
             if (isTrainSelected) ...[
-              if (matches("Red Line"))
-                GestureDetector(
+              GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -334,7 +300,11 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         builder: (context) => LineStationsScreen(
                           lineName: "Red Line",
                           lineColor: const Color(0xFFC1443B),
-                          stations: _lineStationsFor("Red Line"),
+                          stations: routeStations
+                              .where(
+                                (station) => station.line == "Red Line",
+                              )
+                              .toList(),
                         ),
                       ),
                     );
@@ -453,10 +423,9 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   ),
                 ),
 
-              if (matches("Red Line")) const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-              if (matches("Green Line"))
-                GestureDetector(
+              GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -464,7 +433,11 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         builder: (context) => LineStationsScreen(
                           lineName: "Green Line",
                           lineColor: const Color(0xFF3F7D5C),
-                          stations: _lineStationsFor("Green Line"),
+                          stations: routeStations
+                              .where(
+                                (station) => station.line == "Green Line",
+                              )
+                              .toList(),
                         ),
                       ),
                     );
@@ -583,10 +556,9 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   ),
                 ),
 
-              if (matches("Green Line")) const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-              if (matches("Blue Line"))
-                GestureDetector(
+              GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -594,7 +566,11 @@ class _RoutesScreenState extends State<RoutesScreen> {
                         builder: (context) => LineStationsScreen(
                           lineName: "Blue Line",
                           lineColor: const Color(0xFF3B5B92),
-                          stations: _lineStationsFor("Blue Line"),
+                          stations: routeStations
+                              .where(
+                                (station) => station.line == "Blue Line",
+                              )
+                              .toList(),
                         ),
                       ),
                     );
@@ -714,7 +690,6 @@ class _RoutesScreenState extends State<RoutesScreen> {
                 ),
             ] else ...[
               ...routeStations
-                  .where((station) => matches(station.name))
                   .map((station) => _buildStationCard(station)),
             ],
           ],

@@ -12,7 +12,6 @@ import '../screens/notifcationsScreen.dart';
 import '../services/NexttrainServices.dart';
 import '../models/NextTrainCardData.dart';
 import 'package:rihla_4_0/screens/fullMapPage.dart';
-import 'package:rihla_4_0/widgets/SearchBarWidget.dart';
 import 'package:rihla_4_0/widgets/metro_preview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/screens/Studentinfo.dart';
@@ -258,8 +257,6 @@ class _HomePageState extends State<HomePage> {
 
               // SizedBox(height: 40),
 
-              // Search bar widget
-              // Searchbarwidget(),
               SizedBox(height: 30),
 
               ClipRRect(

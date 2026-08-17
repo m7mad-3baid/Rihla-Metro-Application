@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class BottomBar extends StatelessWidget {
-  
   final int selectedIndex;
   final Function(int) onTapp;
-  
 
   const BottomBar({
     super.key,
@@ -57,16 +54,18 @@ class BottomBar extends StatelessWidget {
                 children: [
                   // Filled icon when selected, outlined when not
                   Icon(
-                    selectedIndex == 0 ? Icons.house_rounded : Icons.house_outlined,
+                    selectedIndex == 0
+                        ? Icons.house_rounded
+                        : Icons.house_outlined,
                     size: selectedIndex == 0 ? 30 : 25,
-                    color: selectedIndex == 0 ?  Color(0xFF00515A) : Colors.grey,
+                    color: selectedIndex == 0 ? Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
                     "Home",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == 0
-                          ?  Color(0xFF00515A)
+                          ? Color(0xFF00515A)
                           : Colors.grey,
                     ),
                   ),
@@ -88,14 +87,14 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     selectedIndex == 1 ? Icons.map : Icons.map_outlined,
                     size: selectedIndex == 1 ? 30 : 25,
-                    color: selectedIndex == 1 ?  Color(0xFF00515A) : Colors.grey,
+                    color: selectedIndex == 1 ? Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
                     "Routes",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == 1
-                          ?  Color(0xFF00515A)
+                          ? Color(0xFF00515A)
                           : Colors.grey,
                     ),
                   ),
@@ -119,14 +118,14 @@ class BottomBar extends StatelessWidget {
                         ? Icons.confirmation_num
                         : Icons.confirmation_num_outlined,
                     size: selectedIndex == 2 ? 30 : 25,
-                    color: selectedIndex == 2 ?  Color(0xFF00515A) : Colors.grey,
+                    color: selectedIndex == 2 ? Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
                     "Tickets",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == 2
-                          ?  Color(0xFF00515A)
+                          ? Color(0xFF00515A)
                           : Colors.grey,
                     ),
                   ),
@@ -148,14 +147,14 @@ class BottomBar extends StatelessWidget {
                   Icon(
                     selectedIndex == 3 ? Icons.person : Icons.person_outline,
                     size: selectedIndex == 3 ? 30 : 25,
-                    color: selectedIndex == 3 ?  Color(0xFF00515A) : Colors.grey,
+                    color: selectedIndex == 3 ? Color(0xFF00515A) : Colors.grey,
                   ),
                   Text(
                     "Account",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == 3
-                          ?  Color(0xFF00515A)
+                          ? Color(0xFF00515A)
                           : Colors.grey,
                     ),
                   ),

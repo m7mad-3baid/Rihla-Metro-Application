@@ -1,12 +1,11 @@
-// ==================== IMPORTS ====================
+// IMPORTS
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/MainScreen.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import '../services/session_services.dart';
 import 'package:video_player/video_player.dart';
-import 'routes_screen.dart';
 
-// ==================== SPLASH WIDGET (Stateful) ====================
+//  SPLASH WIDGET (Stateful)
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -14,12 +13,12 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-// ==================== SPLASH STATE ====================
+//  SPLASH STATE
 class _SplashState extends State<Splash> {
-  // ---- PROPERTIES ----
+  // PROPERTIES
   late VideoPlayerController _controller; // Video player controller
 
-  // ---- LIFECYCLE: INIT STATE ----
+  //  LIFECYCLE: INIT STATE
   @override
   void initState() {
     super.initState();
@@ -58,7 +57,7 @@ class _SplashState extends State<Splash> {
     });
   }
 
-  // ---- LIFECYCLE: BUILD ----
+  //  LIFECYCLE: BUILD
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +74,7 @@ class _SplashState extends State<Splash> {
     );
   }
 
-  // ---- LIFECYCLE: DISPOSE ----
+  //  LIFECYCLE: DISPOSE
   @override
   void dispose() {
     _controller.dispose(); // Clean up video player resources
