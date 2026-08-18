@@ -142,7 +142,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          'Next: ${station.nextTrain}',
+                          'ACTIVE',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 11,
