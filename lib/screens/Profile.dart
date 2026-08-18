@@ -279,14 +279,16 @@ class _ProfileState extends State<Profile> {
                   children: [
                     // Personal Information row
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => personalInfo(),
-                          ),
-                        );
-                      },
+                      onTap: () async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => personalInfo(),
+    ),
+  );
+
+  await loadUser();
+},
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
