@@ -48,14 +48,6 @@ class _TicketsState extends State<Tickets> {
     }
   }
 
-  String formatPrice(double price) {
-    if (price == price.roundToDouble()) {
-      return price.toStringAsFixed(0);
-    }
-
-    return price.toStringAsFixed(2);
-  }
-
   Future<void> loadStudentStatus() async {
     final prefs = await SharedPreferences.getInstance();
     if (!mounted) return;
@@ -266,7 +258,7 @@ class _TicketsState extends State<Tickets> {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              "${formatPrice(isStudent ? twoHoursPrice / 2 : twoHoursPrice)} SDG",
+                              "${isStudent ? twoHoursPrice / 2 : twoHoursPrice} SDG",
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -283,26 +275,22 @@ class _TicketsState extends State<Tickets> {
                               ),
                             ),
                             const Spacer(),
-                            // View details link
-                            InkWell(
-                              onTap: () {},
-                              child: const Row(
-                                children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    size: 18,
+                            const Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 18,
+                                  color: Color(0xFF00515A),
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "View Details",
+                                  style: TextStyle(
                                     color: Color(0xFF00515A),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  SizedBox(width: 6),
-                                  Text(
-                                    "View Details",
-                                    style: TextStyle(
-                                      color: Color(0xFF00515A),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             // Purchase button
@@ -393,7 +381,7 @@ class _TicketsState extends State<Tickets> {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              "${formatPrice(isStudent ? sevenDaysPrice / 2 : sevenDaysPrice)} SDG",
+                              "${isStudent ? sevenDaysPrice / 2 : sevenDaysPrice} SDG",
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -410,26 +398,22 @@ class _TicketsState extends State<Tickets> {
                               ),
                             ),
                             const Spacer(),
-                            // View details link
-                            InkWell(
-                              onTap: () {},
-                              child: const Row(
-                                children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    size: 18,
+                            const Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 18,
+                                  color: Color(0xFF4B5320),
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "View Details",
+                                  style: TextStyle(
                                     color: Color(0xFF4B5320),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  SizedBox(width: 6),
-                                  Text(
-                                    "View Details",
-                                    style: TextStyle(
-                                      color: Color(0xFF4B5320),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             // Purchase button
