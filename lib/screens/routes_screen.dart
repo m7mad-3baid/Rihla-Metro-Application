@@ -46,7 +46,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
               double.tryParse(item['latitude']?.toString() ?? '') ?? 0,
               double.tryParse(item['longitude']?.toString() ?? '') ?? 0,
             ),
-            nextTrain: "Unknown",
+            nextTrain: "none",
           );
         }).toList();
       });
@@ -293,404 +293,379 @@ class _RoutesScreenState extends State<RoutesScreen> {
 
             if (isTrainSelected) ...[
               GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LineStationsScreen(
-                          lineName: "Red Line",
-                          lineColor: const Color(0xFFC1443B),
-                          stations: routeStations
-                              .where(
-                                (station) => station.line == "Red Line",
-                              )
-                              .toList(),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Red Line",
+                        lineColor: const Color(0xFFC1443B),
+                        stations: routeStations
+                            .where((station) => station.line == "Red Line")
+                            .toList(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Theme.of(context).cardColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xFFC1443B),
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 20,
-                          offset: const Offset(0, 4),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: const Color(0xFFC1443B),
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          height: 60,
-                          width: 6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0xFFC1443B),
+                        child: const Center(
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: const EdgeInsets.only(left: 25),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(9),
-                            color: const Color(0xFFC1443B),
-                          ),
-                          child: const Center(
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
-                              "1",
+                              "Red Line",
                               style: TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 10, top: 20),
-                              child: Text(
-                                "Red Line",
+                          const Row(
+                            children: [
+                              Text(
+                                "     Khartoum central ",
                                 style: TextStyle(
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                " bahri south",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: const EdgeInsets.only(left: 15, top: 20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFC1443B),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "8 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const Row(
-                              children: [
-                                Text(
-                                  "     Khartoum central ",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_left_outlined,
-                                  size: 15,
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_right_outlined,
-                                  size: 15,
-                                ),
-                                Text(
-                                  " bahri south",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: 30,
-                              width: 100,
-                              margin: const EdgeInsets.only(left: 15, top: 20),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFC1443B),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "8 stations",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 35),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 35),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ],
                   ),
                 ),
+              ),
 
               const SizedBox(height: 10),
 
               GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LineStationsScreen(
-                          lineName: "Green Line",
-                          lineColor: const Color(0xFF3F7D5C),
-                          stations: routeStations
-                              .where(
-                                (station) => station.line == "Green Line",
-                              )
-                              .toList(),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Green Line",
+                        lineColor: const Color(0xFF3F7D5C),
+                        stations: routeStations
+                            .where((station) => station.line == "Green Line")
+                            .toList(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Theme.of(context).cardColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xFF3F7D5C),
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 20,
-                          offset: const Offset(0, 4),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: const Color(0xFF3F7D5C),
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          height: 60,
-                          width: 6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0xFF3F7D5C),
+                        child: const Center(
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: const EdgeInsets.only(left: 25),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(9),
-                            color: const Color(0xFF3F7D5C),
-                          ),
-                          child: const Center(
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
-                              "1",
+                              "Green Line",
                               style: TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 10, top: 20),
-                              child: Text(
-                                "Green Line",
+                          const Row(
+                            children: [
+                              Text(
+                                "     Omdur Central ",
                                 style: TextStyle(
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                "Khartoum central",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: const EdgeInsets.only(left: 15, top: 20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF3F7D5C),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "5 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const Row(
-                              children: [
-                                Text(
-                                  "     Omdur Central ",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_left_outlined,
-                                  size: 15,
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_right_outlined,
-                                  size: 15,
-                                ),
-                                Text(
-                                  "Khartoum central",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: 30,
-                              width: 100,
-                              margin: const EdgeInsets.only(left: 15, top: 20),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF3F7D5C),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "5 stations",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 29),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 29),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ],
                   ),
                 ),
+              ),
 
               const SizedBox(height: 10),
 
               GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LineStationsScreen(
-                          lineName: "Blue Line",
-                          lineColor: const Color(0xFF3B5B92),
-                          stations: routeStations
-                              .where(
-                                (station) => station.line == "Blue Line",
-                              )
-                              .toList(),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineStationsScreen(
+                        lineName: "Blue Line",
+                        lineColor: const Color(0xFF3B5B92),
+                        stations: routeStations
+                            .where((station) => station.line == "Blue Line")
+                            .toList(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 150,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Theme.of(context).cardColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        height: 60,
+                        width: 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xFF3B5B92),
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 20,
-                          offset: const Offset(0, 4),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(left: 25),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: const Color(0xFF3B5B92),
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          height: 60,
-                          width: 6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0xFF3B5B92),
+                        child: const Center(
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: const EdgeInsets.only(left: 25),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(9),
-                            color: const Color(0xFF3B5B92),
-                          ),
-                          child: const Center(
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
-                              "1",
+                              "Blue Line",
                               style: TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 10, top: 20),
-                              child: Text(
-                                "Blue Line",
+                          const Row(
+                            children: [
+                              Text(
+                                "     Khartoum central ",
                                 style: TextStyle(
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                ),
+                              ),
+                              Icon(Icons.arrow_circle_left_outlined, size: 15),
+                              Icon(Icons.arrow_circle_right_outlined, size: 15),
+                              Text(
+                                " bahri central",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 30,
+                            width: 100,
+                            margin: const EdgeInsets.only(left: 13, top: 20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF3B5B92),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "7 stations",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const Row(
-                              children: [
-                                Text(
-                                  "     Khartoum central ",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_left_outlined,
-                                  size: 15,
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_right_outlined,
-                                  size: 15,
-                                ),
-                                Text(
-                                  " bahri central",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: 30,
-                              width: 100,
-                              margin: const EdgeInsets.only(left: 13, top: 20),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF3B5B92),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "7 stations",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 35),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 35),
+                        child: Icon(Icons.arrow_forward_ios),
+                      ),
+                    ],
                   ),
                 ),
+              ),
             ] else ...[
-              ...routeStations
-                  .map((station) => _buildStationCard(station)),
+              ...routeStations.map((station) => _buildStationCard(station)),
             ],
           ],
         ),
