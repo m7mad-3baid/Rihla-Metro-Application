@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/services/api_services.dart';
-import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Screen displaying ticket purchasing options and user's active tickets

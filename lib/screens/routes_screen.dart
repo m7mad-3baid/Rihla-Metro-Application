@@ -395,7 +395,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             ),
                             child: const Center(
                               child: Text(
-                                "8 stations",
+                                "STATIONS",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 13,
@@ -520,7 +520,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             ),
                             child: const Center(
                               child: Text(
-                                "5 stations",
+                                "STATIONS",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 13,
@@ -645,7 +645,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                             ),
                             child: const Center(
                               child: Text(
-                                "7 stations",
+                                "STATIONS",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 13,
