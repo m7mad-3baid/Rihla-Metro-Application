@@ -350,14 +350,16 @@ class _personalInfoState extends State<personalInfo> {
 
             // Edit profile button
             GestureDetector(
-               onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Passwordverifyfirst(),
-      ),
-    );
-  },
+               onTap: () async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Passwordverifyfirst(),
+    ),
+  );
+
+  await loadUser();
+},
               child: Container(
                 height: 80, 
                 width: 350,
