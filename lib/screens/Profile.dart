@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/notifcationsScreen.dart';
 import 'package:rihla_4_0/screens/personalinfo.dart';
-import 'package:rihla_4_0/screens/preferences.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
@@ -58,14 +57,9 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardColor = Theme.of(context).cardColor;
-    final iconBoxColor = isDark
-        ? const Color(0xFF2A3A3D)
-        : const Color(0xFFC4D5D9);
-    final sectionTitleColor = isDark
-        ? Colors.white70
-        : const Color.fromARGB(255, 103, 103, 103);
+    const iconBoxColor = Color(0xFFC4D5D9);
+    const sectionTitleColor = Color.fromARGB(255, 103, 103, 103);
     final borderColor = Theme.of(context).dividerColor;
 
     return Scaffold(
@@ -544,9 +538,9 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 10),
 
-              // App settings card: Preferences & About Rihla
+              // About Rihla card
               Container(
-                height: 170,
+                height: 85,
                 width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -565,57 +559,6 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: Column(
                   children: [
-                    // Preferences row
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Preferences(),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          // Icon container
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 15),
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                color: iconBoxColor,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: Icon(Icons.settings),
-                            ),
-                          ),
-                          // Label
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, top: 15),
-                            child: Text(
-                              "Preffrences",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
-                          Spacer(),
-                          // Navigation arrow
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, right: 10),
-                            child: Icon(Icons.arrow_forward_ios),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 5),
-
-                    Divider(indent: 10, endIndent: 10),
-
                     // About Rihla row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
