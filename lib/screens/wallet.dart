@@ -329,7 +329,7 @@ class _walletState extends State<wallet> {
 
                         // Top UP button
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             GestureDetector(
                               onTap: showBuyTicketDialog,
