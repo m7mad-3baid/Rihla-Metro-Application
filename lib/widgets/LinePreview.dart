@@ -31,7 +31,6 @@ class _LinePreviewState extends State<LinePreview> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       width: 375,
       height: 250,

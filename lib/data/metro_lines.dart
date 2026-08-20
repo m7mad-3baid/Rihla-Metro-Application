@@ -1,5 +1,4 @@
 import 'package:latlong2/latlong.dart';
-// Coordinates for the blue metro line
 
 import 'package:latlong2/latlong.dart';
 
@@ -20,7 +19,6 @@ final List<LatLng> blueLine = [
 
 ];
 
-// Coordinates for the red metro line
 final List<LatLng> redLine = [
 
   LatLng(15.5890,32.5530),
@@ -33,7 +31,6 @@ final List<LatLng> redLine = [
 
 ];
 
-// Coordinates for the green metro line
 final List<LatLng> greenLine = [
 
   khartoumCentral,

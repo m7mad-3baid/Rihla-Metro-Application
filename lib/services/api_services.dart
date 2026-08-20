@@ -31,7 +31,6 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
-  // SAVE STATION
   static Future<bool> saveStation(int userId, int stationId) async {
     try {
       print("Saving station id: $stationId");
@@ -56,7 +55,6 @@ class ApiService {
     }
   }
 
-  // GET SAVED STATIONS
   static Future<List<dynamic>> getSavedStations(int userId) async {
     try {
       final response = await http.get(
@@ -71,7 +69,6 @@ class ApiService {
     }
   }
 
-  // REMOVE SAVED STATION
   static Future<bool> removeSavedStation(int userId, int stationId) async {
     try {
       final response = await http.post(
@@ -94,7 +91,6 @@ class ApiService {
     }
   }
 
-  // REGISTER - Creates a new user account
   static Future<dynamic> register(
     String name,
     String email,
@@ -121,7 +117,6 @@ class ApiService {
     }
   }
 
-  // LOGIN - Authenticates user credentials
   static Future<dynamic> login(String email, String password) async {
     try {
       final response = await http.post(
@@ -208,34 +203,17 @@ class ApiService {
   }
 
   static Future<List<NotificationModel>> getNotifications() async {
-    try {
-      final response = await http.get(
-        Uri.parse("$baseUrl/get_notifications.php"),
-      );
+    final response = await http.get(
+      Uri.parse("$baseUrl/get_notifications.php"),
+    );
 
-      if (response.statusCode == 200) {
-        List data = jsonDecode(response.body);
-
-        List<NotificationModel> notifications = [];
-
-        for (var item in data) {
-          notifications.add(
-            NotificationModel(
-              title: item['title'],
-              message: item['message'],
-              date: item['created_at'],
-            ),
-          );
-        }
-
-        return notifications;
-      }
-
-      return [];
-    } catch (e) {
-      print(e);
-      return [];
+    if (response.statusCode != 200) {
+      throw Exception("Could not load notifications");
     }
+
+    List data = jsonDecode(response.body);
+
+    return data.map((item) => NotificationModel.fromJson(item)).toList();
   }
 
   static Future<List<MetroStatus>> getMetroStatus() async {
@@ -299,7 +277,6 @@ class ApiService {
     }
   }
 
-  // GET CURRENT TICKET PRICES FROM DATABASE
   static Future<dynamic> getTicketPrices() async {
     try {
       final response = await http.get(

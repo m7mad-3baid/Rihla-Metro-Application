@@ -6,7 +6,6 @@ import '../data/stationsdata.dart';
 import '../data/metro_lines.dart';
 import 'dart:async';
 
-// Full map page widget displaying metro lines and stations
 class FullMapPage extends StatefulWidget {
   const FullMapPage({super.key});
 
@@ -16,7 +15,6 @@ class FullMapPage extends StatefulWidget {
 
 class _FullMapPageState extends State<FullMapPage>
     with SingleTickerProviderStateMixin {
-  // Currently selected station from marker tap
   Station? selectedStation;
 
   late AnimationController trainController;
@@ -39,7 +37,6 @@ void dispose() {
   super.dispose();
 }
 
-  // Returns color based on metro line name
   Color getStationColor(String line) {
     switch (line.toLowerCase()) {
       case "blue":
@@ -58,21 +55,18 @@ void dispose() {
     return Scaffold(
       body: Stack(
         children: [
-          // Map widget with tile layer, polylines, and station markers
           FlutterMap(
             options: MapOptions(
               initialCenter: LatLng(15.5007, 32.5599),
               initialZoom: 11,
             ),
             children: [
-              // OpenStreetMap tile layer
               TileLayer(
                 urlTemplate:
                     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
                 subdomains: const ['a', 'b', 'c', 'd'],
                 userAgentPackageName: 'com.example.rihla',
               ),
-              // Render colored polylines for each metro line
               PolylineLayer(
                 polylines: [
                   Polyline(
@@ -88,7 +82,6 @@ void dispose() {
                   Polyline(points: redLine, color: Colors.red, strokeWidth: 5),
                 ],
               ),
-              // Display station markers from data source
               MarkerLayer(
                 markers: stations.map((station) {
                   return Marker(
@@ -103,7 +96,6 @@ void dispose() {
                       },
                       child: Column(
                         children: [
-                          // Colored circle indicator for station line
                           Container(
                             width: 24,
                             height: 24,
@@ -114,7 +106,6 @@ void dispose() {
                             ),
                           ),
                           SizedBox(height: 3),
-                          // Station name label
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 4),
                             color: Colors.white,
@@ -134,7 +125,6 @@ void dispose() {
               ),
             ],
           ),
-          // Station information card shown when a station is selected
           if (selectedStation != null)
             Positioned(
               bottom: 20,
@@ -151,7 +141,6 @@ void dispose() {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Station name heading
                     Text(
                       selectedStation!.name,
                       style: TextStyle(
@@ -160,12 +149,10 @@ void dispose() {
                       ),
                     ),
                     SizedBox(height: 10),
-                    // Metro line name
                     Text(
                       "Line: ${selectedStation!.line}",
                       style: TextStyle(fontSize: 18),
                     ),
-                    // Next train arrival time
                     Text(
                       "Next Train: ${selectedStation!.nextTrain}",
                       style: TextStyle(fontSize: 18),

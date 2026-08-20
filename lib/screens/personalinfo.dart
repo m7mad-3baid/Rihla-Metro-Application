@@ -8,7 +8,6 @@ class personalInfo extends StatefulWidget {
 }
 
 class _personalInfoState extends State<personalInfo> {
-  // Variables to store user information
   String name = "";
   String email = "";
   bool is_student = false;
@@ -16,20 +15,15 @@ class _personalInfoState extends State<personalInfo> {
   @override
   void initState() {
     super.initState();
-    // Load user data when the screen initializes
     loadUser();
   }
 
-  // Load user data from SharedPreferences
   Future<void> loadUser() async {
-    // Get SharedPreferences instance
     final prefs = await SharedPreferences.getInstance();
 
-    // Update the state with loaded data or set defaults
     setState(() {
       name = prefs.getString("name") ?? "guest username";
       email = prefs.getString("email") ?? "guest email";
-      // Load student status, default to false if not set
       is_student = prefs.getBool("is_student") ?? false;
     });
   }
@@ -41,22 +35,18 @@ class _personalInfoState extends State<personalInfo> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header section with back button and title
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Back navigation button
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 15),
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate back to the previous screen
                       Navigator.pop(context);
                     },
                     child: Icon(Icons.arrow_back_ios_new_rounded, size: 35),
                   ),
                 ),
-                // Screen title
                 Padding(
                   padding: const EdgeInsets.only(top: 20, right: 20),
                   child: Text(
@@ -67,7 +57,6 @@ class _personalInfoState extends State<personalInfo> {
               ],
             ),
 
-            // Avatar section with user initials
             Padding(
               padding: const EdgeInsets.only(top: 50),
               child: Align(
@@ -76,10 +65,8 @@ class _personalInfoState extends State<personalInfo> {
                   height: 120,
                   width: 120,
                   decoration: BoxDecoration(
-                    // Background color for avatar
                     color: Colors.blue[900],
                     borderRadius: BorderRadius.circular(100),
-                    // Add amber border for verified students
                     border: Border.all(
                       color: is_student ? Colors.amber : Colors.transparent,
                       width: 10,
@@ -87,7 +74,6 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Inner container for displaying user initials
                   child: Container(
                     height: 120,
                     width: 120,
@@ -98,8 +84,6 @@ class _personalInfoState extends State<personalInfo> {
 
                     child: Center(
                       child: Text(
-                        // Extract initials from the name
-                        // Take first letter of first two words and convert to uppercase
                         name.isNotEmpty
                             ? name
                                   .trim()
@@ -108,7 +92,7 @@ class _personalInfoState extends State<personalInfo> {
                                   .take(2)
                                   .join()
                                   .toUpperCase()
-                            : "?", // Show "?" if name is empty
+                            : "?",
 
                         style: TextStyle(
                           color: Colors.white,
@@ -122,17 +106,14 @@ class _personalInfoState extends State<personalInfo> {
               ),
             ),
 
-            // Spacing between avatar and first info card
             SizedBox(height: 40),
 
-            // Full Name information card
             Container(
               height: 80,
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
-                // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -145,7 +126,6 @@ class _personalInfoState extends State<personalInfo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Person icon container
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Container(
@@ -159,13 +139,11 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // User name information
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Label text
                         Text(
                           "Accounts Name :",
                           style: TextStyle(
@@ -175,7 +153,6 @@ class _personalInfoState extends State<personalInfo> {
 
                         SizedBox(height: 3),
 
-                        // Display the user's name
                         Text(
                           name,
                           style: TextStyle(
@@ -187,23 +164,19 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Push content to the left
                   Spacer(),
                 ],
               ),
             ),
 
-            // Spacing between name and email cards
             SizedBox(height: 20),
 
-            // Email information card
             Container(
               height: 80,
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
-                // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -216,7 +189,6 @@ class _personalInfoState extends State<personalInfo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Email icon container
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Container(
@@ -233,13 +205,11 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Email information
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Label text
                         Text(
                           "Email :",
                           style: TextStyle(
@@ -249,7 +219,6 @@ class _personalInfoState extends State<personalInfo> {
 
                         SizedBox(height: 3),
 
-                        // Display the user's email
                         Text(
                           email,
                           style: TextStyle(
@@ -261,23 +230,19 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Push content to the left
                   Spacer(),
                 ],
               ),
             ),
 
-            // Spacing between email and student status card
             SizedBox(height: 20),
 
-            // Student status information card
             Container(
               height: 80,
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
-                // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -290,7 +255,6 @@ class _personalInfoState extends State<personalInfo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // School icon container
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Container(
@@ -307,13 +271,11 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Student status information
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Label text
                         Text(
                           "Student Status :",
                           style: TextStyle(
@@ -323,11 +285,9 @@ class _personalInfoState extends State<personalInfo> {
 
                         SizedBox(height: 3),
 
-                        // Display student verification status with icon
                         Row(
                           children: [
                             Text(
-                              // Show verified or not verified based on student status
                               is_student
                                   ? "Student Status Verified"
                                   : "Not Student ",
@@ -338,7 +298,6 @@ class _personalInfoState extends State<personalInfo> {
                             ),
                             SizedBox(width: 10),
 
-                            // Show verified icon only for students
                             if (is_student)
                               Icon(Icons.verified, color: Colors.amber),
                           ],
@@ -347,16 +306,13 @@ class _personalInfoState extends State<personalInfo> {
                     ),
                   ),
 
-                  // Push content to the left
                   Spacer(),
                 ],
               ),
             ),
 
-            // Spacing before edit button
             SizedBox(height: 100),
 
-            // Edit profile button
             GestureDetector(
               onTap: () async {
                 await Navigator.push(
@@ -379,14 +335,12 @@ class _personalInfoState extends State<personalInfo> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Edit icon
                     Icon(
                       Icons.edit_note_rounded,
                       color: Colors.white,
                       size: 30,
                     ),
 
-                    // Edit button text
                     Text(
                       " Edit Password & Details",
                       style: TextStyle(color: Colors.white),

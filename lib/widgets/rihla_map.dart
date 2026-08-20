@@ -6,7 +6,6 @@ import 'package:latlong2/latlong.dart';
 
 
 
-// Coordinates for the blue metro line
 final List<LatLng> blueLine = [
   LatLng(15.7200, 32.6000),
   LatLng(15.6800, 32.5700),
@@ -16,7 +15,6 @@ final List<LatLng> blueLine = [
   LatLng(15.5200, 32.5000),
 ];
 
-// Coordinates for the red metro line
 final List<LatLng> redLine = [
   LatLng(15.5900, 32.5530),
   LatLng(15.6000, 32.5450),
@@ -25,7 +23,6 @@ final List<LatLng> redLine = [
   LatLng(15.6500, 32.4800),
 ];
 
-// Coordinates for the green metro line
 final List<LatLng> greenLine = [
   LatLng(15.6000, 32.5340),
   LatLng(15.5800, 32.5800),
@@ -43,7 +40,7 @@ class RihlaMap extends StatelessWidget {
       child: Container(
         height: 400,
         width: 375,
-      
+
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           color: Colors.white,
@@ -57,16 +54,16 @@ class RihlaMap extends StatelessWidget {
             ),
           ],
         ),
-      
+
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-      
+
           child: FlutterMap(
             options: MapOptions(
               initialCenter: LatLng(15.5007, 32.5599),
               initialZoom: 12,
             ),
-      
+
             children: [
                TileLayer(
         urlTemplate:
@@ -74,9 +71,9 @@ class RihlaMap extends StatelessWidget {
         subdomains: const ['a', 'b', 'c', 'd'],
         userAgentPackageName: 'com.example.rihla',
       ),
-      
-      
-      
+
+
+
             ],
           ),
         ),

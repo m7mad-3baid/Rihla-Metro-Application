@@ -17,7 +17,6 @@ class LineStationsScreen extends StatefulWidget {
   State<LineStationsScreen> createState() => _LineStationsScreenState();
 }
 class _LineStationsScreenState extends State<LineStationsScreen> {
-  // Tracks which station cards are expanded. Starts all collapsed.
   late List<bool> expanded;
 
   @override
@@ -36,16 +35,10 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
         });
       },
 
-      // AnimatedContainer automatically animates any property that
-      // changes between rebuilds (here: height). Same idea as the
-      // ticket card — we don't write the animation by hand, we just
-      // give it a duration and a target size, and it does the rest.
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         width: double.infinity,
-        // Collapsed height fits the header row.
-        // Expanded height adds room for the description block.
         height: isExpanded ? 230 : 100,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -118,11 +111,6 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
               ],
             ),
 
-            // AnimatedSwitcher fades the description in/out smoothly
-            // instead of it just popping into view instantly.
-            // We only give it real content when expanded — when
-            // collapsed it's an empty SizedBox, same trick as the
-            // QR code in your ticket card.
             Expanded(
               child: SingleChildScrollView(
                 physics: const NeverScrollableScrollPhysics(),

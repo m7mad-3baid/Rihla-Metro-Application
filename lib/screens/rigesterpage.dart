@@ -11,24 +11,15 @@ class Rigesterpage extends StatefulWidget {
 }
 
 class _RigesterpageState extends State<Rigesterpage> {
-  // ============================================================
-  // CONTROLLERS FOR TEXT FIELDS
-  // ============================================================
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
   final TextEditingController studentIdController = TextEditingController();
-  // ============================================================
-  // STATE VARIABLES
-  // ============================================================
-  bool isStudent = false; // Tracks if user is a student
-  bool agreedToTerms = false; // Tracks if user agreed to terms
-  bool isLoading = false; // for the loading circle
+  bool isStudent = false;
+  bool agreedToTerms = false;
+  bool isLoading = false;
 
-  // ============================================================
-  // BUILD METHOD - UI RENDERING
-  // ============================================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +27,9 @@ class _RigesterpageState extends State<Rigesterpage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // ============================================================
-            // HEADER SECTION - Red background with app name and title
-            // ============================================================
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF122E64), // Brand red color
+                color: Color(0xFF122E64),
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(20),
                   bottomLeft: Radius.circular(20),
@@ -54,7 +42,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // App name
                     Text(
                       "RIHLA",
                       style: TextStyle(
@@ -64,7 +51,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    // Page title
                     Text(
                       "CREATE AN ACCOUNT",
                       style: TextStyle(color: Colors.grey[300], fontSize: 25),
@@ -74,9 +60,6 @@ class _RigesterpageState extends State<Rigesterpage> {
               ),
             ),
 
-            // ============================================================
-            // FORM SECTION - White container with all input fields
-            // ============================================================
             Center(
               child: Container(
                 padding: EdgeInsets.all(25),
@@ -85,9 +68,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    // ==========================================================
-                    // USERNAME FIELD
-                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -111,9 +91,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // ==========================================================
-                    // EMAIL FIELD
-                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -140,9 +117,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // ==========================================================
-                    // PASSWORD FIELD
-                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -158,7 +132,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     ),
                     TextField(
                       controller: passwordController,
-                      obscureText: true, // Hides password characters
+                      obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -170,9 +144,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // ==========================================================
-                    // CONFIRM PASSWORD FIELD
-                    // ==========================================================
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -188,7 +159,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     ),
                     TextField(
                       controller: repasswordController,
-                      obscureText: true, // Hides password characters
+                      obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -200,9 +171,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // ==========================================================
-                    // STUDENT CHECKBOX - Toggles student discount
-                    // ==========================================================
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
@@ -256,9 +224,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ),
                     ),
 
-                    // ==========================================================
-                    // TERMS AND CONDITIONS CHECKBOX
-                    // ==========================================================
                     Row(
                       children: [
                         Checkbox(
@@ -277,16 +242,12 @@ class _RigesterpageState extends State<Rigesterpage> {
                       ],
                     ),
 
-                    // ==========================================================
-                    // REGISTER BUTTON - Creates account (only if terms agreed)
-                    // ==========================================================
                     ElevatedButton(
                       onPressed: agreedToTerms
                           ? () async {
                               setState(() {
                                 isLoading = true;
                               });
-                              // Validate that all fields are filled
                               if (usernameController.text.isEmpty ||
                                   emailController.text.isEmpty ||
                                   passwordController.text.isEmpty ||
@@ -314,7 +275,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 });
                                 return;
                               }
-                              // ---- Student ID validation ----
                               const validStudentIds = [
                                 "202103056",
                                 "202103035",
@@ -333,7 +293,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 return;
                               }
 
-                              // Call API to register user
                               final result = await ApiService.register(
                                 usernameController.text,
                                 emailController.text,
@@ -348,12 +307,9 @@ class _RigesterpageState extends State<Rigesterpage> {
                                 isLoading = false;
                               });
 
-                              // Log result for debugging
                               print(result);
 
-                              // Check if registration was successful
                               if (result["success"] == true) {
-                                // Show success message
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -363,7 +319,6 @@ class _RigesterpageState extends State<Rigesterpage> {
                                   ),
                                 );
 
-                                // Navigate to login page after delay
                                 Future.delayed(Duration(seconds: 2), () {
                                   Navigator.pushReplacement(
                                     context,
@@ -373,13 +328,12 @@ class _RigesterpageState extends State<Rigesterpage> {
                                   );
                                 });
                               } else {
-                                // Show error message from API
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(result["message"])),
                                 );
                               }
                             }
-                          : null, // Button disabled if terms not agreed
+                          : null,
                       child: isLoading
                           ? CircularProgressIndicator(color: Colors.white)
                           : Text(
@@ -401,9 +355,6 @@ class _RigesterpageState extends State<Rigesterpage> {
 
                     SizedBox(height: 10),
 
-                    // ==========================================================
-                    // "ALREADY HAVE AN ACCOUNT" TEXT
-                    // ==========================================================
                     Text(
                       " Already Have An Account ? ",
                       style: TextStyle(color: Color(0xFF122E64)),
@@ -411,12 +362,8 @@ class _RigesterpageState extends State<Rigesterpage> {
 
                     SizedBox(height: 25),
 
-                    // ==========================================================
-                    // LOGIN BUTTON - Navigates to login page
-                    // ==========================================================
                     ElevatedButton(
                       onPressed: () {
-                        // Navigate back to login page
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => Loginpage()),

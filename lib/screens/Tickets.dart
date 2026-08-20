@@ -3,7 +3,6 @@ import 'package:rihla_4_0/screens/wallet.dart';
 import 'package:rihla_4_0/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Screen displaying ticket purchasing options and user's active tickets
 class Tickets extends StatefulWidget {
   const Tickets({super.key});
 
@@ -12,9 +11,7 @@ class Tickets extends StatefulWidget {
 }
 
 class _TicketsState extends State<Tickets> {
-  // Toggle state: true shows Buy Tickets, false shows My Tickets
   bool isBuySelected = true;
-  // Toggles QR code visibility in the active trip card
   Set<int> visibleQR = {};
   bool isStudent = false;
   double twoHoursPrice = 200;
@@ -90,7 +87,6 @@ class _TicketsState extends State<Tickets> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Screen title
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -109,7 +105,6 @@ class _TicketsState extends State<Tickets> {
 
               SizedBox(height: 30),
 
-              // Segmented toggle: Buy A Ticket | My Tickets
               Container(
                 width: 350,
                 height: 40,
@@ -119,7 +114,6 @@ class _TicketsState extends State<Tickets> {
                 ),
                 child: Row(
                   children: [
-                    // Buy A Ticket segment
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -152,7 +146,6 @@ class _TicketsState extends State<Tickets> {
                         ),
                       ),
                     ),
-                    // My Tickets segment
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -192,9 +185,7 @@ class _TicketsState extends State<Tickets> {
 
               SizedBox(height: 25),
 
-              // Buy Tickets View
               if (isBuySelected) ...[
-                // Card 1: 2-Hour standard ticket
                 Container(
                   height: 375,
                   width: 350,
@@ -211,7 +202,6 @@ class _TicketsState extends State<Tickets> {
                   ),
                   child: Stack(
                     children: [
-                      // Decorative watermark ticket icon
                       Positioned(
                         right: -25,
                         top: -20,
@@ -229,7 +219,6 @@ class _TicketsState extends State<Tickets> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Most Popular badge
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 12,
@@ -293,7 +282,6 @@ class _TicketsState extends State<Tickets> {
                               ],
                             ),
                             const SizedBox(height: 16),
-                            // Purchase button
                             SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -336,7 +324,6 @@ class _TicketsState extends State<Tickets> {
 
                 SizedBox(height: 20),
 
-                // Card 2: 7-Day pass ticket
                 Container(
                   height: 375,
                   width: 350,
@@ -353,7 +340,6 @@ class _TicketsState extends State<Tickets> {
                   ),
                   child: Stack(
                     children: [
-                      // Decorative watermark ticket icon
                       Positioned(
                         right: -25,
                         top: -20,
@@ -416,7 +402,6 @@ class _TicketsState extends State<Tickets> {
                               ],
                             ),
                             const SizedBox(height: 16),
-                            // Purchase button
                             SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -460,7 +445,6 @@ class _TicketsState extends State<Tickets> {
                 SizedBox(height: 25),
               ] else ...[
                 if (myTickets.isEmpty)
-                  // Empty state: nothing purchased yet
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 60),
                     child: Column(
@@ -487,7 +471,6 @@ class _TicketsState extends State<Tickets> {
                     ),
                   )
                 else
-                  // One card per active ticket, most recent first (already sorted by the backend)
                   Column(
                     children: myTickets.map((ticket) {
                       final int ticketId = ticket['id'];
@@ -657,7 +640,6 @@ class _TicketsState extends State<Tickets> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomBar(selectedIndex: 2, onTap: (index) {},),
     );
   }
 }

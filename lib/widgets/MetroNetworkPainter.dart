@@ -3,45 +3,36 @@ import 'package:latlong2/latlong.dart' as latlong;
 import '../data/metro_lines.dart';
 
 class MetroNetworkPainter extends CustomPainter {
-  // Stores the currently selected line
-  // null means no line selected
   final String? selectedLine;
 
-  // ts job is to pass the selected metro line into the painter so it can draw the correct UI.
   MetroNetworkPainter({
     this.selectedLine,
   });
 
-  // Converts LatLng coordinates into screen positions
   Offset convertToOffset(
     latlong.LatLng point,
     Size size,
   ) {
-    // Network boundaries
     final minLat = 15.5200;
     final maxLat = 15.7200;
 
     final minLng = 32.4800;
     final maxLng = 32.6500;
 
-    // Longitude -> X position
     double x =
         (point.longitude - minLng) /
         (maxLng - minLng);
 
-    // Latitude -> Y position
     double y =
         (point.latitude - minLat) /
         (maxLat - minLat);
 
     return Offset(
       x * size.width,
-      // Flip Y because canvas starts from top
       (1 - y) * size.height,
     );
   }
 
-  // Draws one metro line
   void drawMetroLine(
     Canvas canvas,
     Size size,
@@ -50,7 +41,6 @@ class MetroNetworkPainter extends CustomPainter {
   ) {
     bool isSelected = false;
 
-    // Check if this line is selected
     if (selectedLine != null) {
       if (color == Colors.blue &&
           selectedLine == "blue") {
@@ -68,16 +58,12 @@ class MetroNetworkPainter extends CustomPainter {
       }
     }
 
-    // Paint settings
     final paint = Paint()
-      // Selected line stays bright
-      // Others become faded
       ..color = isSelected
           ? color
           : (selectedLine == null
               ? color
               : color.withOpacity(0.25))
-      // Selected line becomes thicker
       ..strokeWidth = isSelected ? 9 : 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
@@ -114,7 +100,6 @@ class MetroNetworkPainter extends CustomPainter {
     Canvas canvas,
     Size size,
   ) {
-    // Draw blue line
     drawMetroLine(
       canvas,
       size,
@@ -122,7 +107,6 @@ class MetroNetworkPainter extends CustomPainter {
       Colors.blue,
     );
 
-    // Draw green line
     drawMetroLine(
       canvas,
       size,
@@ -130,7 +114,6 @@ class MetroNetworkPainter extends CustomPainter {
       Colors.green,
     );
 
-    // Draw red line
     drawMetroLine(
       canvas,
       size,
@@ -143,7 +126,6 @@ class MetroNetworkPainter extends CustomPainter {
   bool shouldRepaint(
     covariant MetroNetworkPainter oldDelegate,
   ) {
-    // Redraw whenever selected line changes
     return oldDelegate.selectedLine != selectedLine;
   }
 }

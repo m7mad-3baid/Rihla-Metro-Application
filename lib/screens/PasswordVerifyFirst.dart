@@ -20,7 +20,7 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
 
     if (result["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: 
+        SnackBar(content:
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [Icon(Icons.check_box_outlined, color: Colors.green,), Text(" Correct Password ")],
@@ -32,7 +32,7 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => editinfo() ));
 
-      
+
       print("Password correct");
     } else {
       print("Wrong password");
@@ -50,28 +50,23 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            // Header section with back button and title
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Back navigation button
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 15),
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate back to the previous screen
                       Navigator.pop(context);
                     },
                     child: Icon(Icons.arrow_back_ios_new_rounded, size: 35),
                   ),
                 ),
-                // Screen title
                 Padding(
                   padding: const EdgeInsets.only(top: 20, right: 20),
                   child: Text(

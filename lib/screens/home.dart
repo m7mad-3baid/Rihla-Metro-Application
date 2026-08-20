@@ -74,14 +74,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void checkNotifications() async {
-    var notifications = await ApiService.getNotifications();
+    try {
+      var notifications = await ApiService.getNotifications();
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    if (notifications.isNotEmpty) {
-      setState(() {
-        hasNotification = true;
-      });
+      if (notifications.isNotEmpty) {
+        setState(() {
+          hasNotification = true;
+        });
+      }
+    } catch (_) {
+      return;
     }
   }
 
@@ -90,7 +94,6 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
 
     setState(() {
-      // Default to "Guest" if no name is saved
       name = prefs.getString("name") ?? "Guest";
     });
   }
@@ -112,11 +115,9 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header section with avatar, greeting, and notification icon
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // User avatar with initials
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 20),
 
@@ -175,7 +176,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  // Greeting text
                   Container(
                     margin: const EdgeInsets.only(top: 30, right: 55, left: 0),
                     child: Column(
@@ -214,7 +214,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  // Notification bell icon
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -255,7 +254,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
 
-              // SizedBox(height: 40),
 
               SizedBox(height: 30),
 
@@ -268,7 +266,6 @@ class _HomePageState extends State<HomePage> {
 
                   child: Stack(
                     children: [
-                      // BACKGROUND TRAIN ICON
                       Positioned(
                         right: -15,
                         top: -5,
@@ -282,7 +279,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
-                      // CARD CONTENT
                       Padding(
                         padding: EdgeInsets.all(20),
 
@@ -364,7 +360,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               SizedBox(height: 20),
-              // Map section title
               Align(
                 alignment: AlignmentGeometry.centerLeft,
                 child: Padding(
@@ -405,7 +400,6 @@ class _HomePageState extends State<HomePage> {
                   : const SizedBox(),
 
               SizedBox(height: 10),
-              // Saved stations section title
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
@@ -417,7 +411,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10),
-              // Horizontal scrollable list of saved station pills
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -433,7 +426,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               SizedBox(height: 20),
-              // Student discount promotional card
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
 
@@ -458,7 +450,6 @@ class _HomePageState extends State<HomePage> {
 
                   child: Stack(
                     children: [
-                      // BACKGROUND SCHOOL ICON
                       Positioned(
                         right: -20,
                         top: -15,
@@ -474,7 +465,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
-                      // CARD CONTENT
                       Padding(
                         padding: EdgeInsets.all(20),
 
@@ -538,7 +528,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 20),
-              // Quick actions row 1: Routes and Tickets
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -561,7 +550,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SizedBox(height: 15),
-              // Quick actions row 2: Favorites and Nearby
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -595,7 +583,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               SizedBox(height: 30),
-              // Metro status card showing line statuses
               Container(
                 height: 300,
                 width: 375,
@@ -613,7 +600,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Column(
                   children: [
-                    // Metro status header
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -637,7 +623,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 15),
-                    // Blue line status
                     _buildMetroLine(
                       "BL",
                       "Blue Line",
@@ -650,7 +635,6 @@ class _HomePageState extends State<HomePage> {
                       indent: 20,
                       endIndent: 20,
                     ),
-                    // Green line status
                     _buildMetroLine(
                       "GR",
                       "Green Line",
@@ -663,7 +647,6 @@ class _HomePageState extends State<HomePage> {
                       indent: 20,
                       endIndent: 20,
                     ),
-                    // Red line status
                     _buildMetroLine(
                       "RD",
                       "Red",
@@ -682,25 +665,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Builds a quick action card with an icon and title
-  // Builds the small action cards (Routes, Tickets, Favorites, Nearby)
   Widget _buildQuickAction({
     required IconData icon,
     required String title,
     required Color color,
   }) {
     return Container(
-      // Card size
       width: 150,
       height: 170,
 
       decoration: BoxDecoration(
-        // Main card background
         color: Colors.white,
 
         borderRadius: BorderRadius.circular(20),
 
-        // Soft premium shadow
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -712,11 +690,6 @@ class _HomePageState extends State<HomePage> {
 
       child: Stack(
         children: [
-          // =====================================
-          // BACKGROUND FADED ICON
-          // =====================================
-          // Large icon placed behind the content
-          // with low opacity like Next Train card
           Positioned(
             right: -15,
             top: -15,
@@ -728,9 +701,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // =====================================
-          // CARD CONTENT
-          // =====================================
           Padding(
             padding: EdgeInsets.all(15),
 
@@ -740,7 +710,6 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Spacer(),
 
-                // Card title
                 Text(
                   title,
 
@@ -754,7 +723,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Builds a pill-shaped widget for a saved station
   Widget _buildStationPill(String name, Color color) {
     return Padding(
       padding: const EdgeInsets.only(left: 15, top: 15, bottom: 10),
@@ -779,9 +747,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Colored circle indicating line
             Icon(Icons.circle, size: 15, color: color),
-            // Station name
             Text(name, style: TextStyle(fontWeight: FontWeight.w500)),
           ],
         ),
@@ -831,7 +797,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // Builds a row representing a metro line's status
   Widget _buildMetroLine(
     String abbreviation,
     String lineName,
@@ -844,7 +809,6 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Line abbreviation badge and name
           Row(
             children: [
               Container(
@@ -868,7 +832,6 @@ class _HomePageState extends State<HomePage> {
               Text(lineName, style: TextStyle(fontSize: 20)),
             ],
           ),
-          // Status indicator and text
           Row(
             children: [
               Icon(Icons.circle, size: 15, color: statusColor),

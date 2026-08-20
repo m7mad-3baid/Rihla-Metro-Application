@@ -17,18 +17,13 @@ class BottomBar extends StatelessWidget {
       width: 300,
       decoration: BoxDecoration(
         color: Colors.white,
-        // Top border line
         border: Border(
           top: const BorderSide(color: Color(0xFFE2E2E2), width: 0.5),
         ),
-        // Rounded top corners
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
-          // bottomLeft: Radius.circular(40),
-          // bottomRight: Radius.circular(40),
         ),
-        // Shadow effect for elevation
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(110, 32, 5, 5),
@@ -38,21 +33,17 @@ class BottomBar extends StatelessWidget {
           ),
         ],
       ),
-      // Navigation items row
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Home tab
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 10),
             child: GestureDetector(
               onTap: () {
-                // Notify parent of tab selection
                 onTapp(0);
               },
               child: Column(
                 children: [
-                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 0
                         ? Icons.house_rounded
@@ -73,17 +64,14 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-          // Routes tab
           Padding(
             padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
-                // Notify parent of tab selection
                 onTapp(1);
               },
               child: Column(
                 children: [
-                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 1 ? Icons.map : Icons.map_outlined,
                     size: selectedIndex == 1 ? 30 : 25,
@@ -102,17 +90,14 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-          // Tickets tab
           Padding(
             padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
-                // Notify parent of tab selection
                 onTapp(2);
               },
               child: Column(
                 children: [
-                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 2
                         ? Icons.confirmation_num
@@ -133,17 +118,14 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-          // Profile tab
           Padding(
             padding: const EdgeInsets.only(left: 50, top: 10),
             child: GestureDetector(
               onTap: () {
-                // Notify parent of tab selection
                 onTapp(3);
               },
               child: Column(
                 children: [
-                  // Filled icon when selected, outlined when not
                   Icon(
                     selectedIndex == 3 ? Icons.person : Icons.person_outline,
                     size: selectedIndex == 3 ? 30 : 25,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import for FilteringTextInputFormatter = to allow only digits in the top-up field.
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rihla_4_0/services/api_services.dart';
 
-// Wallet screen displaying balance, payment methods, and recent activity
 class wallet extends StatefulWidget {
   const wallet({super.key});
 
@@ -222,11 +221,9 @@ class _walletState extends State<wallet> {
         child: SafeArea(
           child: Column(
             children: [
-              // Header with back button and title
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Back navigation button
                   Padding(
                     padding: const EdgeInsets.only(top: 20, left: 15),
                     child: GestureDetector(
@@ -236,7 +233,6 @@ class _walletState extends State<wallet> {
                       child: Icon(Icons.arrow_back_ios_new_rounded, size: 35),
                     ),
                   ),
-                  // Screen title
                   Padding(
                     padding: const EdgeInsets.only(top: 20, right: 20),
                     child: Text(
@@ -252,7 +248,6 @@ class _walletState extends State<wallet> {
 
               const SizedBox(height: 30),
 
-              // Wallet card showing balance and Top UP button
               Container(
                 width: 350,
                 height: 260,
@@ -270,7 +265,6 @@ class _walletState extends State<wallet> {
                 ),
                 child: Stack(
                   children: [
-                    // Decorative wallet icon in background
                     Positioned(
                       right: -25,
                       bottom: -25,
@@ -283,7 +277,6 @@ class _walletState extends State<wallet> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Wallet name and icon
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -317,10 +310,8 @@ class _walletState extends State<wallet> {
 
                         const SizedBox(height: 25),
 
-                        // Wallet balance display
                         Row(
                           children: [
-                            // Balance amount
                             Text(
                               balance.toStringAsFixed(0),
                               style: TextStyle(
@@ -330,7 +321,6 @@ class _walletState extends State<wallet> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            // Currency label
                             Text(
                               "SDG",
                               style: TextStyle(
@@ -342,10 +332,8 @@ class _walletState extends State<wallet> {
                           ],
                         ),
 
-                        // Pushes button to bottom of card
                         const Spacer(),
 
-                        // Top UP button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -420,7 +408,6 @@ class _walletState extends State<wallet> {
 
               const SizedBox(height: 10),
 
-              // Payment Methods section title
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
@@ -434,7 +421,6 @@ class _walletState extends State<wallet> {
 
               const SizedBox(height: 15),
 
-              // Saved payment method card: Bankak ending in 4532
               Container(
                 height: 120,
                 width: 375,
@@ -451,16 +437,13 @@ class _walletState extends State<wallet> {
                 ),
                 child: Row(
                   children: [
-                    // Bank logo
                     Image.asset("assets/imgs/bankaklogo.png", scale: 8),
                     const SizedBox(width: 15),
-                    // Payment details
                     Padding(
                       padding: const EdgeInsets.only(top: 15, right: 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Masked account number with last four digits
                           Padding(
                             padding: const EdgeInsets.only(right: 15),
                             child: Row(
@@ -472,7 +455,6 @@ class _walletState extends State<wallet> {
                                     color: Color.fromARGB(255, 47, 65, 74),
                                   ),
                                 ),
-                                // Last four digits
                                 Text(
                                   "4532",
                                   style: TextStyle(
@@ -484,7 +466,6 @@ class _walletState extends State<wallet> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          // Expiry date and change link
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -495,7 +476,6 @@ class _walletState extends State<wallet> {
                                   color: Color.fromARGB(255, 47, 65, 74),
                                 ),
                               ),
-                              // Change payment method link
                               Padding(
                                 padding: const EdgeInsets.only(
                                   left: 100,
@@ -531,7 +511,6 @@ class _walletState extends State<wallet> {
 
               SizedBox(height: 20),
 
-              // Recent Activity section title
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(

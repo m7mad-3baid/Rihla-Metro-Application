@@ -8,7 +8,6 @@ import '../services/session_services.dart';
 import 'package:rihla_4_0/screens/ride_history_screen.dart';
 import 'package:rihla_4_0/services/api_services.dart';
 
-// Profile screen displaying user info, grouped settings cards, and logout
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -17,7 +16,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  // User data loaded from local storage
   String name = "";
   String email = "";
   bool isStudent = false;
@@ -30,7 +28,6 @@ class _ProfileState extends State<Profile> {
     loadBalance();
   }
 
-  // Fetch user details from SharedPreferences
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -66,7 +63,6 @@ class _ProfileState extends State<Profile> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Screen title
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -85,7 +81,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 30),
 
-              // User profile card with avatar, name, email, and student badge
               Container(
                 width: 370,
                 height: 220,
@@ -95,7 +90,6 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: Stack(
                   children: [
-                    // Decorative background profile icon
                     Positioned(
                       right: -20,
                       top: -15,
@@ -113,7 +107,6 @@ class _ProfileState extends State<Profile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Account label
                           const Text(
                             "ACCOUNT",
                             style: TextStyle(
@@ -123,10 +116,8 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           const SizedBox(height: 15),
-                          // Avatar and user info row
                           Row(
                             children: [
-                              // Avatar circle with initials
                               Container(
                                 width: 65,
                                 height: 65,
@@ -154,7 +145,6 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               const SizedBox(width: 16),
-                              // Name and email
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +179,6 @@ class _ProfileState extends State<Profile> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // Verified student badge (shown only if isStudent is true)
                           if (isStudent)
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -228,8 +217,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 15),
 
-              // ── Account Section ──────────────────────────
-              // Section header
               Row(
                 children: [
                   Padding(
@@ -248,7 +235,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 10),
 
-              // Account settings card: Personal Information & Wallet
               Container(
                 height: 170,
                 width: 360,
@@ -266,7 +252,6 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: Column(
                   children: [
-                    // Personal Information row
                     GestureDetector(
                       onTap: () async {
                         await Navigator.push(
@@ -281,7 +266,6 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Icon container
                           Padding(
                             padding: const EdgeInsets.only(left: 15, top: 15),
                             child: Container(
@@ -294,7 +278,6 @@ class _ProfileState extends State<Profile> {
                               child: Icon(Icons.person_outline_rounded),
                             ),
                           ),
-                          // Label
                           Padding(
                             padding: const EdgeInsets.only(left: 10, top: 15),
                             child: Text(
@@ -306,7 +289,6 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           Spacer(),
-                          // Navigation arrow
                           Padding(
                             padding: const EdgeInsets.only(top: 15, right: 10),
                             child: Icon(Icons.arrow_forward_ios),
@@ -323,7 +305,6 @@ class _ProfileState extends State<Profile> {
                       endIndent: 10,
                     ),
 
-                    // Wallet row
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -334,7 +315,6 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Icon container
                           Padding(
                             padding: const EdgeInsets.only(left: 15, top: 15),
                             child: Container(
@@ -347,7 +327,6 @@ class _ProfileState extends State<Profile> {
                               child: Icon(Icons.wallet),
                             ),
                           ),
-                          // Label
                           Padding(
                             padding: const EdgeInsets.only(left: 10, top: 15),
                             child: Text(
@@ -359,7 +338,6 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           Spacer(),
-                          // Navigation arrow
                           Padding(
                             padding: const EdgeInsets.only(top: 15, right: 10),
                             child: Icon(Icons.arrow_forward_ios),
@@ -373,8 +351,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 15),
 
-              // ── Travel Section ──────────────────────────
-              // Section header
               Row(
                 children: [
                   Padding(
@@ -392,7 +368,6 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 10),
 
-              // Travel settings card: Route Alert & Rides History
               Container(
                 height: 170,
                 width: 360,
@@ -410,7 +385,6 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: Column(
                   children: [
-                    // Route Alert row
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -423,7 +397,6 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Icon container
                           Padding(
                             padding: const EdgeInsets.only(left: 15, top: 15),
                             child: Container(
@@ -436,7 +409,6 @@ class _ProfileState extends State<Profile> {
                               child: Icon(Icons.notifications_active_outlined),
                             ),
                           ),
-                          // Label
                           Padding(
                             padding: const EdgeInsets.only(left: 10, top: 15),
                             child: Text(
@@ -448,7 +420,6 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           Spacer(),
-                          // Navigation arrow
                           Padding(
                             padding: const EdgeInsets.only(top: 15, right: 10),
                             child: Icon(Icons.arrow_forward_ios),
@@ -465,7 +436,6 @@ class _ProfileState extends State<Profile> {
                       endIndent: 10,
                     ),
 
-                    // Rides History row
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -479,7 +449,6 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Icon container
                           Padding(
                             padding: const EdgeInsets.only(left: 15, top: 15),
                             child: Container(
@@ -492,7 +461,6 @@ class _ProfileState extends State<Profile> {
                               child: Icon(Icons.history_outlined),
                             ),
                           ),
-                          // Label
                           Padding(
                             padding: const EdgeInsets.only(left: 10, top: 15),
                             child: Text(
@@ -504,7 +472,6 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           Spacer(),
-                          // Navigation arrow
                           Padding(
                             padding: const EdgeInsets.only(top: 15, right: 10),
                             child: Icon(Icons.arrow_forward_ios),
@@ -518,8 +485,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 15),
 
-              // ── App Section ─────────────────────────────
-              // Section header
               Row(
                 children: [
                   Padding(
@@ -538,7 +503,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 10),
 
-              // About Rihla card
               Container(
                 height: 85,
                 width: 360,
@@ -556,11 +520,9 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: Column(
                   children: [
-                    // About Rihla row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Icon container
                         Padding(
                           padding: const EdgeInsets.only(left: 15, top: 15),
                           child: Container(
@@ -573,7 +535,6 @@ class _ProfileState extends State<Profile> {
                             child: Icon(Icons.info_outlined),
                           ),
                         ),
-                        // Label
                         Padding(
                           padding: const EdgeInsets.only(left: 10, top: 15),
                           child: Text(
@@ -585,7 +546,6 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         Spacer(),
-                        // Navigation arrow
                         Padding(
                           padding: const EdgeInsets.only(top: 15, right: 10),
                           child: Icon(Icons.arrow_forward_ios),
@@ -598,7 +558,6 @@ class _ProfileState extends State<Profile> {
 
               SizedBox(height: 20),
 
-              // Logout button
               Container(
                 margin: EdgeInsets.only(
                   top: 10,
@@ -612,7 +571,6 @@ class _ProfileState extends State<Profile> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Logout icon
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Icon(
@@ -621,7 +579,6 @@ class _ProfileState extends State<Profile> {
                           size: 30,
                         ),
                       ),
-                      // Logout label
                       Text(
                         "LOG OUT",
                         style: TextStyle(
@@ -632,7 +589,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                  // Clears session and navigates to login screen
                   onPressed: () async {
                     await SessionService.logout();
                     Navigator.pushReplacement(
