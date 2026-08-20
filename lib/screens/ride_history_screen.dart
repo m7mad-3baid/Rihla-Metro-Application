@@ -35,7 +35,13 @@ class _RideHistoryScreenState extends State<RideHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Ride History')),
+      backgroundColor: const Color(0xFFFFF9E6),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFFFF9E6),
+        foregroundColor: Colors.black,
+        elevation: 0,
+        title: const Text('Ride History'),
+      ),
       body: rides.isEmpty
           ? const Center(child: Text('No rides found yet.'))
           : ListView.builder(
@@ -50,7 +56,7 @@ class _RideHistoryScreenState extends State<RideHistoryScreen> {
                   margin: EdgeInsets.only(bottom: 10),
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(

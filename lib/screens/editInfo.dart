@@ -8,7 +8,6 @@ class editinfo extends StatefulWidget {
 }
 
 class _editinfoState extends State<editinfo> {
-
   String name = "";
   String email = "";
 
@@ -23,33 +22,25 @@ class _editinfoState extends State<editinfo> {
     loadUser();
   }
 
-
   Future<void> loadUser() async {
-
     final prefs = await SharedPreferences.getInstance();
 
     setState(() {
-
       name = prefs.getString("name") ?? "";
       email = prefs.getString("email") ?? "";
 
       nameController.text = name;
       emailController.text = email;
-
     });
   }
 
-
   Future<void> saveChanges() async {
-
     String newName = nameController.text;
     String newEmail = emailController.text;
     String newPassword = newPasswordController.text;
     String rePassword = rePasswordController.text;
 
-
     if (newPassword.isNotEmpty && newPassword != rePassword) {
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Passwords do not match"),
@@ -60,27 +51,20 @@ class _editinfoState extends State<editinfo> {
       return;
     }
 
-
     final prefs = await SharedPreferences.getInstance();
-    
 
     int userId = prefs.getInt("user_id")!;
 
-
-var result = await ApiService.updateprofile(
-  userId,
-  newName,
-  newEmail,
-  newPassword,
-);
-
-
-
+    var result = await ApiService.updateprofile(
+      userId,
+      newName,
+      newEmail,
+      newPassword,
+    );
 
     await prefs.setString("name", newName);
 
     await prefs.setString("email", newEmail);
-
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -88,390 +72,262 @@ var result = await ApiService.updateprofile(
         backgroundColor: Colors.green,
       ),
     );
-
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
 
       body: SafeArea(
-
         child: Column(
-
           children: [
-
             Row(
-
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
               children: [
-
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 15),
 
                   child: GestureDetector(
-
                     onTap: () {
-
                       Navigator.pop(context);
-
                     },
 
-                    child: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      size: 35,
-                    ),
-
+                    child: Icon(Icons.arrow_back_ios_new_rounded, size: 35),
                   ),
                 ),
 
-
                 Padding(
-
                   padding: const EdgeInsets.only(top: 20, right: 20),
 
                   child: Text(
-
                     "Edit Info",
 
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-
                 ),
-
               ],
-
             ),
 
-
             SizedBox(height: 40),
 
-
             SizedBox(height: 40),
-
-
 
             Container(
-
               width: 350,
 
               decoration: BoxDecoration(
-
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
 
                 borderRadius: BorderRadius.circular(20),
 
                 boxShadow: [
-
                   BoxShadow(
-
                     color: Colors.black12,
 
                     blurRadius: 8,
 
-                    offset: Offset(0,4),
-
+                    offset: Offset(0, 4),
                   ),
-
                 ],
-
               ),
 
-
               child: TextField(
-
                 controller: nameController,
 
                 decoration: InputDecoration(
+                  filled: true,
+
+                  fillColor: Colors.white,
 
                   labelText: "Full Name",
 
+                  prefixIcon: Icon(Icons.person, color: Colors.blue[900]),
+
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            Container(
+              width: 350,
+
+              decoration: BoxDecoration(
+                color: Colors.white,
+
+                borderRadius: BorderRadius.circular(20),
+
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+
+                    blurRadius: 8,
+
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+
+              child: TextField(
+                controller: emailController,
+
+                decoration: InputDecoration(
+                  filled: true,
+
+                  fillColor: Colors.white,
+
+                  labelText: "Email",
+
                   prefixIcon: Icon(
-                    Icons.person,
+                    Icons.mail_outline_rounded,
+
                     color: Colors.blue[900],
                   ),
 
                   border: InputBorder.none,
-
                 ),
-
               ),
-
             ),
 
-
-
-            SizedBox(height:20),
-
-
+            SizedBox(height: 20),
 
             Container(
+              width: 350,
 
-              width:350,
-
-              decoration: BoxDecoration(
-
-                color: Theme.of(context).cardColor,
-
-                borderRadius:BorderRadius.circular(20),
-
-                boxShadow:[
-
-                  BoxShadow(
-
-                    color:Colors.black12,
-
-                    blurRadius:8,
-
-                    offset:Offset(0,4),
-
-                  ),
-
-                ],
-
-              ),
-
-
-              child:TextField(
-
-                controller:emailController,
-
-                decoration:InputDecoration(
-
-                  labelText:"Email",
-
-                  prefixIcon:Icon(
-
-                    Icons.mail_outline_rounded,
-
-                    color:Colors.blue[900],
-
-                  ),
-
-                  border:InputBorder.none,
-
-                ),
-
-              ),
-
-            ),
-
-
-
-            SizedBox(height:20),
-
-
-
-            Container(
-
-              width:350,
-
-              child:Text(
-
+              child: Text(
                 "Leave Passwords Empty if You Dont Want to Change Them *",
 
-                style:TextStyle(
-
-                  color:Colors.grey[700],
-
-                  fontSize:12,
-
-                ),
-
+                style: TextStyle(color: Colors.grey[700], fontSize: 12),
               ),
-
             ),
 
-
-
-            SizedBox(height:20),
-
-
+            SizedBox(height: 20),
 
             Container(
+              width: 350,
 
-              width:350,
+              decoration: BoxDecoration(
+                color: Colors.white,
 
-              decoration:BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
 
-                color: Theme.of(context).cardColor,
-
-                borderRadius:BorderRadius.circular(20),
-
-                boxShadow:[
-
+                boxShadow: [
                   BoxShadow(
+                    color: Colors.black12,
 
-                    color:Colors.black12,
+                    blurRadius: 8,
 
-                    blurRadius:8,
-
-                    offset:Offset(0,4),
-
+                    offset: Offset(0, 4),
                   ),
-
                 ],
-
               ),
 
+              child: TextField(
+                controller: newPasswordController,
 
-              child:TextField(
+                obscureText: true,
 
-                controller:newPasswordController,
+                decoration: InputDecoration(
+                  filled: true,
 
-                obscureText:true,
+                  fillColor: Colors.white,
 
-                decoration:InputDecoration(
+                  labelText: "New Password",
 
-                  labelText:"New Password",
-
-                  prefixIcon:Icon(
-
+                  prefixIcon: Icon(
                     Icons.lock_outline_rounded,
 
-                    color:Colors.blue[900],
-
+                    color: Colors.blue[900],
                   ),
 
-                  border:InputBorder.none,
-
+                  border: InputBorder.none,
                 ),
-
               ),
-
             ),
 
-
-
-            SizedBox(height:20),
-
-
+            SizedBox(height: 20),
 
             Container(
+              width: 350,
 
-              width:350,
+              decoration: BoxDecoration(
+                color: Colors.white,
 
-              decoration:BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
 
-                color: Theme.of(context).cardColor,
-
-                borderRadius:BorderRadius.circular(20),
-
-                boxShadow:[
-
+                boxShadow: [
                   BoxShadow(
+                    color: Colors.black12,
 
-                    color:Colors.black12,
+                    blurRadius: 8,
 
-                    blurRadius:8,
-
-                    offset:Offset(0,4),
-
+                    offset: Offset(0, 4),
                   ),
-
                 ],
-
               ),
 
+              child: TextField(
+                controller: rePasswordController,
 
-              child:TextField(
+                obscureText: true,
 
-                controller:rePasswordController,
+                decoration: InputDecoration(
+                  filled: true,
 
-                obscureText:true,
+                  fillColor: Colors.white,
 
-                decoration:InputDecoration(
+                  labelText: "Confirm Password",
 
-                  labelText:"Confirm Password",
-
-                  prefixIcon:Icon(
-
+                  prefixIcon: Icon(
                     Icons.lock_outline_rounded,
 
-                    color:Colors.blue[900],
-
+                    color: Colors.blue[900],
                   ),
 
-                  border:InputBorder.none,
-
+                  border: InputBorder.none,
                 ),
-
               ),
-
             ),
 
-
-
-            SizedBox(height:40),
-
-
+            SizedBox(height: 40),
 
             Container(
+              height: 60,
 
-              height:60,
+              width: 300,
 
-              width:300,
-
-
-              child:ElevatedButton(
-
-                onPressed:(){
-
+              child: ElevatedButton(
+                onPressed: () {
                   saveChanges();
-
                 },
 
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[900],
 
-                style:ElevatedButton.styleFrom(
-
-                  backgroundColor:Colors.blue[900],
-
-                  shape:RoundedRectangleBorder(
-
-                    borderRadius:BorderRadius.circular(20),
-
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-
                 ),
 
-
-                child:Text(
-
+                child: Text(
                   "Save Changes",
 
-                  style:TextStyle(
+                  style: TextStyle(
+                    color: Colors.white,
 
-                    color:Colors.white,
+                    fontSize: 18,
 
-                    fontSize:18,
-
-                    fontWeight:FontWeight.bold,
-
+                    fontWeight: FontWeight.bold,
                   ),
-
                 ),
-
               ),
-
             ),
-
-
           ],
-
         ),
-
       ),
-
     );
-
   }
-
 }

@@ -63,18 +63,26 @@ class _walletState extends State<wallet> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: Text("Top Up Wallet"),
           content: TextField(
             controller: amountController,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(labelText: "Enter The Amount"),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              labelText: "Enter The Amount",
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
               },
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF7C5700),
+              ),
               child: Text("Cancel"),
             ),
             ElevatedButton(
@@ -108,6 +116,10 @@ class _walletState extends State<wallet> {
                   ).showSnackBar(SnackBar(content: Text(result['message'])));
                 }
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF7C5700),
+                foregroundColor: Colors.white,
+              ),
               child: Text("Top Up"),
             ),
           ],
@@ -125,11 +137,13 @@ class _walletState extends State<wallet> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              backgroundColor: Colors.white,
               title: const Text("Buy a Ticket"),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   RadioListTile(
+                    activeColor: const Color(0xFF7C5700),
                     title: const Text("2-Hours Ticket"),
                     value: "2-Hours Ticket",
                     groupValue: selectedTicket,
@@ -141,6 +155,7 @@ class _walletState extends State<wallet> {
                   ),
 
                   RadioListTile(
+                    activeColor: const Color(0xFF7C5700),
                     title: const Text("7-Days Ticket"),
                     value: "7-Days Ticket",
                     groupValue: selectedTicket,
@@ -186,6 +201,9 @@ class _walletState extends State<wallet> {
                       );
                     }
                   },
+                  style: TextButton.styleFrom(
+                    foregroundColor: const Color(0xFF7C5700),
+                  ),
                   child: const Text("BUY"),
                 ),
               ],
@@ -199,7 +217,7 @@ class _walletState extends State<wallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -422,7 +440,7 @@ class _walletState extends State<wallet> {
                 width: 375,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context).cardColor,
+                  color: Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -541,7 +559,7 @@ class _walletState extends State<wallet> {
                       width: 375,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(

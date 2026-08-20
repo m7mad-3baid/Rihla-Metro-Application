@@ -85,7 +85,7 @@ class _TicketsState extends State<Tickets> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

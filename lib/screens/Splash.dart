@@ -69,7 +69,9 @@ class _SplashState extends State<Splash> {
                 aspectRatio: _controller.value.aspectRatio,
                 child: VideoPlayer(_controller),
               )
-            : const CircularProgressIndicator(), // Show loader while initializing
+            : const CircularProgressIndicator(
+                color: Color(0xFF7C5700),
+              ), // Show loader while initializing
       ),
     );
   }

@@ -117,7 +117,7 @@ void dispose() {
                           // Station name label
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 4),
-                            color: Theme.of(context).cardColor,
+                            color: Colors.white,
                             child: Text(
                               station.name,
                               style: TextStyle(
@@ -143,7 +143,7 @@ void dispose() {
               child: Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 15)],
                 ),

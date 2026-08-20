@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -600,7 +600,7 @@ class _HomePageState extends State<HomePage> {
                 height: 300,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -645,7 +645,11 @@ class _HomePageState extends State<HomePage> {
                       getStatus("Blue"),
                       getStatusColor(getStatus("Blue")),
                     ),
-                    Divider(indent: 20, endIndent: 20),
+                    Divider(
+                      color: Color(0xFFE2E2E2),
+                      indent: 20,
+                      endIndent: 20,
+                    ),
                     // Green line status
                     _buildMetroLine(
                       "GR",
@@ -654,7 +658,11 @@ class _HomePageState extends State<HomePage> {
                       getStatus("Green"),
                       getStatusColor(getStatus("Green")),
                     ),
-                    Divider(indent: 20, endIndent: 20),
+                    Divider(
+                      color: Color(0xFFE2E2E2),
+                      indent: 20,
+                      endIndent: 20,
+                    ),
                     // Red line status
                     _buildMetroLine(
                       "RD",
@@ -688,7 +696,7 @@ class _HomePageState extends State<HomePage> {
 
       decoration: BoxDecoration(
         // Main card background
-        color: Theme.of(context).cardColor,
+        color: Colors.white,
 
         borderRadius: BorderRadius.circular(20),
 
@@ -754,7 +762,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 150,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

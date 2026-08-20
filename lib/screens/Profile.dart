@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rihla_4_0/screens/notifcationsScreen.dart';
 import 'package:rihla_4_0/screens/personalinfo.dart';
 import 'package:rihla_4_0/screens/wallet.dart';
-import 'package:rihla_4_0/widgets/BottomBar.dart';
 import 'package:rihla_4_0/screens/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_services.dart';
 import 'package:rihla_4_0/screens/ride_history_screen.dart';
 import 'package:rihla_4_0/services/api_services.dart';
-
 
 // Profile screen displaying user info, grouped settings cards, and logout
 class Profile extends StatefulWidget {
@@ -57,13 +55,13 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final cardColor = Theme.of(context).cardColor;
+    const cardColor = Colors.white;
     const iconBoxColor = Color(0xFFC4D5D9);
     const sectionTitleColor = Color.fromARGB(255, 103, 103, 103);
-    final borderColor = Theme.of(context).dividerColor;
+    const borderColor = Color(0xFFE2E2E2);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -257,10 +255,7 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: cardColor,
-                  border: Border.all(
-                    color: borderColor,
-                    width: 0.25,
-                  ),
+                  border: Border.all(color: borderColor, width: 0.25),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -274,15 +269,15 @@ class _ProfileState extends State<Profile> {
                     // Personal Information row
                     GestureDetector(
                       onTap: () async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => personalInfo(),
-    ),
-  );
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => personalInfo(),
+                          ),
+                        );
 
-  await loadUser();
-},
+                        await loadUser();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -322,7 +317,11 @@ class _ProfileState extends State<Profile> {
 
                     SizedBox(height: 5),
 
-                    Divider(indent: 10, endIndent: 10),
+                    Divider(
+                      color: Color(0xFFE2E2E2),
+                      indent: 10,
+                      endIndent: 10,
+                    ),
 
                     // Wallet row
                     GestureDetector(
@@ -400,10 +399,7 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: cardColor,
-                  border: Border.all(
-                    color: borderColor,
-                    width: 0.25,
-                  ),
+                  border: Border.all(color: borderColor, width: 0.25),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -463,7 +459,11 @@ class _ProfileState extends State<Profile> {
 
                     SizedBox(height: 5),
 
-                    Divider(indent: 10, endIndent: 10),
+                    Divider(
+                      color: Color(0xFFE2E2E2),
+                      indent: 10,
+                      endIndent: 10,
+                    ),
 
                     // Rides History row
                     GestureDetector(
@@ -545,10 +545,7 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: cardColor,
-                  border: Border.all(
-                    color: borderColor,
-                    width: 0.25,
-                  ),
+                  border: Border.all(color: borderColor, width: 0.25),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,

@@ -30,14 +30,14 @@ class _personalInfoState extends State<personalInfo> {
       name = prefs.getString("name") ?? "guest username";
       email = prefs.getString("email") ?? "guest email";
       // Load student status, default to false if not set
-      is_student = prefs.getBool("is_student") ?? false;    
+      is_student = prefs.getBool("is_student") ?? false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: Column(
           children: [
@@ -81,10 +81,10 @@ class _personalInfoState extends State<personalInfo> {
                     borderRadius: BorderRadius.circular(100),
                     // Add amber border for verified students
                     border: Border.all(
-                      color: is_student ? Colors.amber : Colors.transparent, 
-                      width: 10, 
-                      strokeAlign: BorderSide.strokeAlignOutside
-                    )
+                      color: is_student ? Colors.amber : Colors.transparent,
+                      width: 10,
+                      strokeAlign: BorderSide.strokeAlignOutside,
+                    ),
                   ),
 
                   // Inner container for displaying user initials
@@ -131,7 +131,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -152,7 +152,7 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).dividerColor,
+                        color: const Color(0xFFE2E2E2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Icon(Icons.person, color: Colors.blue[900]),
@@ -202,7 +202,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -223,10 +223,13 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).dividerColor,
+                        color: const Color(0xFFE2E2E2),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Icon(Icons.mail_outline_rounded, color: Colors.blue[900]),
+                      child: Icon(
+                        Icons.mail_outline_rounded,
+                        color: Colors.blue[900],
+                      ),
                     ),
                   ),
 
@@ -273,7 +276,7 @@ class _personalInfoState extends State<personalInfo> {
               width: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 // Add shadow effect for elevation
                 boxShadow: [
                   BoxShadow(
@@ -294,10 +297,13 @@ class _personalInfoState extends State<personalInfo> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).dividerColor,
+                        color: const Color(0xFFE2E2E2),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Icon(Icons.school_outlined, color: Colors.blue[900]),
+                      child: Icon(
+                        Icons.school_outlined,
+                        color: Colors.blue[900],
+                      ),
                     ),
                   ),
 
@@ -322,7 +328,9 @@ class _personalInfoState extends State<personalInfo> {
                           children: [
                             Text(
                               // Show verified or not verified based on student status
-                              is_student ? "Student Status Verified" : "Not Student ",
+                              is_student
+                                  ? "Student Status Verified"
+                                  : "Not Student ",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -331,8 +339,8 @@ class _personalInfoState extends State<personalInfo> {
                             SizedBox(width: 10),
 
                             // Show verified icon only for students
-                            if(is_student)
-                              Icon(Icons.verified, color: Colors.amber,)
+                            if (is_student)
+                              Icon(Icons.verified, color: Colors.amber),
                           ],
                         ),
                       ],
@@ -350,36 +358,43 @@ class _personalInfoState extends State<personalInfo> {
 
             // Edit profile button
             GestureDetector(
-               onTap: () async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Passwordverifyfirst(),
-    ),
-  );
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Passwordverifyfirst(),
+                  ),
+                );
 
-  await loadUser();
-},
+                await loadUser();
+              },
               child: Container(
-                height: 80, 
+                height: 80,
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.blue[900]
+                  color: Colors.blue[900],
                 ),
-              
+
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Edit icon
-                    Icon(Icons.edit_note_rounded, color: Colors.white, size: 30),
-                    
+                    Icon(
+                      Icons.edit_note_rounded,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+
                     // Edit button text
-                    Text(" Edit Password & Details", style: TextStyle(color: Colors.white),)
+                    Text(
+                      " Edit Password & Details",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

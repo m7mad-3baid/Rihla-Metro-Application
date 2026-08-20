@@ -46,7 +46,7 @@ class RihlaMap extends StatelessWidget {
       
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

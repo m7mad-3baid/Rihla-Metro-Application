@@ -12,7 +12,12 @@ class NotificationsScreen extends StatelessWidget {
 
     return Scaffold(
 
+      backgroundColor: const Color(0xFFFFF9E6),
+
       appBar: AppBar(
+        backgroundColor: const Color(0xFFFFF9E6),
+        foregroundColor: Colors.black,
+        elevation: 0,
         title: const Text("Notifications"),
       ),
 
@@ -28,7 +33,7 @@ class NotificationsScreen extends StatelessWidget {
           if(snapshot.connectionState == ConnectionState.waiting){
 
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: Color(0xFF7C5700)),
             );
 
           }
@@ -63,6 +68,8 @@ class NotificationsScreen extends StatelessWidget {
 
 
               return Card(
+
+                color: Colors.white,
 
                 child: ListTile(
 

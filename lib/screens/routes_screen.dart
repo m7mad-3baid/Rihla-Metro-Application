@@ -77,7 +77,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
         width: 350,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           boxShadow: const [
             BoxShadow(color: Colors.grey, blurRadius: 20, offset: Offset(0, 4)),
           ],
@@ -191,7 +191,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -312,7 +312,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).cardColor,
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
@@ -437,7 +437,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).cardColor,
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
@@ -562,7 +562,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                   width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).cardColor,
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,

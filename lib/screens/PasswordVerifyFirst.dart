@@ -52,7 +52,7 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SafeArea(
         child: Column(
           children: [
@@ -101,7 +101,7 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
             Container(
               width: 350,
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -115,6 +115,8 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
                 controller: passwordcontroller,
                 obscureText: true,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   labelText: "Current password",
                   prefixIcon: Icon(
                     Icons.lock_outline_rounded,

@@ -10,7 +10,7 @@ class Studentinfo extends StatelessWidget {
 
     return Scaffold(
 
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
 
       body: SafeArea(
 

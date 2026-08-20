@@ -16,10 +16,10 @@ class BottomBar extends StatelessWidget {
       height: 70,
       width: 300,
       decoration: BoxDecoration(
-        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        color: Colors.white,
         // Top border line
         border: Border(
-          top: BorderSide(color: Theme.of(context).dividerColor, width: 0.5),
+          top: const BorderSide(color: Color(0xFFE2E2E2), width: 0.5),
         ),
         // Rounded top corners
         borderRadius: BorderRadius.only(

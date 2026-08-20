@@ -32,7 +32,7 @@ class _RigesterpageState extends State<Rigesterpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFFFF9E6),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -82,7 +82,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: const Color(0xFFFFF9E6),
                 child: Column(
                   children: [
                     // ==========================================================
@@ -101,8 +101,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     TextField(
                       controller: usernameController,
                       decoration: InputDecoration(
-                        fillColor:
-                            Theme.of(context).inputDecorationTheme.fillColor,
+                        fillColor: Colors.white,
                         filled: true,
                         prefixIcon: Icon(Icons.person_outlined),
                         border: OutlineInputBorder(
@@ -131,8 +130,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
-                        fillColor:
-                            Theme.of(context).inputDecorationTheme.fillColor,
+                        fillColor: Colors.white,
                         filled: true,
                         prefixIcon: Icon(Icons.email_outlined),
                         border: OutlineInputBorder(
@@ -162,8 +160,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       controller: passwordController,
                       obscureText: true, // Hides password characters
                       decoration: InputDecoration(
-                        fillColor:
-                            Theme.of(context).inputDecorationTheme.fillColor,
+                        fillColor: Colors.white,
                         filled: true,
                         prefixIcon: Icon(Icons.lock_outline),
                         border: OutlineInputBorder(
@@ -193,8 +190,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                       controller: repasswordController,
                       obscureText: true, // Hides password characters
                       decoration: InputDecoration(
-                        fillColor:
-                            Theme.of(context).inputDecorationTheme.fillColor,
+                        fillColor: Colors.white,
                         filled: true,
                         prefixIcon: Icon(Icons.lock_outline),
                         border: OutlineInputBorder(
@@ -210,7 +206,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
@@ -242,9 +238,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                                   child: TextField(
                                     controller: studentIdController,
                                     decoration: InputDecoration(
-                                      fillColor: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .fillColor,
+                                      fillColor: Colors.white,
                                       filled: true,
                                       prefixIcon: Icon(Icons.badge_outlined),
                                       border: OutlineInputBorder(
@@ -387,7 +381,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                             }
                           : null, // Button disabled if terms not agreed
                       child: isLoading
-                          ? CircularProgressIndicator()
+                          ? CircularProgressIndicator(color: Colors.white)
                           : Text(
                               "Create Your Account",
                               style: TextStyle(
@@ -433,7 +427,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                         style: TextStyle(color: Color(0xFF122E64)),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).cardColor,
+                        backgroundColor: Colors.white,
                         minimumSize: Size(395, 50),
                       ),
                     ),
