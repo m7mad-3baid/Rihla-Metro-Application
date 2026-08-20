@@ -161,7 +161,7 @@ class _LineStationsScreenState extends State<LineStationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9E6),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: widget.lineColor,
         foregroundColor: Colors.white,

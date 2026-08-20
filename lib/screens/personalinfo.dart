@@ -37,7 +37,7 @@ class _personalInfoState extends State<personalInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9E6),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

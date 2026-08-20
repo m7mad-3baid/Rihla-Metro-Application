@@ -52,7 +52,7 @@ class _PasswordverifyfirstState extends State<Passwordverifyfirst> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9E6),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

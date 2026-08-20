@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
     const borderColor = Color(0xFFE2E2E2);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9E6),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -32,7 +32,7 @@ class _RigesterpageState extends State<Rigesterpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9E6),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -82,7 +82,7 @@ class _RigesterpageState extends State<Rigesterpage> {
                 padding: EdgeInsets.all(25),
                 height: 750,
                 width: 400,
-                color: const Color(0xFFFFF9E6),
+                color: Colors.white,
                 child: Column(
                   children: [
                     // ==========================================================
