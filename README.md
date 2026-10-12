@@ -287,8 +287,8 @@ Rihla is an educational graduation-project prototype demonstrating how a mobile 
 
 ## Contributors
 
-- Mohammed Abdalwahid
-- Add other team members here.
+- Mohammed Al Obaid Ahmed Almahi
+- Hussam Aldein Faisal
 
 ## License
 
